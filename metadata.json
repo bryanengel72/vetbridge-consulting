@@ -1,0 +1,7 @@
+{
+  "name": "VetBridge Consulting",
+  "description": "Smarter operations for modern veterinary practices. Optimizing clinic efficiency, profitability, and care quality through data, analytics, and system integration.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
