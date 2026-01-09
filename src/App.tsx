@@ -9,7 +9,7 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ChatAssistant from './components/ChatAssistant';
 
-import Testimonials from './components/Testimonials';
+
 
 const App: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -50,10 +50,6 @@ const App: React.FC = () => {
         <section id="why-us" className="py-24 bg-navy text-white overflow-hidden relative">
           <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-white to-transparent opacity-10"></div>
           <WhyChooseUs />
-        </section>
-        <section id="testimonials" className="py-24 bg-white relative">
-          <div className="absolute top-1/2 left-0 w-64 h-64 bg-accent-orange/5 rounded-full blur-[100px] -translate-y-1/2"></div>
-          <Testimonials />
         </section>
         <section id="contact" className="py-24 bg-slate-50">
           <Contact />
