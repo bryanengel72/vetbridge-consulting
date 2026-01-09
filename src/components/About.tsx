@@ -6,30 +6,30 @@ const About: React.FC = () => {
     <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
       <div className="relative reveal">
         <div className="relative rounded-[3rem] overflow-hidden shadow-2xl">
-          <img 
-            src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&q=80&w=2070" 
-            alt="Vet Team" 
+          <img
+            src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&q=80&w=2070"
+            alt="Vet Team"
             className="w-full grayscale hover:grayscale-0 transition-all duration-700"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-navy/40 to-transparent"></div>
         </div>
-        
+
         {/* Experience Box */}
-        <div className="absolute -bottom-10 -right-10 lg:right-10 bg-white p-10 rounded-[2.5rem] shadow-3xl border border-slate-100 reveal" style={{ transitionDelay: '0.3s' }}>
-           <div className="flex items-end gap-2 mb-2">
-             <span className="text-5xl font-black text-navy">50+</span>
-             <span className="text-accent-orange text-xl font-black mb-1">Years</span>
-           </div>
-           <p className="text-sm font-bold text-slate-400 uppercase tracking-widest leading-tight">Healthcare & Tech <br/>Combined Expertise</p>
+        <div className="absolute -bottom-6 right-4 md:-bottom-10 md:-right-10 lg:right-10 bg-white p-6 md:p-10 rounded-[2rem] md:rounded-[2.5rem] shadow-3xl border border-slate-100 reveal max-w-[200px] md:max-w-none" style={{ transitionDelay: '0.3s' }}>
+          <div className="flex items-end gap-2 mb-2">
+            <span className="text-3xl md:text-5xl font-black text-navy">50+</span>
+            <span className="text-accent-orange text-sm md:text-xl font-black mb-1">Years</span>
+          </div>
+          <p className="text-[10px] md:text-sm font-bold text-slate-400 uppercase tracking-widest leading-tight">Healthcare & Tech <br />Combined Expertise</p>
         </div>
-        
+
         {/* Floating Shapes */}
         <div className="absolute -top-10 -left-10 w-40 h-40 bg-orange-500/10 rounded-full blur-3xl -z-10 animate-pulse"></div>
       </div>
-      
-      <div className="reveal" style={{ transitionDelay: '0.2s' }}>
+
+      <div className="reveal mt-12 lg:mt-0" style={{ transitionDelay: '0.2s' }}>
         <h6 className="text-accent-orange font-black tracking-[0.2em] uppercase text-xs mb-6">Our Legacy</h6>
-        <h2 className="text-5xl md:text-6xl font-black text-navy mb-8 leading-[1.1]">
+        <h2 className="text-4xl md:text-6xl font-black text-navy mb-8 leading-[1.1]">
           Where Clinical Wisdom Meets <span className="text-accent-orange">Tech Precision.</span>
         </h2>
         <p className="text-xl text-slate-600 mb-8 leading-relaxed font-light">
@@ -38,7 +38,7 @@ const About: React.FC = () => {
         <p className="text-lg text-slate-500 mb-10 leading-relaxed italic">
           "Our mission is to give veterinarians their time back while ensuring their business thrives in a data-driven world."
         </p>
-        
+
         <div className="grid sm:grid-cols-2 gap-8">
           <div className="group">
             <div className="w-12 h-12 bg-navy text-white rounded-xl flex items-center justify-center mb-4 group-hover:bg-accent-orange group-hover:text-navy transition-colors duration-300">

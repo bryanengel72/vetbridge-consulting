@@ -12,18 +12,18 @@ const Contact: React.FC = () => {
 
   return (
     <div className="container mx-auto px-6">
-      <div className="bg-navy rounded-[4rem] p-12 lg:p-24 shadow-3xl relative overflow-hidden text-white reveal">
+      <div className="bg-navy rounded-[3rem] md:rounded-[4rem] p-8 md:p-12 lg:p-24 shadow-3xl relative overflow-hidden text-white reveal">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-accent-orange/5 skew-x-12 translate-x-1/4"></div>
         <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/10 rounded-full blur-[100px]"></div>
-        
+
         <div className="relative z-10 grid lg:grid-cols-2 gap-20 items-center">
           <div>
             <h6 className="text-accent-orange font-black tracking-[0.2em] uppercase text-xs mb-6">Connect With Us</h6>
-            <h2 className="text-5xl md:text-7xl font-black mb-10 leading-tight">Let's Design <br/> Your Future.</h2>
+            <h2 className="text-5xl md:text-7xl font-black mb-10 leading-tight">Let's Design <br /> Your Future.</h2>
             <p className="text-slate-400 text-xl mb-12 max-w-md font-light">
               Schedule a complimentary discovery call to audit your current operations and identify growth opportunities.
             </p>
-            
+
             <div className="space-y-10">
               <div className="flex items-center gap-6 group cursor-pointer">
                 <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-accent-orange group-hover:bg-accent-orange group-hover:text-navy transition-all">
@@ -45,7 +45,7 @@ const Contact: React.FC = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="bg-white rounded-[3rem] p-10 lg:p-14 shadow-inner text-navy reveal" style={{ transitionDelay: '0.4s' }}>
             {submitted ? (
               <div className="py-20 text-center animate-in zoom-in duration-500">

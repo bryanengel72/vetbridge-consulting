@@ -30,7 +30,7 @@ const ChatAssistant: React.FC = () => {
     setIsLoading(true);
 
     const response = await getGeminiResponse([...messages, userMsg]);
-    
+
     setMessages(prev => [...prev, { role: 'model', text: response || "I apologize, I encountered an error. Please try again or book a call!" }]);
     setIsLoading(false);
   };
@@ -46,11 +46,11 @@ const ChatAssistant: React.FC = () => {
             // Remove trailing punctuation from URLs if any
             const url = part.replace(/[.,;!?]$/, '');
             return (
-              <a 
-                key={j} 
-                href={url} 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                key={j}
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-accent-orange font-bold underline break-all hover:text-navy transition-colors"
               >
                 {url}
@@ -67,7 +67,7 @@ const ChatAssistant: React.FC = () => {
   return (
     <div className="flex flex-col items-end">
       {isOpen && (
-        <div className="w-[380px] h-[600px] bg-white rounded-[2.5rem] shadow-4xl border border-slate-100 mb-6 flex flex-col overflow-hidden animate-in slide-in-from-bottom-10 fade-in duration-500">
+        <div className="w-[90vw] md:w-[380px] h-[500px] md:h-[600px] max-h-[80vh] bg-white rounded-[2.5rem] shadow-4xl border border-slate-100 mb-6 flex flex-col overflow-hidden animate-in slide-in-from-bottom-10 fade-in duration-500">
           <div className="bg-navy p-6 text-white flex justify-between items-center relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-accent-orange/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"></div>
             <div className="flex items-center gap-4 relative z-10">
@@ -84,7 +84,7 @@ const ChatAssistant: React.FC = () => {
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
             </button>
           </div>
-          
+
           <div ref={scrollRef} className="flex-grow p-6 overflow-y-auto space-y-6 bg-slate-50/50">
             {messages.map((m, i) => (
               <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'} animate-in slide-in-from-bottom-2 duration-300`}>
@@ -105,19 +105,19 @@ const ChatAssistant: React.FC = () => {
               </div>
             )}
           </div>
-          
+
           <div className="p-6 border-t bg-white">
             <div className="flex gap-3 bg-slate-50 p-2 rounded-2xl border border-slate-100 focus-within:border-accent-orange focus-within:ring-2 focus-within:ring-accent-orange/10 transition-all">
-              <input 
-                type="text" 
+              <input
+                type="text"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && handleSend()}
                 placeholder="Ask our AI expert..."
                 className="flex-grow text-sm bg-transparent px-3 py-2 focus:outline-none font-medium"
               />
-              <button 
-                onClick={handleSend} 
+              <button
+                onClick={handleSend}
                 disabled={!input.trim() || isLoading}
                 className="bg-navy text-white p-3 rounded-xl hover:bg-accent-orange hover:text-navy transition-all shadow-lg active:scale-95 disabled:opacity-30 disabled:cursor-not-allowed"
               >
@@ -128,8 +128,8 @@ const ChatAssistant: React.FC = () => {
           </div>
         </div>
       )}
-      
-      <button 
+
+      <button
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Toggle Chat"
         className="w-20 h-20 bg-accent-orange text-navy rounded-full shadow-[0_20px_50px_rgba(245,158,11,0.3)] flex items-center justify-center hover:scale-105 hover:-translate-y-1 active:scale-90 transition-all group relative overflow-hidden"
@@ -139,8 +139,8 @@ const ChatAssistant: React.FC = () => {
           <svg className="w-10 h-10 relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M19 9l-7 7-7-7" /></svg>
         ) : (
           <div className="relative z-10">
-             <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>
-             <span className="absolute -top-1 -right-1 w-4 h-4 bg-navy rounded-full border-2 border-accent-orange animate-pulse"></span>
+            <svg className="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" /></svg>
+            <span className="absolute -top-1 -right-1 w-4 h-4 bg-navy rounded-full border-2 border-accent-orange animate-pulse"></span>
           </div>
         )}
       </button>
