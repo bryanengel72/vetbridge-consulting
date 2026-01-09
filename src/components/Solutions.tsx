@@ -67,36 +67,36 @@ const Solutions: React.FC = () => {
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-20 gap-10 reveal">
         <div className="max-w-2xl">
           <h6 className="text-accent-orange font-black tracking-[0.2em] uppercase text-xs mb-4">Core Ecosystem</h6>
-          <h2 className="text-5xl md:text-6xl font-black text-navy leading-tight">Architecture for <br/> Peak Performance</h2>
+          <h2 className="text-5xl md:text-6xl font-black text-navy leading-tight">Architecture for <br /> Peak Performance</h2>
         </div>
         <div className="bg-white p-8 rounded-3xl shadow-xl border border-slate-100 flex items-center gap-6">
-           <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center text-2xl">⚡</div>
-           <div>
-             <h4 className="font-bold text-navy">Interactive Deep Dive</h4>
-             <p className="text-sm text-slate-500">Hover any card to see Challenges vs. Gains.</p>
-           </div>
+          <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center text-2xl">⚡</div>
+          <div>
+            <h4 className="font-bold text-navy">Interactive Deep Dive</h4>
+            <p className="text-sm text-slate-500">Hover any card to see Challenges vs. Gains.</p>
+          </div>
         </div>
       </div>
 
       <div className="grid lg:grid-cols-3 gap-10">
         {solutions.map((sol, i) => (
-          <div key={sol.id} className="group h-[550px] perspective-1000 reveal" style={{ transitionDelay: `${i * 0.15}s` }}>
+          <div key={sol.id} className="group h-[650px] perspective-1000 reveal" style={{ transitionDelay: `${i * 0.15}s` }}>
             <div className="relative w-full h-full card-flip preserve-3d cursor-default">
-              
+
               {/* Card Front */}
-              <div className="absolute inset-0 backface-hidden bg-white p-12 rounded-[2.5rem] shadow-lg border border-slate-100 flex flex-col overflow-hidden">
+              <div className="absolute inset-0 backface-hidden bg-white p-10 rounded-[2.5rem] shadow-lg border border-slate-100 flex flex-col overflow-hidden">
                 <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${sol.accent} opacity-[0.05] rounded-bl-[5rem]`}></div>
-                
+
                 <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${sol.accent} flex items-center justify-center mb-8 text-white shadow-xl shadow-slate-200`}>
                   {sol.icon}
                 </div>
-                
+
                 <span className="inline-block text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-4">{sol.tag}</span>
                 <h3 className="text-3xl font-black text-navy mb-6">{sol.title}</h3>
                 <p className="text-slate-600 text-lg leading-relaxed">
                   {sol.shortDesc}
                 </p>
-                
+
                 {/* Visual Cue Only */}
                 <div className="mt-auto pt-8 border-t border-slate-50 flex items-center justify-between">
                   <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Flip for Challenge & Gain</span>
@@ -107,7 +107,7 @@ const Solutions: React.FC = () => {
               </div>
 
               {/* Card Back */}
-              <div className="absolute inset-0 backface-hidden rotate-y-180 bg-navy p-10 rounded-[2.5rem] shadow-2xl flex flex-col border border-white/10">
+              <div className="absolute inset-0 backface-hidden rotate-y-180 bg-navy p-8 rounded-[2.5rem] shadow-2xl flex flex-col border border-white/10">
                 <div className="mb-6">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
@@ -121,7 +121,7 @@ const Solutions: React.FC = () => {
 
                 <div className="mb-8">
                   <h4 className="text-white font-black text-[10px] uppercase tracking-[0.2em] mb-4 opacity-50">What You'll Gain</h4>
-                  <ul className="space-y-4">
+                  <ul className="space-y-3">
                     {sol.gain.map((item, idx) => (
                       <li key={idx} className="flex gap-3 text-white text-sm">
                         <svg className="w-5 h-5 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" /></svg>
