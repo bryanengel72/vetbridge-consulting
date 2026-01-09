@@ -60,22 +60,22 @@ const Contact: React.FC = () => {
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Practice Name</label>
-                    <input required type="text" className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 text-navy font-bold focus:outline-none focus:border-accent-orange transition-colors" placeholder="VCA Animal..." />
+                    <input required type="text" className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 text-black font-bold focus:outline-none focus:border-accent-orange transition-colors" placeholder="VCA Animal..." />
                   </div>
                   <div className="space-y-2">
                     <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">PIMS System</label>
-                    <input required type="text" className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 text-navy font-bold focus:outline-none focus:border-accent-orange transition-colors" placeholder="Cornerstone, ezyVet..." />
+                    <input required type="text" className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 text-black font-bold focus:outline-none focus:border-accent-orange transition-colors" placeholder="Cornerstone, ezyVet..." />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Direct Email</label>
-                  <input required type="email" className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 text-navy font-bold focus:outline-none focus:border-accent-orange transition-colors" placeholder="dr@clinic.com" />
+                  <input required type="email" className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 text-black font-bold focus:outline-none focus:border-accent-orange transition-colors" placeholder="dr@clinic.com" />
                 </div>
                 <div className="space-y-2">
                   <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Message</label>
-                  <textarea required className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 text-navy font-bold h-32 focus:outline-none focus:border-accent-orange transition-colors resize-none" placeholder="What are your main operational pain points?"></textarea>
+                  <textarea required className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 text-black font-bold h-32 focus:outline-none focus:border-accent-orange transition-colors resize-none" placeholder="What are your main operational pain points?"></textarea>
                 </div>
-                <button type="submit" className="w-full bg-navy text-white font-black py-5 rounded-2xl hover:bg-accent-orange hover:text-navy transition-all shadow-xl shadow-navy/20 transform hover:-translate-y-1">
+                <button type="submit" className="w-full bg-navy text-white font-black py-5 rounded-2xl hover:bg-accent-orange hover:text-black transition-all shadow-xl shadow-navy/20 transform hover:-translate-y-1">
                   Submit Discovery Request
                 </button>
               </form>
