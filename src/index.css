@@ -14,33 +14,68 @@ body {
 }
 
 /* Helper classes usually handled by Tailwind but custom values here */
-.bg-navy { background-color: #0f172a; }
-.text-accent-orange { color: #f59e0b; }
-.bg-accent-orange { background-color: #f59e0b; }
-.border-accent-orange { border-color: #f59e0b; }
+.bg-brand-primary {
+    background-color: #2d2b55;
+}
+
+.text-brand-secondary {
+    color: #6b63b5;
+}
+
+.bg-brand-secondary {
+    background-color: #6b63b5;
+}
+
+.border-brand-secondary {
+    border-color: #6b63b5;
+}
 
 section {
     scroll-margin-top: 80px;
 }
 
 /* Custom Scrollbar */
-::-webkit-scrollbar { width: 8px; }
-::-webkit-scrollbar-track { background: #0f172a; }
-::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
-::-webkit-scrollbar-thumb:hover { background: #f59e0b; }
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #2d2b55;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #4b4887;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #6b63b5;
+}
 
 @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
-    100% { transform: translateY(0px); }
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
 }
-.animate-float { animation: float 6s ease-in-out infinite; }
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
 
 .reveal {
     opacity: 0;
     transform: translateY(30px);
     transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
+
 .reveal.active {
     opacity: 1;
     transform: translateY(0);
@@ -50,18 +85,23 @@ section {
 .perspective-1000 {
     perspective: 1000px;
 }
+
 .preserve-3d {
     transform-style: preserve-3d;
 }
+
 .backface-hidden {
     backface-visibility: hidden;
 }
+
 .rotate-y-180 {
     transform: rotateY(180deg);
 }
+
 .card-flip {
     transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
 .group:hover .card-flip {
     transform: rotateY(180deg);
 }

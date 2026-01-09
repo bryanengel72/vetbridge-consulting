@@ -23,9 +23,9 @@ const WhyChooseUs: React.FC = () => {
   return (
     <div className="container mx-auto px-6 relative">
       <div className="text-center mb-20">
-        <h6 className="text-accent-orange font-bold tracking-widest uppercase text-sm mb-4">Why Choose Us?</h6>
+        <h6 className="text-brand-secondary font-bold tracking-widest uppercase text-sm mb-4">Why Choose Us?</h6>
         <h2 className="text-4xl md:text-6xl font-black mb-6">The VetBridge Advantage</h2>
-        <div className="h-1.5 w-24 bg-accent-orange mx-auto rounded-full"></div>
+        <div className="h-1.5 w-24 bg-brand-secondary mx-auto rounded-full"></div>
       </div>
       
       <div className="grid md:grid-cols-3 gap-12">
@@ -43,7 +43,7 @@ const WhyChooseUs: React.FC = () => {
         <p className="text-slate-400 mb-10 max-w-2xl mx-auto">
           Our team is standing by to help you unlock the full potential of your clinic. No commitment, just a conversation.
         </p>
-        <a href="https://calendar.app.google/ki8q1DDtziZjLvRz5" target="_blank" rel="noopener noreferrer" className="inline-block bg-accent-orange text-navy px-10 py-5 rounded-xl font-black text-lg hover:bg-white transition-all transform hover:scale-105">
+        <a href="https://calendar.app.google/ki8q1DDtziZjLvRz5" target="_blank" rel="noopener noreferrer" className="inline-block bg-brand-secondary text-brand-primary px-10 py-5 rounded-xl font-black text-lg hover:bg-white transition-all transform hover:scale-105">
           Start With a Free Discovery Call
         </a>
       </div>

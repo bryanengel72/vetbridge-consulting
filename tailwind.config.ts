@@ -8,8 +8,9 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                navy: '#0f172a',
-                'accent-orange': '#f59e0b',
+                // Purple palette from flyer
+                'brand-primary': '#2d2b55', // Deep violet/dark purple
+                'brand-secondary': '#6b63b5', // Lighter purple/lavender
             },
             fontFamily: {
                 sans: ['Inter', 'sans-serif'],

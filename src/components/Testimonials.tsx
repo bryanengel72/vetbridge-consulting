@@ -31,8 +31,8 @@ const Testimonials: React.FC = () => {
     return (
         <div className="container mx-auto px-6">
             <div className="text-center mb-20 reveal">
-                <h6 className="text-accent-orange font-black tracking-[0.2em] uppercase text-xs mb-4">Success Stories</h6>
-                <h2 className="text-4xl md:text-5xl font-black text-navy mb-6">Trusted by Leading Practices</h2>
+                <h6 className="text-brand-secondary font-black tracking-[0.2em] uppercase text-xs mb-4">Success Stories</h6>
+                <h2 className="text-4xl md:text-5xl font-black text-brand-primary mb-6">Trusted by Leading Practices</h2>
                 <p className="text-slate-600 max-w-2xl mx-auto text-lg">
                     Join the growing network of veterinary clinics maximizing their potential with our data-driven solutions.
                 </p>
@@ -42,9 +42,9 @@ const Testimonials: React.FC = () => {
                 {testimonials.map((item, i) => (
                     <div key={item.id} className="bg-white p-8 rounded-3xl shadow-xl border border-slate-100 hover:shadow-2xl transition-shadow reveal" style={{ transitionDelay: `${i * 0.1}s` }}>
                         <div className="flex items-center gap-4 mb-6">
-                            <img src={item.image} alt={item.author} className="w-14 h-14 rounded-full object-cover border-2 border-accent-orange p-1" />
+                            <img src={item.image} alt={item.author} className="w-14 h-14 rounded-full object-cover border-2 border-brand-secondary p-1" />
                             <div>
-                                <h4 className="font-bold text-navy text-lg leading-tight">{item.author}</h4>
+                                <h4 className="font-bold text-brand-primary text-lg leading-tight">{item.author}</h4>
                                 <p className="text-slate-500 text-xs uppercase tracking-wide font-medium">{item.role}</p>
                             </div>
                         </div>
@@ -56,7 +56,7 @@ const Testimonials: React.FC = () => {
                             </p>
                         </div>
 
-                        <div className="text-sm font-bold text-accent-orange border-t border-slate-100 pt-4">
+                        <div className="text-sm font-bold text-brand-secondary border-t border-slate-100 pt-4">
                             {item.clinic}
                         </div>
                     </div>
