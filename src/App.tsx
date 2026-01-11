@@ -7,7 +7,7 @@ import About from './components/About';
 import WhyChooseUs from './components/WhyChooseUs';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
-import ChatAssistant from './components/ChatAssistant';
+
 
 
 
@@ -57,10 +57,7 @@ const App: React.FC = () => {
       </main>
       <Footer />
 
-      {/* Gemini Discovery Assistant */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <ChatAssistant />
-      </div>
+
     </div>
   );
 };

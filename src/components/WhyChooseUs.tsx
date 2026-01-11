@@ -8,12 +8,12 @@ const reasons = [
     icon: '⚙️'
   },
   {
-    title: 'Measurable ROI',
+    title: 'ROI-Focused',
     desc: 'Every engagement includes clear metrics, time savings, or revenue impact.',
     icon: '📊'
   },
   {
-    title: 'Built for Real Clinics',
+    title: 'Healthcare Tech Driven',
     desc: 'Enterprise-level healthcare expertise, scaled for veterinary practices.',
     icon: '🏥'
   }
@@ -27,7 +27,7 @@ const WhyChooseUs: React.FC = () => {
         <h2 className="text-4xl md:text-6xl font-black mb-6">The VetBridge Advantage</h2>
         <div className="h-1.5 w-24 bg-brand-secondary mx-auto rounded-full"></div>
       </div>
-      
+
       <div className="grid md:grid-cols-3 gap-12">
         {reasons.map((r, i) => (
           <div key={i} className="flex flex-col items-center text-center">
@@ -37,14 +37,14 @@ const WhyChooseUs: React.FC = () => {
           </div>
         ))}
       </div>
-      
+
       <div className="mt-24 p-12 bg-white/5 rounded-3xl border border-white/10 backdrop-blur-sm text-center">
         <h4 className="text-2xl font-bold mb-6">Ready to improve your practice operations?</h4>
         <p className="text-slate-400 mb-10 max-w-2xl mx-auto">
           Our team is standing by to help you unlock the full potential of your clinic. No commitment, just a conversation.
         </p>
-        <a href="https://calendar.app.google/ki8q1DDtziZjLvRz5" target="_blank" rel="noopener noreferrer" className="inline-block bg-brand-secondary text-brand-primary px-10 py-5 rounded-xl font-black text-lg hover:bg-white transition-all transform hover:scale-105">
-          Start With a Free Discovery Call
+        <a href="#contact" className="inline-block bg-brand-secondary text-brand-primary px-10 py-5 rounded-xl font-black text-lg hover:bg-white transition-all transform hover:scale-105">
+          Contact Us
         </a>
       </div>
     </div>

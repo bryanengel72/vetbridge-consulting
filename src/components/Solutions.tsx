@@ -132,8 +132,8 @@ const Solutions: React.FC = () => {
                 </div>
 
                 <div className="mt-auto">
-                  <a href="https://calendar.app.google/ki8q1DDtziZjLvRz5" target="_blank" rel="noopener noreferrer" className="w-full bg-white text-brand-primary py-4 rounded-xl font-black text-center text-xs block hover:bg-brand-secondary transition-all uppercase tracking-widest">
-                    Request This Analysis
+                  <a href="#contact" className="w-full bg-white text-brand-primary py-4 rounded-xl font-black text-center text-xs block hover:bg-brand-secondary transition-all uppercase tracking-widest">
+                    Contact Us
                   </a>
                 </div>
               </div>

@@ -31,7 +31,7 @@ const ChatAssistant: React.FC = () => {
 
     const response = await getGeminiResponse([...messages, userMsg]);
 
-    setMessages(prev => [...prev, { role: 'model', text: response || "I apologize, I encountered an error. Please try again or book a call!" }]);
+    setMessages(prev => [...prev, { role: 'model', text: response || "I apologize, I encountered an error. Please try again or contact us!" }]);
     setIsLoading(false);
   };
 

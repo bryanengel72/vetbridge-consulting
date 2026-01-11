@@ -21,7 +21,7 @@ const Contact: React.FC = () => {
             <h6 className="text-brand-secondary font-black tracking-[0.2em] uppercase text-xs mb-6">Connect With Us</h6>
             <h2 className="text-5xl md:text-7xl font-black mb-10 leading-tight">Let's Design <br /> Your Future.</h2>
             <p className="text-slate-400 text-xl mb-12 max-w-md font-light">
-              Schedule a complimentary discovery call to audit your current operations and identify growth opportunities.
+              Contact us to audit your current operations and identify growth opportunities.
             </p>
 
             <div className="space-y-10">
@@ -76,7 +76,7 @@ const Contact: React.FC = () => {
                   <textarea required className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 text-black font-bold h-32 focus:outline-none focus:border-brand-secondary transition-colors resize-none" placeholder="What are your main operational pain points?"></textarea>
                 </div>
                 <button type="submit" className="w-full bg-brand-primary text-white font-black py-5 rounded-2xl hover:bg-brand-secondary hover:text-black transition-all shadow-xl shadow-brand-primary/20 transform hover:-translate-y-1">
-                  Submit Discovery Request
+                  Send Message
                 </button>
               </form>
             )}
