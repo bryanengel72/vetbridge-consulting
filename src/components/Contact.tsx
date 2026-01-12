@@ -1,13 +1,36 @@
-
-import React, { useState } from 'react';
+import emailjs from '@emailjs/browser';
+import React, { useRef, useState } from 'react';
 
 const Contact: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [isSending, setIsSending] = useState(false);
+  const form = useRef<HTMLFormElement>(null);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 5000);
+    setIsSending(true);
+
+    // Replace these with your actual EmailJS service/template IDs
+    const SERVICE_ID = 'service_ekg9k3n';
+    const TEMPLATE_ID = 'template_kwdi3g9';
+    const PUBLIC_KEY = 'gD_uQtcmPNPx4tyTy';
+
+    if (form.current) {
+      emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, {
+        publicKey: PUBLIC_KEY,
+      })
+        .then(
+          () => {
+            setSubmitted(true);
+            setIsSending(false);
+          },
+          (error) => {
+            console.error('FAILED...', error.text);
+            alert('Failed to send message. Please ensure you have set up your EmailJS keys in Contact.tsx.');
+            setIsSending(false);
+          }
+        );
+    }
   };
 
   return (
@@ -56,27 +79,31 @@ const Contact: React.FC = () => {
                 <p className="text-slate-500">A senior consultant will be in touch within 24 hours.</p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-8">
+              <form ref={form} onSubmit={handleSubmit} className="space-y-8">
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Practice Name</label>
-                    <input required type="text" className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 text-black font-bold focus:outline-none focus:border-brand-secondary transition-colors" placeholder="VCA Animal..." />
+                    <input required name="practice_name" type="text" className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 text-black font-bold focus:outline-none focus:border-brand-secondary transition-colors" placeholder="VCA Animal..." />
                   </div>
                   <div className="space-y-2">
                     <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">PIMS System</label>
-                    <input required type="text" className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 text-black font-bold focus:outline-none focus:border-brand-secondary transition-colors" placeholder="Cornerstone, ezyVet..." />
+                    <input required name="pims_system" type="text" className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 text-black font-bold focus:outline-none focus:border-brand-secondary transition-colors" placeholder="Cornerstone, ezyVet..." />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Direct Email</label>
-                  <input required type="email" className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 text-black font-bold focus:outline-none focus:border-brand-secondary transition-colors" placeholder="dr@clinic.com" />
+                  <input required name="user_email" type="email" className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 text-black font-bold focus:outline-none focus:border-brand-secondary transition-colors" placeholder="dr@clinic.com" />
                 </div>
                 <div className="space-y-2">
                   <label className="block text-[10px] font-black text-slate-400 uppercase tracking-widest ml-1">Message</label>
-                  <textarea required className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 text-black font-bold h-32 focus:outline-none focus:border-brand-secondary transition-colors resize-none" placeholder="What are your main operational pain points?"></textarea>
+                  <textarea required name="message" className="w-full bg-slate-50 border-2 border-slate-100 rounded-2xl px-6 py-4 text-black font-bold h-32 focus:outline-none focus:border-brand-secondary transition-colors resize-none" placeholder="What are your main operational pain points?"></textarea>
                 </div>
-                <button type="submit" className="w-full bg-brand-primary text-white font-black py-5 rounded-2xl hover:bg-brand-secondary hover:text-black transition-all shadow-xl shadow-brand-primary/20 transform hover:-translate-y-1">
-                  Send Message
+                <button
+                  type="submit"
+                  disabled={isSending}
+                  className="w-full bg-brand-primary text-white font-black py-5 rounded-2xl hover:bg-brand-secondary hover:text-black transition-all shadow-xl shadow-brand-primary/20 transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSending ? 'Sending...' : 'Send Message'}
                 </button>
               </form>
             )}
