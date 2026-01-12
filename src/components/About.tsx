@@ -7,7 +7,7 @@ const About: React.FC = () => {
       <div className="relative reveal">
         <div className="relative rounded-[3rem] overflow-hidden shadow-2xl">
           <img
-            src="https://images.unsplash.com/photo-1584132967334-10e028bd69f7?auto=format&fit=crop&q=80&w=2070"
+            src="/images/about-legacy.jpg"
             alt="Vet Team"
             className="w-full grayscale hover:grayscale-0 transition-all duration-700"
           />

@@ -59,14 +59,7 @@ const Hero: React.FC = () => {
                   <p className="text-2xl font-black text-white">+24.8%</p>
                 </div>
 
-                <div className="absolute bottom-10 left-10 glass p-4 rounded-2xl animate-float" style={{ animationDelay: '2s' }}>
-                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-tighter mb-2">PIMS Integration</p>
-                  <div className="flex gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-xs font-bold text-white">eZ</div>
-                    <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-xs font-bold text-white">CS</div>
-                    <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-xs font-bold text-white">AV</div>
-                  </div>
-                </div>
+
               </div>
             </div>
 
