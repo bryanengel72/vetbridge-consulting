@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import confetti from 'canvas-confetti';
 
 const ROICalculator: React.FC = () => {
     const [numVets, setNumVets] = useState(3);
@@ -11,6 +12,43 @@ const ROICalculator: React.FC = () => {
     const threeYearGrowth = additionalRevenue * 3; // 3-Year Growth Potential
     const valuationIncrease = additionalRevenue * 4.5; // Estimated 4.5x multiple on operational efficiency revenue
     const additionalAppts = Math.round((numVets * dailyAppts * 5 * 50) * (efficiencyGain / 100));
+
+    // Humor State
+    const [confettiTriggered, setConfettiTriggered] = useState(false);
+    const [eggMessage, setEggMessage] = useState<string | null>(null);
+    const [interactionStart, setInteractionStart] = useState(false);
+
+    const handleInteraction = () => {
+        if (!interactionStart) setInteractionStart(true);
+    };
+
+    useEffect(() => {
+        if (!interactionStart) return;
+
+        // Option 1: Easter Eggs
+        if (numVets === 20) {
+            setEggMessage("Building a veterinary empire, are we? 🏰");
+        } else if (efficiencyGain === 40) {
+            setEggMessage("Whoa there, Elon Musk! 🚀 That's efficient!");
+        } else if (dailyAppts === 30) {
+            setEggMessage("Do your vets run on nuclear fusion? ⚛️");
+        } else {
+            setEggMessage(null);
+        }
+
+        // Option 3: Confetti for big wins
+        if (valuationIncrease > 1000000 && !confettiTriggered) {
+            confetti({
+                particleCount: 100,
+                spread: 70,
+                origin: { y: 0.6 }
+            });
+            setConfettiTriggered(true);
+        } else if (valuationIncrease < 1000000) {
+            setConfettiTriggered(false); // Reset if they drop back down
+        }
+
+    }, [numVets, efficiencyGain, dailyAppts, valuationIncrease, confettiTriggered]);
 
     const formatCurrency = (value: number) => {
         return new Intl.NumberFormat('en-US', {
@@ -57,7 +95,7 @@ const ROICalculator: React.FC = () => {
                                     max="20"
                                     step="1"
                                     value={numVets}
-                                    onChange={(e) => setNumVets(Number(e.target.value))}
+                                    onChange={(e) => { setNumVets(Number(e.target.value)); handleInteraction(); }}
                                     className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-brand-secondary hover:accent-brand-primary transition-all"
                                 />
                                 <div className="flex justify-between text-xs text-gray-400 mt-2 font-medium">
@@ -80,7 +118,7 @@ const ROICalculator: React.FC = () => {
                                         max="2000000"
                                         step="10000"
                                         value={revPerVet}
-                                        onChange={(e) => setRevPerVet(Number(e.target.value))}
+                                        onChange={(e) => { setRevPerVet(Number(e.target.value)); handleInteraction(); }}
                                         className="w-full pl-9 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-xl focus:ring-2 focus:ring-brand-primary focus:border-brand-primary transition-all text-gray-800 font-bold text-lg shadow-inner"
                                     />
                                 </div>
@@ -99,7 +137,7 @@ const ROICalculator: React.FC = () => {
                                     max="40"
                                     step="1"
                                     value={efficiencyGain}
-                                    onChange={(e) => setEfficiencyGain(Number(e.target.value))}
+                                    onChange={(e) => { setEfficiencyGain(Number(e.target.value)); handleInteraction(); }}
                                     className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-green-600 hover:accent-green-700 transition-all"
                                 />
                                 <div className="flex justify-between text-xs text-gray-400 mt-2 font-medium">
@@ -123,7 +161,7 @@ const ROICalculator: React.FC = () => {
                                     max="30"
                                     step="1"
                                     value={dailyAppts}
-                                    onChange={(e) => setDailyAppts(Number(e.target.value))}
+                                    onChange={(e) => { setDailyAppts(Number(e.target.value)); handleInteraction(); }}
                                     className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-brand-secondary hover:accent-brand-primary transition-all"
                                 />
                                 <div className="flex justify-between text-xs text-gray-400 mt-2 font-medium">
@@ -147,6 +185,11 @@ const ROICalculator: React.FC = () => {
                             </h3>
 
                             <div className="space-y-6">
+                                {eggMessage && (
+                                    <div className="bg-white/10 backdrop-blur-sm border border-white/20 p-3 rounded-lg text-center animate-in fade-in slide-in-from-top-2">
+                                        <p className="text-yellow-300 font-bold text-sm">✨ {eggMessage}</p>
+                                    </div>
+                                )}
                                 <div className="p-6 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 shadow-lg transform transition-all hover:scale-[1.02] duration-300">
                                     <p className="text-blue-200 text-xs font-bold uppercase tracking-widest mb-2">Annual Revenue Increase</p>
                                     <p className="text-4xl md:text-5xl font-bold text-white tracking-tight drop-shadow-sm">
