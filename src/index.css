@@ -13,21 +13,9 @@ body {
     overflow-x: hidden;
 }
 
-/* Helper classes usually handled by Tailwind but custom values here */
-.bg-brand-primary {
-    background-color: #2d2b55;
-}
-
-.text-brand-secondary {
-    color: #6b63b5;
-}
-
-.bg-brand-secondary {
-    background-color: #6b63b5;
-}
-
-.border-brand-secondary {
-    border-color: #6b63b5;
+@theme {
+    --color-brand-primary: #2d2b55;
+    --color-brand-secondary: #6b63b5;
 }
 
 section {
