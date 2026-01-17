@@ -41,11 +41,11 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
 
   return (
     <header className={`fixed top-0 w-full z-40 transition-all duration-300 ${isScrolled || mobileMenuOpen ? 'bg-brand-primary shadow-lg py-3' : 'bg-transparent py-6'}`}>
-      <div className="container mx-auto px-6 flex justify-between items-center">
+      <div className="container mx-auto px-6 flex justify-end md:justify-between items-center">
         {/* Logo / Home */}
         <button
           onClick={(e) => scrollToSection(e, 'top')}
-          className="flex items-center gap-2 group outline-none"
+          className="hidden md:flex items-center gap-2 group outline-none"
         >
           <img
             src={logo}
