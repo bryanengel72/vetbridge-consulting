@@ -4,10 +4,13 @@ const ROICalculator: React.FC = () => {
     const [numVets, setNumVets] = useState(3);
     const [revPerVet, setRevPerVet] = useState(650000);
     const [efficiencyGain, setEfficiencyGain] = useState(15);
+    const [dailyAppts, setDailyAppts] = useState(15);
 
     const totalRevenue = numVets * revPerVet;
     const additionalRevenue = totalRevenue * (efficiencyGain / 100);
     const threeYearGrowth = additionalRevenue * 3; // 3-Year Growth Potential
+    const valuationIncrease = additionalRevenue * 4.5; // Estimated 4.5x multiple on operational efficiency revenue
+    const additionalAppts = Math.round((numVets * dailyAppts * 5 * 50) * (efficiencyGain / 100));
 
     const formatCurrency = (value: number) => {
         return new Intl.NumberFormat('en-US', {
@@ -107,6 +110,27 @@ const ROICalculator: React.FC = () => {
                                     "Our clients typically see <span className="font-bold text-gray-700">15-25% growth</span> in the first year."
                                 </p>
                             </div>
+
+                            {/* Daily Appointments Slider */}
+                            <div>
+                                <div className="flex justify-between items-end mb-4">
+                                    <label className="text-sm font-bold text-gray-700 uppercase tracking-wide">Avg. Appts Per DVM / Day</label>
+                                    <span className="text-3xl font-bold text-brand-primary">{dailyAppts}</span>
+                                </div>
+                                <input
+                                    type="range"
+                                    min="8"
+                                    max="30"
+                                    step="1"
+                                    value={dailyAppts}
+                                    onChange={(e) => setDailyAppts(Number(e.target.value))}
+                                    className="w-full h-3 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-brand-secondary hover:accent-brand-primary transition-all"
+                                />
+                                <div className="flex justify-between text-xs text-gray-400 mt-2 font-medium">
+                                    <span>8 Appts</span>
+                                    <span>30 Appts</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
@@ -131,12 +155,37 @@ const ROICalculator: React.FC = () => {
                                     <div className="mt-2 text-xs text-blue-200/60 font-medium">Based on {efficiencyGain}% efficiency gain</div>
                                 </div>
 
-                                <div className="p-6 rounded-2xl bg-white/5 border border-white/5 shadow-lg transform transition-all hover:scale-[1.02] duration-300">
-                                    <p className="text-blue-200 text-xs font-bold uppercase tracking-widest mb-2">3-Year Growth Potential</p>
-                                    <p className="text-3xl md:text-4xl font-bold text-green-400 drop-shadow-sm">
-                                        +{formatCurrency(threeYearGrowth)}
-                                    </p>
-                                    <div className="mt-2 text-xs text-blue-200/60 font-medium">Cumulative additional revenue</div>
+                                <div className="space-y-4">
+                                    <div className="p-5 rounded-2xl bg-white/5 border border-white/5 shadow-lg transform transition-all hover:scale-[1.02] duration-300">
+                                        <div className="flex justify-between items-center bg-transparent">
+                                            <div>
+                                                <p className="text-blue-200 text-xs font-bold uppercase tracking-widest mb-1">Practice Value Boost</p>
+                                                <p className="text-3xl font-bold text-green-400 drop-shadow-sm tracking-tight pt-1">
+                                                    +{formatCurrency(valuationIncrease)}
+                                                </p>
+                                            </div>
+                                            <div className="text-right hidden sm:block">
+                                                <span className="text-xs text-blue-200/60 font-medium block">Est. Enterprise Value</span>
+                                                <span className="text-[10px] text-blue-200/40 block">Based on 4.5x multiple</span>
+                                            </div>
+                                        </div>
+                                        <div className="mt-2 sm:hidden text-xs text-blue-200/60 font-medium">Est. Enterprise Value (4.5x multiple)</div>
+                                    </div>
+
+                                    <div className="p-5 rounded-2xl bg-white/5 border border-white/5 shadow-lg transform transition-all hover:scale-[1.02] duration-300">
+                                        <div className="flex justify-between items-center">
+                                            <div>
+                                                <p className="text-blue-200 text-xs font-bold uppercase tracking-widest mb-1">Annual Capacity Gain</p>
+                                                <p className="text-3xl font-bold text-white drop-shadow-sm tracking-tight pt-1">
+                                                    +{new Intl.NumberFormat('en-US').format(additionalAppts)}
+                                                </p>
+                                            </div>
+                                            <div className="text-right hidden sm:block">
+                                                <span className="text-xs text-blue-200/60 font-medium block">Additional Appts / Year</span>
+                                            </div>
+                                        </div>
+                                        <div className="mt-2 sm:hidden text-xs text-blue-200/60 font-medium">Additional Appointments / Year</div>
+                                    </div>
                                 </div>
 
                                 <div className="pt-6">
@@ -156,6 +205,7 @@ const ROICalculator: React.FC = () => {
                     </div>
                 </div>
             </div>
+
         </div>
     );
 };
