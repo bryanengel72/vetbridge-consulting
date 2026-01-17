@@ -1,5 +1,5 @@
-
 import React, { useState } from 'react';
+import logo from '../assets/logo-gold.png';
 
 interface HeaderProps {
   isScrolled: boolean;
@@ -47,15 +47,11 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
           onClick={(e) => scrollToSection(e, 'top')}
           className="flex items-center gap-2 group outline-none"
         >
-          <div className="w-10 h-10 bg-brand-secondary rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
-            <span className="text-brand-primary font-bold text-xl">V</span>
-          </div>
-          <div className="text-left">
-            <h1 className="font-bold leading-none text-white text-base">
-              VETBRIDGE<br />
-              <span className="text-brand-secondary text-[10px] tracking-widest uppercase">Consulting</span>
-            </h1>
-          </div>
+          <img
+            src={logo}
+            alt="VetBridge Consulting"
+            className="h-16 w-auto object-contain transition-transform group-hover:scale-105"
+          />
         </button>
 
         {/* Desktop Nav */}
