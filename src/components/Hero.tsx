@@ -3,7 +3,7 @@ import React from 'react';
 
 const Hero: React.FC = () => {
   return (
-    <div className="relative min-h-screen bg-brand-primary flex items-center pt-20 overflow-hidden">
+    <div className="relative min-h-screen bg-brand-primary flex items-center pt-36 overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-0 right-0 w-[800px] h-[800px] bg-brand-primary/10 rounded-full blur-[120px] -translate-y-1/2 translate-x-1/4"></div>
