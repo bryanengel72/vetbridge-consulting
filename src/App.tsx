@@ -12,7 +12,6 @@ import ROICalculator from './components/ROICalculator';
 
 
 
-
 const App: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -49,8 +48,8 @@ const App: React.FC = () => {
         <section id="about" className="py-24">
           <About />
         </section>
-        <section id="why-us" className="py-24 bg-brand-primary text-white overflow-hidden relative">
-          <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-white to-transparent opacity-10"></div>
+        <section id="why-us" className="py-24 bg-slate-50 text-slate-900 overflow-hidden relative border-y border-slate-100">
+          <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-white to-transparent opacity-50"></div>
           <WhyChooseUs />
         </section>
         <section id="roi-calculator" className="py-24 bg-white relative overflow-hidden">

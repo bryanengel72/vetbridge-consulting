@@ -40,18 +40,17 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
   };
 
   return (
-    <header className={`fixed top-0 w-full z-40 transition-all duration-300 ${isScrolled || mobileMenuOpen ? 'bg-brand-primary shadow-lg py-3' : 'bg-transparent py-6'}`}>
+    <header className={`fixed top-0 w-full z-40 transition-all duration-300 ${isScrolled || mobileMenuOpen ? 'bg-white/95 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-6'}`}>
       <div className="container mx-auto px-6 flex justify-end md:justify-between items-center">
         {/* Logo / Home */}
         <button
           onClick={(e) => scrollToSection(e, 'top')}
-          className="hidden md:flex items-center gap-2 group outline-none"
+          className="hidden md:flex items-center gap-2 group outline-none text-left"
         >
-          <img
-            src={logo}
-            alt="VetBridge Consulting"
-            className="h-16 w-auto object-contain transition-transform group-hover:scale-105"
-          />
+          <h1 className="font-black text-brand-primary leading-none text-xl md:text-2xl transition-transform group-hover:scale-105">
+            VETBRIDGE<br/>
+            <span className="text-brand-secondary text-[10px] md:text-xs tracking-widest uppercase block mt-1">Consulting</span>
+          </h1>
         </button>
 
         {/* Desktop Nav */}
@@ -61,7 +60,7 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
               key={link.name}
               href={`#${link.id}`}
               onClick={(e) => scrollToSection(e, link.id)}
-              className="text-white hover:text-brand-secondary transition-colors font-semibold"
+              className="text-slate-600 hover:text-brand-primary transition-colors font-semibold"
             >
               {link.name}
             </a>
@@ -76,7 +75,7 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden text-white p-2"
+          className="md:hidden text-slate-800 p-2"
           onClick={toggleMenu}
           aria-label="Toggle Menu"
         >
@@ -90,13 +89,13 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
 
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
-        <nav className="md:hidden bg-brand-primary absolute top-full left-0 w-full h-[100vh] p-8 space-y-8 flex flex-col items-center border-t border-white/5 animate-in slide-in-from-top duration-300">
+        <nav className="md:hidden bg-white absolute top-full left-0 w-full h-[100vh] p-8 space-y-8 flex flex-col items-center border-t border-slate-100 animate-in slide-in-from-top duration-300">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={`#${link.id}`}
               onClick={(e) => scrollToSection(e, link.id)}
-              className="text-white text-3xl font-black hover:text-brand-secondary transition-colors"
+              className="text-slate-800 text-3xl font-black hover:text-brand-primary transition-colors"
             >
               {link.name}
             </a>

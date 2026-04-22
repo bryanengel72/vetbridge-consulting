@@ -5,13 +5,13 @@ const About: React.FC = () => {
   return (
     <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
       <div className="relative reveal">
-        <div className="relative rounded-[3rem] overflow-hidden shadow-2xl">
+        <div className="relative rounded-[3rem] overflow-hidden shadow-2xl border border-slate-100">
           <img
             src="/images/about-legacy.jpg"
             alt="Vet Team"
-            className="w-full grayscale hover:grayscale-0 transition-all duration-700"
+            className="w-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/40 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/10 to-transparent"></div>
         </div>
 
         {/* Experience Box */}
@@ -24,7 +24,7 @@ const About: React.FC = () => {
         </div>
 
         {/* Floating Shapes */}
-        <div className="absolute -top-10 -left-10 w-40 h-40 bg-brand-secondary/10 rounded-full blur-3xl -z-10 animate-pulse"></div>
+        <div className="absolute -top-10 -left-10 w-40 h-40 bg-brand-secondary/5 rounded-full blur-3xl -z-10"></div>
       </div>
 
       <div className="reveal mt-12 lg:mt-0" style={{ transitionDelay: '0.2s' }}>
