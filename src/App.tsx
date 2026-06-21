@@ -9,6 +9,7 @@ import WhyChooseUs from './components/WhyChooseUs';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ROICalculator from './components/ROICalculator';
+import Referrals from './components/Referrals';
 
 
 
@@ -51,6 +52,9 @@ const App: React.FC = () => {
         <section id="why-us" className="py-24 bg-slate-50 text-slate-900 overflow-hidden relative border-y border-slate-100">
           <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-white to-transparent opacity-50"></div>
           <WhyChooseUs />
+        </section>
+        <section id="referrals" className="py-24 bg-white relative overflow-hidden border-t border-slate-100">
+          <Referrals />
         </section>
         <section id="roi-calculator" className="py-24 bg-white relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent"></div>

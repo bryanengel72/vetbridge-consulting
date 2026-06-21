@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
       <div className="container mx-auto px-6">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-brand-secondary rounded-full flex items-center justify-center">
+            <div className="w-8 h-8 bg-brand-accent rounded-full flex items-center justify-center">
                <span className="text-brand-primary font-bold text-lg">V</span>
             </div>
             <h1 className="font-bold text-brand-primary leading-none text-lg">

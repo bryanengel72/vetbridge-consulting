@@ -67,7 +67,7 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
           ))}
           <a
             href="#contact"
-            className="bg-brand-secondary text-brand-primary px-5 py-2 rounded-full font-bold hover:bg-white transition-all transform hover:scale-105"
+            className="bg-brand-accent text-brand-primary px-5 py-2 rounded-full font-bold hover:bg-brand-primary hover:text-white transition-all transform hover:scale-105 shadow-sm shadow-brand-accent/30"
           >
             Contact Us
           </a>
@@ -102,7 +102,7 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
           ))}
           <a
             href="#contact"
-            className="w-full text-center bg-brand-secondary text-brand-primary px-5 py-6 rounded-3xl font-black text-xl"
+            className="w-full text-center bg-brand-accent text-brand-primary px-5 py-6 rounded-3xl font-black text-xl"
           >
             Contact Us
           </a>

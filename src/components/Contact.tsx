@@ -41,7 +41,7 @@ const Contact: React.FC = () => {
 
         <div className="relative z-10 grid lg:grid-cols-2 gap-20 items-center">
           <div>
-            <h6 className="text-brand-secondary font-black tracking-[0.2em] uppercase text-xs mb-6">Connect With Us</h6>
+            <h6 className="text-brand-mint font-black tracking-[0.2em] uppercase text-xs mb-6">Connect With Us</h6>
             <h2 className="text-5xl md:text-7xl font-black mb-10 leading-tight">Let's Design <br /> Your Future.</h2>
             <p className="text-slate-400 text-xl mb-12 max-w-md font-light">
               Contact us to audit your current operations and identify growth opportunities.
@@ -49,7 +49,7 @@ const Contact: React.FC = () => {
 
             <div className="space-y-10">
               <div className="flex items-center gap-6 group cursor-pointer">
-                <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-brand-secondary group-hover:bg-brand-secondary group-hover:text-brand-primary transition-all">
+                <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-brand-mint group-hover:bg-brand-accent group-hover:text-brand-primary transition-all">
                   <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z"></path></svg>
                 </div>
                 <div>
@@ -58,7 +58,7 @@ const Contact: React.FC = () => {
                 </div>
               </div>
               <div className="flex items-center gap-6 group cursor-pointer">
-                <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-brand-secondary group-hover:bg-brand-secondary group-hover:text-brand-primary transition-all">
+                <div className="w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center text-brand-mint group-hover:bg-brand-accent group-hover:text-brand-primary transition-all">
                   <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
                 </div>
                 <div>
@@ -101,7 +101,7 @@ const Contact: React.FC = () => {
                 <button
                   type="submit"
                   disabled={isSending}
-                  className="w-full bg-brand-primary text-white font-black py-5 rounded-2xl hover:bg-brand-secondary hover:text-black transition-all shadow-xl shadow-brand-primary/20 transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-brand-primary text-white font-black py-5 rounded-2xl hover:bg-brand-accent hover:text-brand-primary transition-all shadow-xl shadow-brand-primary/20 transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSending ? 'Sending...' : 'Send Message'}
                 </button>

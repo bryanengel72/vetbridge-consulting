@@ -19,7 +19,7 @@ const solutions = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
     ),
-    accent: 'from-emerald-500 to-teal-600',
+    accent: 'from-amber-400 to-orange-500',
   },
   {
     id: 'hub',
@@ -38,7 +38,7 @@ const solutions = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
       </svg>
     ),
-    accent: 'from-purple-500 to-pink-600',
+    accent: 'from-orange-500 to-red-600',
   },
   {
     id: 'insight',
@@ -57,7 +57,7 @@ const solutions = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
       </svg>
     ),
-    accent: 'from-brand-primary to-indigo-600',
+    accent: 'from-red-500 to-brand-primary',
   }
 ];
 
@@ -70,7 +70,7 @@ const Solutions: React.FC = () => {
           <h2 className="text-5xl md:text-6xl font-black text-brand-primary leading-tight">Architecture for <br /> Peak Performance</h2>
         </div>
         <div className="bg-white p-8 rounded-3xl shadow-xl border border-slate-100 flex items-center gap-6">
-          <div className="w-12 h-12 bg-brand-secondary/10 rounded-full flex items-center justify-center text-2xl">⚡</div>
+          <div className="w-12 h-12 bg-brand-accent/15 rounded-full flex items-center justify-center text-2xl">⚡</div>
           <div>
             <h4 className="font-bold text-brand-primary">Interactive Deep Dive</h4>
             <p className="text-sm text-slate-500">Hover any card to see Challenges vs. Gains.</p>
@@ -100,7 +100,7 @@ const Solutions: React.FC = () => {
                 {/* Visual Cue Only */}
                 <div className="mt-auto pt-8 border-t border-slate-50 flex items-center justify-between">
                   <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Flip for Challenge & Gain</span>
-                  <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-300 group-hover:bg-brand-secondary group-hover:text-brand-primary transition-colors duration-500">
+                  <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-300 group-hover:bg-brand-accent group-hover:text-brand-primary transition-colors duration-500">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                   </div>
                 </div>
@@ -111,7 +111,7 @@ const Solutions: React.FC = () => {
                 <div className="mb-6">
                   <div className="flex items-center gap-3 mb-4">
                     <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
-                    <h4 className="text-brand-secondary font-black text-[10px] uppercase tracking-[0.2em]">The Challenge</h4>
+                    <h4 className="text-brand-accent font-black text-[10px] uppercase tracking-[0.2em]">The Challenge</h4>
                   </div>
                   <p className="text-slate-300 text-[13px] leading-relaxed pl-5 relative">
                     <span className="absolute left-0 top-0 bottom-0 w-0.5 bg-red-500/30"></span>
@@ -124,7 +124,7 @@ const Solutions: React.FC = () => {
                   <ul className="space-y-3">
                     {sol.gain.map((item, idx) => (
                       <li key={idx} className="flex gap-3 text-white text-sm">
-                        <svg className="w-5 h-5 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" /></svg>
+                        <svg className="w-5 h-5 text-brand-mint shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" /></svg>
                         <span className="leading-tight font-medium">{item}</span>
                       </li>
                     ))}
@@ -132,7 +132,7 @@ const Solutions: React.FC = () => {
                 </div>
 
                 <div className="mt-auto">
-                  <a href="#contact" className="w-full bg-white text-brand-primary py-4 rounded-xl font-black text-center text-xs block hover:bg-brand-secondary transition-all uppercase tracking-widest">
+                  <a href="#contact" className="w-full bg-brand-accent text-brand-primary py-4 rounded-xl font-black text-center text-xs block hover:bg-white transition-all uppercase tracking-widest">
                     Contact Us
                   </a>
                 </div>

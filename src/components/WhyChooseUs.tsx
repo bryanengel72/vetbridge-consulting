@@ -25,7 +25,7 @@ const WhyChooseUs: React.FC = () => {
       <div className="text-center mb-20">
         <h6 className="text-brand-secondary font-bold tracking-widest uppercase text-sm mb-4">Why Choose Us?</h6>
         <h2 className="text-4xl md:text-6xl font-black text-slate-900 mb-6">The VetBridge Advantage</h2>
-        <div className="h-1.5 w-24 bg-brand-secondary mx-auto rounded-full"></div>
+        <div className="h-1.5 w-24 bg-brand-accent mx-auto rounded-full"></div>
       </div>
 
       <div className="grid md:grid-cols-3 gap-12">

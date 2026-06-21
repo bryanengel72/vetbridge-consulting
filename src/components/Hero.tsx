@@ -41,9 +41,9 @@ const Hero: React.FC = () => {
             Optimizing Practice Performance
           </div>
 
-          <h2 className="reveal stagger-2 text-5xl md:text-8xl font-black text-slate-900 leading-[0.9] mb-8 text-reveal-mask">
+          <h2 className="reveal stagger-2 text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-slate-900 leading-[0.95] mb-8">
             Smarter <br />
-            <span className="text-brand-primary italic font-serif">Operations</span> <br />
+            <span className="text-brand-secondary italic font-serif pr-2">Operations</span> <br />
             for Modern Vets.
           </h2>
 
@@ -51,10 +51,13 @@ const Hero: React.FC = () => {
             We bridge the gap between healthcare technology and veterinary excellence through data, analytics, and seamless integration.
           </p>
 
-          <div className="reveal stagger-3 flex flex-col sm:flex-row gap-6">
+          <div className="reveal stagger-3 flex flex-col sm:flex-row gap-4">
             <a href="#contact" className="shine-effect group bg-brand-primary text-white px-10 py-5 rounded-2xl font-black text-lg hover:bg-brand-secondary transition-all shadow-2xl shadow-brand-primary/20 flex items-center justify-center gap-2">
               Contact Us
               <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+            </a>
+            <a href="#solutions" className="group bg-white text-brand-primary border-2 border-slate-200 px-10 py-5 rounded-2xl font-black text-lg hover:border-brand-secondary hover:text-brand-secondary transition-all flex items-center justify-center gap-2">
+              Explore Solutions
             </a>
           </div>
         </div>
@@ -84,7 +87,7 @@ const Hero: React.FC = () => {
             </div>
 
             {/* Decorative Badges */}
-            <div className="absolute -bottom-10 -right-10 bg-brand-secondary p-8 rounded-3xl shadow-3xl text-white rotate-6 transform hover:rotate-0 transition-transform cursor-pointer border border-white/20">
+            <div className="absolute -bottom-10 -right-10 bg-brand-accent p-8 rounded-3xl shadow-3xl text-brand-primary rotate-6 transform hover:rotate-0 transition-transform cursor-pointer border border-white/40">
               <p className="text-5xl font-black leading-none">50+</p>
               <p className="text-xs font-black uppercase tracking-widest mt-2">Combined Years <br /> Expertise</p>
             </div>

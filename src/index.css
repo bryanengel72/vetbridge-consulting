@@ -14,8 +14,11 @@ body {
 }
 
 @theme {
-    --color-brand-primary: #2d2b55;
-    --color-brand-secondary: #6b63b5;
+    /* Mistral "flame" palette — near-black ink + sunset orange/red/amber */
+    --color-brand-primary: #141312;   /* warm near-black — dark sections, headings */
+    --color-brand-secondary: #fa500f; /* Mistral red-orange — accent text, hovers */
+    --color-brand-accent: #ff8205;    /* Mistral orange — CTAs, badges, highlights */
+    --color-brand-mint: #ffae00;      /* Mistral amber — accents on dark surfaces */
 }
 
 section {
@@ -28,16 +31,16 @@ section {
 }
 
 ::-webkit-scrollbar-track {
-    background: #2d2b55;
+    background: #141312;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #4b4887;
+    background: #7a3308;
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #6b63b5;
+    background: #fa500f;
 }
 
 @keyframes slow-zoom {
