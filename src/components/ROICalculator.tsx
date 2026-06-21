@@ -179,7 +179,7 @@ const ROICalculator: React.FC = () => {
                         <div className="absolute bottom-0 left-0 w-80 h-80 bg-brand-mint rounded-full blur-[100px] opacity-30 -translate-x-1/3 translate-y-1/3 pointer-events-none"></div>
 
                         <div className="relative z-10">
-                            <h3 className="text-xl font-bold text-teal-100 mb-8 flex items-center">
+                            <h3 className="text-xl font-bold text-violet-100 mb-8 flex items-center">
                                 <span className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center mr-3 text-sm font-bold">2</span>
                                 Projected Returns
                             </h3>
@@ -191,43 +191,43 @@ const ROICalculator: React.FC = () => {
                                     </div>
                                 )}
                                 <div className="p-6 rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 shadow-lg transform transition-all hover:scale-[1.02] duration-300">
-                                    <p className="text-teal-200 text-xs font-bold uppercase tracking-widest mb-2">Annual Revenue Increase</p>
+                                    <p className="text-violet-200 text-xs font-bold uppercase tracking-widest mb-2">Annual Revenue Increase</p>
                                     <p className="text-4xl md:text-5xl font-bold text-white tracking-tight drop-shadow-sm">
                                         +{formatCurrency(additionalRevenue)}
                                     </p>
-                                    <div className="mt-2 text-xs text-teal-200/60 font-medium">Based on {efficiencyGain}% efficiency gain</div>
+                                    <div className="mt-2 text-xs text-violet-200/60 font-medium">Based on {efficiencyGain}% efficiency gain</div>
                                 </div>
 
                                 <div className="space-y-4">
                                     <div className="p-5 rounded-2xl bg-white/5 border border-white/5 shadow-lg transform transition-all hover:scale-[1.02] duration-300">
                                         <div className="flex justify-between items-center bg-transparent">
                                             <div>
-                                                <p className="text-teal-200 text-xs font-bold uppercase tracking-widest mb-1">Practice Value Boost</p>
+                                                <p className="text-violet-200 text-xs font-bold uppercase tracking-widest mb-1">Practice Value Boost</p>
                                                 <p className="text-3xl font-bold text-green-400 drop-shadow-sm tracking-tight pt-1">
                                                     +{formatCurrency(valuationIncrease)}
                                                 </p>
                                             </div>
                                             <div className="text-right hidden sm:block">
-                                                <span className="text-xs text-teal-200/60 font-medium block">Est. Enterprise Value</span>
-                                                <span className="text-[10px] text-teal-200/40 block">Based on 4.5x multiple</span>
+                                                <span className="text-xs text-violet-200/60 font-medium block">Est. Enterprise Value</span>
+                                                <span className="text-[10px] text-violet-200/40 block">Based on 4.5x multiple</span>
                                             </div>
                                         </div>
-                                        <div className="mt-2 sm:hidden text-xs text-teal-200/60 font-medium">Est. Enterprise Value (4.5x multiple)</div>
+                                        <div className="mt-2 sm:hidden text-xs text-violet-200/60 font-medium">Est. Enterprise Value (4.5x multiple)</div>
                                     </div>
 
                                     <div className="p-5 rounded-2xl bg-white/5 border border-white/5 shadow-lg transform transition-all hover:scale-[1.02] duration-300">
                                         <div className="flex justify-between items-center">
                                             <div>
-                                                <p className="text-teal-200 text-xs font-bold uppercase tracking-widest mb-1">Annual Capacity Gain</p>
+                                                <p className="text-violet-200 text-xs font-bold uppercase tracking-widest mb-1">Annual Capacity Gain</p>
                                                 <p className="text-3xl font-bold text-white drop-shadow-sm tracking-tight pt-1">
                                                     +{new Intl.NumberFormat('en-US').format(additionalAppts)}
                                                 </p>
                                             </div>
                                             <div className="text-right hidden sm:block">
-                                                <span className="text-xs text-teal-200/60 font-medium block">Additional Appts / Year</span>
+                                                <span className="text-xs text-violet-200/60 font-medium block">Additional Appts / Year</span>
                                             </div>
                                         </div>
-                                        <div className="mt-2 sm:hidden text-xs text-teal-200/60 font-medium">Additional Appointments / Year</div>
+                                        <div className="mt-2 sm:hidden text-xs text-violet-200/60 font-medium">Additional Appointments / Year</div>
                                     </div>
                                 </div>
 

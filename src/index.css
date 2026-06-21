@@ -14,11 +14,11 @@ body {
 }
 
 @theme {
-    /* Mistral "flame" palette — near-black ink + sunset orange/red/amber */
-    --color-brand-primary: #141312;   /* warm near-black — dark sections, headings */
-    --color-brand-secondary: #fa500f; /* Mistral red-orange — accent text, hovers */
-    --color-brand-accent: #ff8205;    /* Mistral orange — CTAs, badges, highlights */
-    --color-brand-mint: #ffae00;      /* Mistral amber — accents on dark surfaces */
+    /* Indigo-violet suite — drawn from the brand flyer */
+    --color-brand-primary: #2e1065;   /* deep indigo — dark sections, headings */
+    --color-brand-secondary: #7c3aed; /* vivid violet — accent text, hovers (flyer signature) */
+    --color-brand-accent: #a78bfa;    /* light lavender — CTAs, badges (dark text on top) */
+    --color-brand-mint: #c4b5fd;      /* pale lavender — accents on dark surfaces */
 }
 
 section {
@@ -31,16 +31,16 @@ section {
 }
 
 ::-webkit-scrollbar-track {
-    background: #141312;
+    background: #2e1065;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #7a3308;
+    background: #6d28d9;
     border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: #fa500f;
+    background: #7c3aed;
 }
 
 @keyframes slow-zoom {
