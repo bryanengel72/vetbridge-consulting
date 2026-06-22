@@ -11,7 +11,7 @@ const Referrals: React.FC = () => {
   return (
     <div className="container mx-auto px-6">
       <div className="text-center mb-12 reveal">
-        <h6 className="text-brand-secondary font-black tracking-[0.25em] uppercase text-xs mb-4">Referral Partner</h6>
+        <h6 className="text-brand-secondary font-black tracking-[0.25em] uppercase text-xs mb-4">Client Spotlight</h6>
         <h2 className="text-4xl md:text-5xl font-black text-brand-primary">Real Impact, In the Field</h2>
       </div>
 
