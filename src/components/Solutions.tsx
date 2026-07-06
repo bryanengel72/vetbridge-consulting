@@ -1,9 +1,9 @@
-
 import React from 'react';
 
 const solutions = [
   {
     id: 'rev',
+    num: '01',
     title: 'VetRev',
     shortDesc: 'Identify pricing optimization opportunities based on your actual patient population and service patterns.',
     tag: 'Revenue Cycle Management',
@@ -23,6 +23,7 @@ const solutions = [
   },
   {
     id: 'hub',
+    num: '02',
     title: 'VetHub',
     shortDesc: 'Real-time, automatic capture of vital signs from physiological monitors directly into your EHR.',
     tag: 'Biomedical Integration',
@@ -42,6 +43,7 @@ const solutions = [
   },
   {
     id: 'insight',
+    num: '03',
     title: 'VetInsight',
     shortDesc: 'Aggregate data from PIMS, lab equipment, imaging, inventory, and scheduling into a unified data lake.',
     tag: 'Analytics & Data Lake',
@@ -63,64 +65,73 @@ const solutions = [
 
 const Solutions: React.FC = () => {
   return (
-    <div className="container mx-auto px-6">
+    <div className="container mx-auto px-6 relative">
       <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-20 gap-10 reveal">
         <div className="max-w-2xl">
-          <h6 className="text-brand-secondary font-black tracking-[0.2em] uppercase text-xs mb-4">Core Ecosystem</h6>
-          <h2 className="text-5xl md:text-6xl font-black text-brand-primary leading-tight">Architecture for <br /> Peak Performance</h2>
+          <h6 className="text-brand-secondary font-black tracking-[0.25em] uppercase text-xs mb-5 flex items-center gap-3">
+            <span className="w-8 h-px bg-brand-secondary"></span>
+            Core Ecosystem
+          </h6>
+          <h2 className="text-5xl md:text-6xl font-semibold text-brand-primary leading-[1.05] font-display">
+            Architecture for <em className="text-brand-secondary font-light">peak</em> performance
+          </h2>
         </div>
-        <div className="bg-white p-8 rounded-3xl shadow-xl border border-slate-100 flex items-center gap-6">
-          <div className="w-12 h-12 bg-brand-accent/15 rounded-full flex items-center justify-center text-2xl">⚡</div>
+        <div className="bg-white p-7 rounded-3xl shadow-xl shadow-brand-primary/5 border border-brand-secondary/10 flex items-center gap-5">
+          <div className="w-12 h-12 bg-brand-accent/20 rounded-2xl flex items-center justify-center text-brand-secondary shrink-0">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>
+          </div>
           <div>
             <h4 className="font-bold text-brand-primary">Interactive Deep Dive</h4>
-            <p className="text-sm text-slate-500">Hover any card to see Challenges vs. Gains.</p>
+            <p className="text-sm text-slate-500">Hover or tap any card to see Challenges vs. Gains.</p>
           </div>
         </div>
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-10">
+      <div className="grid lg:grid-cols-3 gap-8">
         {solutions.map((sol, i) => (
-          <div key={sol.id} className="group h-[650px] perspective-1000 reveal" style={{ transitionDelay: `${i * 0.15}s` }}>
+          <div key={sol.id} className={`group h-[640px] perspective-1000 reveal stagger-${i + 1}`}>
             <div className="relative w-full h-full card-flip preserve-3d cursor-default">
 
               {/* Card Front */}
-              <div className="absolute inset-0 backface-hidden bg-white p-10 rounded-[2.5rem] shadow-lg border border-slate-100 flex flex-col overflow-hidden">
-                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${sol.accent} opacity-[0.05] rounded-bl-[5rem]`}></div>
+              <div className="absolute inset-0 backface-hidden bg-white p-10 rounded-[2.5rem] shadow-xl shadow-brand-primary/5 border border-brand-secondary/10 flex flex-col overflow-hidden">
+                <div className={`absolute top-0 right-0 w-40 h-40 bg-gradient-to-br ${sol.accent} opacity-[0.06] rounded-bl-[6rem]`}></div>
+                <span className="absolute top-8 right-9 text-6xl font-black text-brand-primary/5 font-display select-none">{sol.num}</span>
 
-                <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${sol.accent} flex items-center justify-center mb-8 text-white shadow-xl shadow-slate-200`}>
+                <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${sol.accent} flex items-center justify-center mb-8 text-white shadow-xl shadow-brand-secondary/25`}>
                   {sol.icon}
                 </div>
 
-                <span className="inline-block text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-4">{sol.tag}</span>
-                <h3 className="text-3xl font-black text-brand-primary mb-6">{sol.title}</h3>
+                <span className="inline-block text-[10px] font-black uppercase tracking-[0.25em] text-brand-secondary/70 mb-4">{sol.tag}</span>
+                <h3 className="text-4xl font-semibold text-brand-primary mb-6 font-display">{sol.title}</h3>
                 <p className="text-slate-600 text-lg leading-relaxed">
                   {sol.shortDesc}
                 </p>
 
-                {/* Visual Cue Only */}
-                <div className="mt-auto pt-8 border-t border-slate-50 flex items-center justify-between">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Flip for Challenge & Gain</span>
-                  <div className="w-8 h-8 rounded-full bg-slate-50 flex items-center justify-center text-slate-300 group-hover:bg-brand-accent group-hover:text-brand-primary transition-colors duration-500">
+                <div className="mt-auto pt-8 border-t border-brand-secondary/10 flex items-center justify-between">
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Flip for Challenge &amp; Gain</span>
+                  <div className="w-9 h-9 rounded-full bg-lilac-mist flex items-center justify-center text-brand-secondary/40 group-hover:bg-brand-accent group-hover:text-brand-primary transition-colors duration-500">
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                   </div>
                 </div>
               </div>
 
               {/* Card Back */}
-              <div className="absolute inset-0 backface-hidden rotate-y-180 bg-brand-primary p-8 rounded-[2.5rem] shadow-2xl flex flex-col border border-white/10">
-                <div className="mb-6">
+              <div className="absolute inset-0 backface-hidden rotate-y-180 bg-brand-primary p-9 rounded-[2.5rem] shadow-2xl shadow-brand-primary/30 flex flex-col border border-white/10 overflow-hidden grain">
+                <div className="absolute top-0 right-0 w-64 h-64 bg-brand-secondary/30 rounded-full blur-[80px] pointer-events-none"></div>
+
+                <div className="mb-6 relative">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
-                    <h4 className="text-brand-accent font-black text-[10px] uppercase tracking-[0.2em]">The Challenge</h4>
+                    <div className="w-2 h-2 rounded-full bg-rose-400 animate-pulse"></div>
+                    <h4 className="text-brand-accent font-black text-[10px] uppercase tracking-[0.25em]">The Challenge</h4>
                   </div>
                   <p className="text-slate-300 text-[13px] leading-relaxed pl-5 relative">
-                    <span className="absolute left-0 top-0 bottom-0 w-0.5 bg-red-500/30"></span>
+                    <span className="absolute left-0 top-0 bottom-0 w-0.5 bg-rose-400/40 rounded-full"></span>
                     {sol.challenge}
                   </p>
                 </div>
 
-                <div className="mb-8">
-                  <h4 className="text-white font-black text-[10px] uppercase tracking-[0.2em] mb-4 opacity-50">What You'll Gain</h4>
+                <div className="mb-8 relative">
+                  <h4 className="text-white/50 font-black text-[10px] uppercase tracking-[0.25em] mb-4">What You'll Gain</h4>
                   <ul className="space-y-3">
                     {sol.gain.map((item, idx) => (
                       <li key={idx} className="flex gap-3 text-white text-sm">
@@ -131,9 +142,9 @@ const Solutions: React.FC = () => {
                   </ul>
                 </div>
 
-                <div className="mt-auto">
-                  <a href="#contact" className="w-full bg-brand-accent text-brand-primary py-4 rounded-xl font-black text-center text-xs block hover:bg-white transition-all uppercase tracking-widest">
-                    Contact Us
+                <div className="mt-auto relative">
+                  <a href="#contact" className="shine-effect w-full bg-brand-accent text-brand-primary py-4 rounded-xl font-black text-center text-xs block hover:bg-white transition-all uppercase tracking-[0.2em]">
+                    Start with {sol.title}
                   </a>
                 </div>
               </div>

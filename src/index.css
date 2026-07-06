@@ -1,56 +1,132 @@
 @import "tailwindcss";
 
-@layer components {
-    .glass {
-        @apply bg-white/5 backdrop-blur-md border border-white/10;
-    }
+@theme {
+    /* ── Luminous Precision palette ─────────────────────────── */
+    --color-ink: #150d33;             /* near-black indigo — deepest surfaces, body headings */
+    --color-brand-primary: #2e1065;   /* deep indigo — dark sections, headings */
+    --color-brand-secondary: #7c3aed; /* vivid violet — accent text, hovers */
+    --color-brand-accent: #a78bfa;    /* light lavender — CTAs, badges */
+    --color-brand-mint: #c4b5fd;      /* pale lavender — accents on dark surfaces */
+    --color-brand-gold: #d4a72c;      /* warm gold — rare highlights, stars */
+    --color-porcelain: #faf9f7;       /* warm off-white — primary light background */
+    --color-lilac-mist: #f4f2fb;      /* lavender-tinted white — alternate sections */
+
+    --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+    --font-display: "Fraunces", Georgia, "Times New Roman", serif;
 }
 
-/* Custom Utilities that might not map directly or are specific */
+/* ── Base ──────────────────────────────────────────────────── */
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-sans);
     scroll-behavior: smooth;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
-@theme {
-    /* Indigo-violet suite — drawn from the brand flyer */
-    --color-brand-primary: #2e1065;   /* deep indigo — dark sections, headings */
-    --color-brand-secondary: #7c3aed; /* vivid violet — accent text, hovers (flyer signature) */
-    --color-brand-accent: #a78bfa;    /* light lavender — CTAs, badges (dark text on top) */
-    --color-brand-mint: #c4b5fd;      /* pale lavender — accents on dark surfaces */
+.font-display {
+    font-family: var(--font-display);
+    font-optical-sizing: auto;
 }
 
 section {
     scroll-margin-top: 80px;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: #2e1065;
-}
-
+/* ── Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #150d33; }
 ::-webkit-scrollbar-thumb {
-    background: #6d28d9;
-    border-radius: 4px;
+    background: linear-gradient(#7c3aed, #a78bfa);
+    border-radius: 5px;
+    border: 2px solid #150d33;
+}
+::-webkit-scrollbar-thumb:hover { background: #a78bfa; }
+
+/* ── Film grain overlay ────────────────────────────────────── */
+.grain::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.5;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: #7c3aed;
+/* ── Dotted grid texture ───────────────────────────────────── */
+.dot-grid {
+    background-image: radial-gradient(circle, rgba(124, 58, 237, 0.14) 1px, transparent 1px);
+    background-size: 28px 28px;
+}
+.dot-grid-light {
+    background-image: radial-gradient(circle, rgba(255, 255, 255, 0.09) 1px, transparent 1px);
+    background-size: 28px 28px;
 }
 
-@keyframes slow-zoom {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.05); }
+/* ── Aurora (dark hero atmosphere) ─────────────────────────── */
+@keyframes aurora-drift {
+    0%   { transform: translate(0, 0) scale(1); }
+    33%  { transform: translate(4%, -6%) scale(1.08); }
+    66%  { transform: translate(-5%, 4%) scale(0.95); }
+    100% { transform: translate(0, 0) scale(1); }
 }
-.animate-slow-zoom {
-    animation: slow-zoom 20s ease-out forwards;
+.aurora-blob {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(90px);
+    animation: aurora-drift 18s ease-in-out infinite;
+    will-change: transform;
 }
 
+/* ── Reveal-on-scroll system ───────────────────────────────── */
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+.stagger-1 { --reveal-delay: 100ms; }
+.stagger-2 { --reveal-delay: 250ms; }
+.stagger-3 { --reveal-delay: 400ms; }
+.stagger-4 { --reveal-delay: 550ms; }
+
+/* Hero load-in (plays once on mount, no scroll needed) */
+@keyframes rise-in {
+    from { opacity: 0; transform: translateY(34px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.rise-in {
+    opacity: 0;
+    animation: rise-in 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: var(--rise-delay, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal, .rise-in, .aurora-blob, .marquee-track { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; }
+}
+
+/* ── Integration marquee ───────────────────────────────────── */
+@keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+}
+.marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 36s linear infinite;
+}
+.marquee-mask {
+    mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+}
+
+/* ── Shine sweep on CTAs ───────────────────────────────────── */
 .shine-effect {
     position: relative;
     overflow: hidden;
@@ -70,45 +146,127 @@ section {
     transform: rotate(30deg) translateX(100%);
 }
 
-.text-reveal-mask {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+/* ── Slow zoom for imagery ─────────────────────────────────── */
+@keyframes slow-zoom {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.07); }
 }
-.stagger-1 { transition-delay: 100ms !important; }
-.stagger-2 { transition-delay: 300ms !important; }
-.stagger-3 { transition-delay: 500ms !important; }
-
-.reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+.animate-slow-zoom {
+    animation: slow-zoom 22s ease-out forwards;
 }
 
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
+/* ── 3D flip cards ─────────────────────────────────────────── */
+.perspective-1000 { perspective: 1200px; }
+.preserve-3d { transform-style: preserve-3d; }
+.backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.rotate-y-180 { transform: rotateY(180deg); }
+.card-flip { transition: transform 0.9s cubic-bezier(0.4, 0, 0.2, 1); }
+.group:hover .card-flip { transform: rotateY(180deg); }
+
+/* ── Custom range sliders ──────────────────────────────────── */
+input[type="range"].vb-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    border-radius: 9999px;
+    background: linear-gradient(to right, #7c3aed 0%, #a78bfa var(--fill, 50%), #e9e5f5 var(--fill, 50%), #e9e5f5 100%);
+    outline: none;
+    cursor: pointer;
+}
+input[type="range"].vb-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 26px;
+    height: 26px;
+    border-radius: 9999px;
+    background: #ffffff;
+    border: 3px solid #7c3aed;
+    box-shadow: 0 2px 10px rgba(124, 58, 237, 0.4);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+input[type="range"].vb-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+    box-shadow: 0 4px 16px rgba(124, 58, 237, 0.55);
+}
+input[type="range"].vb-slider::-moz-range-thumb {
+    width: 22px;
+    height: 22px;
+    border-radius: 9999px;
+    background: #ffffff;
+    border: 3px solid #7c3aed;
+    box-shadow: 0 2px 10px rgba(124, 58, 237, 0.4);
+    cursor: pointer;
+}
+input[type="range"].vb-slider.vb-slider-emerald {
+    background: linear-gradient(to right, #059669 0%, #34d399 var(--fill, 50%), #e9e5f5 var(--fill, 50%), #e9e5f5 100%);
+}
+input[type="range"].vb-slider.vb-slider-emerald::-webkit-slider-thumb { border-color: #059669; box-shadow: 0 2px 10px rgba(5, 150, 105, 0.4); }
+input[type="range"].vb-slider.vb-slider-emerald::-moz-range-thumb { border-color: #059669; }
+
+/* ── Underline draw for nav links ──────────────────────────── */
+.nav-link {
+    position: relative;
+}
+.nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    height: 2px;
+    width: 100%;
+    background: #7c3aed;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.nav-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
 }
 
-/* 3D Flip Card Logic */
-.perspective-1000 {
-    perspective: 1000px;
+/* ── Glass ─────────────────────────────────────────────────── */
+.glass {
+    background: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.preserve-3d {
-    transform-style: preserve-3d;
+/* ── Gradient text ─────────────────────────────────────────── */
+.text-gradient-violet {
+    background: linear-gradient(100deg, #c4b5fd 0%, #a78bfa 45%, #8b5cf6 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
-.backface-hidden {
-    backface-visibility: hidden;
+/* ── Ticker pulse dot ──────────────────────────────────────── */
+@keyframes pulse-ring {
+    0%   { box-shadow: 0 0 0 0 rgba(167, 139, 250, 0.6); }
+    70%  { box-shadow: 0 0 0 9px rgba(167, 139, 250, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(167, 139, 250, 0); }
+}
+.pulse-dot {
+    animation: pulse-ring 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-.rotate-y-180 {
-    transform: rotateY(180deg);
+/* ── EKG heartbeat line (hero flourish) ────────────────────── */
+@keyframes ekg-dash {
+    from { stroke-dashoffset: 1000; }
+    to   { stroke-dashoffset: 0; }
+}
+.ekg-path {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    animation: ekg-dash 3.2s ease-out 0.6s forwards;
 }
 
-.card-flip {
-    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+/* ── Float bob for badges ──────────────────────────────────── */
+@keyframes float-bob {
+    0%, 100% { transform: translateY(0) rotate(var(--bob-rotate, 0deg)); }
+    50%      { transform: translateY(-10px) rotate(var(--bob-rotate, 0deg)); }
 }
-
-.group:hover .card-flip {
-    transform: rotateY(180deg);
+.float-bob {
+    animation: float-bob 5s ease-in-out infinite;
 }

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import logo from '../assets/logo-gold.png';
 
 interface HeaderProps {
   isScrolled: boolean;
@@ -14,7 +13,7 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
     { name: 'Solutions', id: 'solutions' },
     { name: 'About', id: 'about' },
     { name: 'Why Us', id: 'why-us' },
-    { name: 'Contact', id: 'contact' },
+    { name: 'ROI', id: 'roi-calculator' },
   ];
 
   const scrollToSection = (e: React.MouseEvent, id: string) => {
@@ -39,35 +38,48 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
     }
   };
 
+  // Header sits over the dark hero when at top, over light sections when scrolled
+  const onDark = !isScrolled && !mobileMenuOpen;
+
   return (
-    <header className={`fixed top-0 w-full z-40 transition-all duration-300 ${isScrolled || mobileMenuOpen ? 'bg-white/95 backdrop-blur-md shadow-sm py-3' : 'bg-transparent py-6'}`}>
-      <div className="container mx-auto px-6 flex justify-end md:justify-between items-center">
+    <header className={`fixed top-0 w-full z-40 transition-all duration-500 ${isScrolled || mobileMenuOpen ? 'bg-white/90 backdrop-blur-xl shadow-[0_1px_0_rgba(46,16,101,0.08)] py-3' : 'bg-transparent py-6'}`}>
+      <div className="container mx-auto px-6 flex justify-between items-center">
         {/* Logo / Home */}
         <button
           onClick={(e) => scrollToSection(e, 'top')}
-          className="hidden md:flex items-center gap-2 group outline-none text-left"
+          className="flex items-center gap-3 group outline-none text-left"
         >
-          <h1 className="font-black text-brand-primary leading-none text-xl md:text-2xl transition-transform group-hover:scale-105">
-            VETBRIDGE<br/>
-            <span className="text-brand-secondary text-[10px] md:text-xs tracking-widest uppercase block mt-1">Consulting</span>
+          {/* Monogram bridge mark */}
+          <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-500 shrink-0 ${onDark ? 'bg-brand-accent text-brand-primary' : 'bg-brand-primary text-white'}`}>
+            <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+              {/* stylized bridge arc + pier */}
+              <path d="M3 16c0-5 4-9 9-9s9 4 9 9" />
+              <path d="M3 16h18" />
+              <path d="M12 7v9" />
+            </svg>
+          </div>
+          <h1 className={`font-black leading-none text-lg md:text-xl transition-colors duration-500 ${onDark ? 'text-white' : 'text-brand-primary'}`}>
+            VETBRIDGE
+            <span className={`text-[9px] md:text-[10px] tracking-[0.3em] uppercase block mt-1 font-bold transition-colors duration-500 ${onDark ? 'text-brand-mint' : 'text-brand-secondary'}`}>Consulting</span>
           </h1>
         </button>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center space-x-8 text-sm font-medium">
+        <nav className="hidden md:flex items-center space-x-8 text-sm">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={`#${link.id}`}
               onClick={(e) => scrollToSection(e, link.id)}
-              className="text-slate-600 hover:text-brand-primary transition-colors font-semibold"
+              className={`nav-link font-semibold transition-colors duration-500 ${onDark ? 'text-slate-300 hover:text-white' : 'text-slate-600 hover:text-brand-primary'}`}
             >
               {link.name}
             </a>
           ))}
           <a
             href="#contact"
-            className="bg-brand-accent text-brand-primary px-5 py-2 rounded-full font-bold hover:bg-brand-primary hover:text-white transition-all transform hover:scale-105 shadow-sm shadow-brand-accent/30"
+            onClick={(e) => scrollToSection(e, 'contact')}
+            className={`shine-effect px-6 py-2.5 rounded-full font-bold transition-all transform hover:scale-105 ${onDark ? 'bg-brand-accent text-brand-primary hover:bg-white' : 'bg-brand-primary text-white hover:bg-brand-secondary shadow-lg shadow-brand-primary/20'}`}
           >
             Contact Us
           </a>
@@ -75,7 +87,7 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
 
         {/* Mobile Toggle */}
         <button
-          className="md:hidden text-slate-800 p-2"
+          className={`md:hidden p-2 transition-colors duration-500 ${onDark ? 'text-white' : 'text-slate-800'}`}
           onClick={toggleMenu}
           aria-label="Toggle Menu"
         >
@@ -89,20 +101,21 @@ const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
 
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
-        <nav className="md:hidden bg-white absolute top-full left-0 w-full h-[100vh] p-8 space-y-8 flex flex-col items-center border-t border-slate-100 animate-in slide-in-from-top duration-300">
+        <nav className="md:hidden bg-white absolute top-full left-0 w-full h-[100vh] p-8 space-y-8 flex flex-col items-center border-t border-slate-100">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={`#${link.id}`}
               onClick={(e) => scrollToSection(e, link.id)}
-              className="text-slate-800 text-3xl font-black hover:text-brand-primary transition-colors"
+              className="text-slate-800 text-3xl font-black hover:text-brand-secondary transition-colors font-display"
             >
               {link.name}
             </a>
           ))}
           <a
             href="#contact"
-            className="w-full text-center bg-brand-accent text-brand-primary px-5 py-6 rounded-3xl font-black text-xl"
+            onClick={(e) => scrollToSection(e, 'contact')}
+            className="w-full text-center bg-brand-primary text-white px-5 py-6 rounded-3xl font-black text-xl shadow-xl shadow-brand-primary/20"
           >
             Contact Us
           </a>
