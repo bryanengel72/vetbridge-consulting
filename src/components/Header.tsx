@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 
 interface HeaderProps {
   isScrolled: boolean;
-  /** False when the hero behind the transparent header is a light surface. */
-  heroIsDark?: boolean;
 }
 
-const Header: React.FC<HeaderProps> = ({ isScrolled, heroIsDark = true }) => {
+const Header: React.FC<HeaderProps> = ({ isScrolled }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const toggleMenu = () => setMobileMenuOpen(!mobileMenuOpen);
@@ -40,8 +38,8 @@ const Header: React.FC<HeaderProps> = ({ isScrolled, heroIsDark = true }) => {
     }
   };
 
-  // Header sits over the hero when at top, over light sections when scrolled
-  const onDark = heroIsDark && !isScrolled && !mobileMenuOpen;
+  // Header sits over the dark hero when at top, over light sections when scrolled
+  const onDark = !isScrolled && !mobileMenuOpen;
 
   return (
     <header className={`fixed top-0 w-full z-40 transition-all duration-500 ${isScrolled || mobileMenuOpen ? 'bg-white/90 backdrop-blur-xl shadow-[0_1px_0_rgba(46,16,101,0.08)] py-3' : 'bg-transparent py-6'}`}>
