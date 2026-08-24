@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Analytics } from "@vercel/analytics/react";
 import Header from './components/Header';
 import Hero from './components/Hero';
+import HeroEditorial from './components/heroes/HeroEditorial';
+import HeroProduct from './components/heroes/HeroProduct';
+import HeroCinematic from './components/heroes/HeroCinematic';
 import Integrations from './components/Integrations';
 import Solutions from './components/Solutions';
 import About from './components/About';
@@ -11,8 +14,30 @@ import Footer from './components/Footer';
 import ROICalculator from './components/ROICalculator';
 import Referrals from './components/Referrals';
 
+/**
+ * Hero variants under review. Preview any of them with ?hero=a|b|c
+ * (e.g. /?hero=b). Once one is chosen it becomes DEFAULT_HERO and the
+ * others — plus this switcher — come out.
+ */
+const HERO_VARIANTS = {
+  current: { component: Hero, dark: true },
+  a: { component: HeroEditorial, dark: false },
+  b: { component: HeroProduct, dark: true },
+  c: { component: HeroCinematic, dark: true },
+} as const;
+
+type HeroKey = keyof typeof HERO_VARIANTS;
+const DEFAULT_HERO: HeroKey = 'current';
+
+const resolveHero = (): HeroKey => {
+  if (typeof window === 'undefined') return DEFAULT_HERO;
+  const key = new URLSearchParams(window.location.search).get('hero');
+  return key && key in HERO_VARIANTS ? (key as HeroKey) : DEFAULT_HERO;
+};
+
 const App: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { component: ActiveHero, dark: heroIsDark } = HERO_VARIANTS[resolveHero()];
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
@@ -50,9 +75,9 @@ const App: React.FC = () => {
       <div className="fixed top-0 left-0 h-[3px] z-[60] bg-gradient-to-r from-brand-secondary via-brand-accent to-brand-mint transition-transform duration-100 origin-left w-full"
         style={{ transform: `scaleX(${scrollProgress})` }} />
 
-      <Header isScrolled={isScrolled} />
+      <Header isScrolled={isScrolled} heroIsDark={heroIsDark} />
       <main className="flex-grow">
-        <Hero />
+        <ActiveHero />
         <Integrations />
         <section id="solutions" className="py-28 bg-lilac-mist relative overflow-hidden">
           <div className="absolute inset-0 dot-grid opacity-60 pointer-events-none"></div>
