@@ -1,11 +1,56 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-/* Figures come from the live NAWS dashboard, 2026 Jan–Jul. */
+const nfInt = new Intl.NumberFormat('en-US');
+const nfUsd = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'USD',
+  maximumFractionDigits: 0,
+});
+
+/* Figures come from the live NAWS dashboard, 2026 Jan–Jul. Only the four
+   source numbers are written down; totals, shares and per-surgery revenue are
+   derived, so nothing on the page can disagree with anything else. */
+const SOURCE = {
+  surgeries: 2318,
+  surgeries2025: 2190,
+  vaccines: 6133,
+  surgeryRevenue: 149573,
+  vaccineRevenue: 83400,
+  perSurgery2025: 63.1,
+};
+
+const procedures = SOURCE.surgeries + SOURCE.vaccines;
+const revenue = SOURCE.surgeryRevenue + SOURCE.vaccineRevenue;
+const perSurgery = SOURCE.surgeryRevenue / SOURCE.surgeries;
+const surgeryShare = (SOURCE.surgeries / procedures) * 100;
+const vaccineShare = (SOURCE.vaccines / procedures) * 100;
+const surgeryDelta = ((SOURCE.surgeries - SOURCE.surgeries2025) / SOURCE.surgeries2025) * 100;
+
 const stats = [
-  { label: 'Surgeries YTD', end: 2318, fmt: 'int', sub: 'vs 2,190 in 2025 · +5.8%' },
-  { label: 'Procedures tracked', end: 8451, fmt: 'int', sub: 'Surgeries 27.4% · Vaccines 72.6%' },
-  { label: 'Revenue tracked', end: 232973, fmt: 'usd', sub: 'Surgery $149,573 · Vaccine $83,400' },
-  { label: 'Revenue per surgery', end: 64.14, fmt: 'usd2', sub: '2025 full year · $63.10' },
+  {
+    label: 'Surgeries YTD',
+    end: SOURCE.surgeries,
+    fmt: 'int',
+    sub: `vs ${nfInt.format(SOURCE.surgeries2025)} in 2025 · +${surgeryDelta.toFixed(1)}%`,
+  },
+  {
+    label: 'Procedures tracked',
+    end: procedures,
+    fmt: 'int',
+    sub: `Surgeries ${surgeryShare.toFixed(1)}% · Vaccines ${vaccineShare.toFixed(1)}%`,
+  },
+  {
+    label: 'Revenue tracked',
+    end: revenue,
+    fmt: 'usd',
+    sub: `Surgery ${nfUsd.format(SOURCE.surgeryRevenue)} · Vaccine ${nfUsd.format(SOURCE.vaccineRevenue)}`,
+  },
+  {
+    label: 'Revenue per surgery',
+    end: perSurgery,
+    fmt: 'usd2',
+    sub: `2025 full year · $${SOURCE.perSurgery2025.toFixed(2)}`,
+  },
 ] as const;
 
 const views = [
@@ -14,8 +59,6 @@ const views = [
   'Demographics', 'Geography', 'Funding', 'AI Insights',
 ];
 
-const nfInt = new Intl.NumberFormat('en-US');
-const nfUsd = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 });
 const nfUsd2 = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 2 });
 
 const format = (v: number, fmt: string) =>
@@ -110,7 +153,7 @@ const Referrals: React.FC = () => {
               <div className="insights">
                 <article className="insight">
                   <p className="ins-tag">▲ &nbsp;Ahead</p>
-                  <p className="ins-num">2,318 surgeries &nbsp;·&nbsp; +5.8%</p>
+                  <p className="ins-num">{nfInt.format(SOURCE.surgeries)} surgeries &nbsp;·&nbsp; +{surgeryDelta.toFixed(1)}%</p>
                   <p className="ins-body">
                     Through July, surgeries are running ahead of 2025 (2,318 vs 2,190). July itself
                     was the strongest month of the year — 383 surgeries, up 17.4% year over year. At
