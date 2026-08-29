@@ -1,31 +1,49 @@
 import React from 'react';
 
-const systems = [
-  'Cornerstone', 'ezyVet', 'AVImark', 'IDEXX Neo', 'Shepherd', 'Digitail',
-  'Covetrus Pulse', 'Vetspire', 'ImproMed', 'DaySmart Vet',
+/* Shepherd is the only PIMS we've actually delivered in, so it sits on its own.
+   The grid below is capability — systems we'll work in — and must never be
+   labelled as experience. */
+const agnostic = [
+  'Cornerstone', 'ezyVet', 'AVImark',
+  'IDEXX Neo', 'Digitail', 'Covetrus Pulse',
+  'Vetspire', 'ImproMed', 'DaySmart Vet',
 ];
 
 const Integrations: React.FC = () => {
   return (
-    <div className="bg-ink border-t border-white/5 py-10 relative overflow-hidden">
-      <div className="container mx-auto px-6 mb-6">
-        <p className="text-center text-[11px] font-bold uppercase tracking-[0.3em] text-slate-500">
-          Vendor-agnostic &nbsp;·&nbsp; We work with the systems you already run
-        </p>
-      </div>
-      <div className="marquee-mask overflow-hidden">
-        <div className="marquee-track gap-4 pr-4">
-          {[...systems, ...systems].map((name, i) => (
-            <span
-              key={`${name}-${i}`}
-              className="shrink-0 px-6 py-3 rounded-full glass text-slate-300 font-semibold text-sm tracking-wide hover:text-white hover:border-brand-accent/40 transition-colors cursor-default"
-            >
-              {name}
-            </span>
-          ))}
+    <section id="systems" style={{ paddingBlock: 'var(--s6)' }}>
+      <div className="shell">
+        <hr className="hairline draw rv" />
+        <div className="row" style={{ paddingTop: 'var(--s5)' }}>
+          <div className="stub">
+            <span className="idx">02</span>
+            <span>Systems</span>
+          </div>
+
+          <div>
+            <p className="label rv" style={{ marginBottom: 'var(--s3)' }}>Delivered in</p>
+            <div className="delivered rv" style={{ marginBottom: 'var(--s6)' }}>
+              <p className="d-name">Shepherd</p>
+              <p className="meta">
+                Live dashboard for Northland Animal Welfare Society, running since 2026.
+              </p>
+            </div>
+
+            <p className="label rv" style={{ marginBottom: 'var(--s3)' }}>
+              We're PIMS-agnostic — we'll work in whatever you run
+            </p>
+            <ul className="systems systems--3 rv" style={{ '--d': '80ms' } as React.CSSProperties}>
+              {agnostic.map((name) => (
+                <li key={name}>{name}</li>
+              ))}
+            </ul>
+            <p className="meta" style={{ marginTop: 'var(--s3)' }}>
+              We work in what's on your machines. Replacing a PIMS is a last resort, not a first move.
+            </p>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

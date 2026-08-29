@@ -1,137 +1,128 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import heroImg from '../assets/hero-clinic.webp';
+
+/* Real NAWS figures, 2026 year to date against the same Jan–Jul window in
+   2025. The bar is this year, the tick is last year. Rows land one at a time
+   as the visitor scrolls — the comparison assembling itself. */
+const SEGMENTS = [
+  { name: 'All surgeries', now: 2318, prev: 2190, delta: '+5.8%', up: true },
+  { name: 'Feral cat TNR', now: 593, prev: 480, delta: '+23.5%', up: true },
+  { name: 'Canine surgeries', now: 401, prev: 530, delta: '−24.3%', up: false },
+  { name: 'Rescue partners', now: 463, prev: 486, delta: '−4.6%', up: false },
+];
+
+const nf = new Intl.NumberFormat('en-US');
 
 const Hero: React.FC = () => {
-  const [count, setCount] = useState(0);
-  const [hours, setHours] = useState(0);
+  /* One row is filled at rest so the panel reads as a chart in progress
+     rather than an empty box; the rest fill across the first ~60vh. */
+  const [landed, setLanded] = useState(1);
+  const ticking = useRef(false);
 
   useEffect(() => {
-    const animate = (end: number, setter: (v: number) => void, duration = 2200) => {
-      let start = 0;
-      const increment = end / (duration / 16);
-      const timer = setInterval(() => {
-        start += increment;
-        if (start >= end) {
-          setter(end);
-          clearInterval(timer);
-        } else {
-          setter(start);
-        }
-      }, 16);
-      return timer;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setLanded(SEGMENTS.length);
+      return;
+    }
+    const onScroll = () => {
+      if (ticking.current) return;
+      ticking.current = true;
+      requestAnimationFrame(() => {
+        const p = Math.min(1, Math.max(0, window.scrollY / (window.innerHeight * 0.62)));
+        setLanded(1 + Math.floor(p * (SEGMENTS.length - 0.001)));
+        ticking.current = false;
+      });
     };
-
-    const t1 = animate(24.8, setCount);
-    const t2 = animate(15, setHours, 2600);
-    return () => { clearInterval(t1); clearInterval(t2); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  const allLanded = landed >= SEGMENTS.length;
+
   return (
-    <div className="relative min-h-screen bg-ink flex items-center pt-32 pb-20 overflow-hidden grain">
-      {/* Atmosphere */}
-      <div className="absolute inset-0 z-0">
-        <div className="aurora-blob w-[900px] h-[900px] bg-brand-secondary/25 top-0 right-0 -translate-y-1/3 translate-x-1/4"></div>
-        <div className="aurora-blob w-[700px] h-[700px] bg-brand-primary/60 bottom-0 left-0 translate-y-1/3 -translate-x-1/4" style={{ animationDelay: '-6s' }}></div>
-        <div className="aurora-blob w-[500px] h-[500px] bg-brand-accent/15 top-1/2 left-1/3" style={{ animationDelay: '-12s' }}></div>
-        <div className="absolute inset-0 dot-grid-light opacity-40"></div>
-        {/* Horizon glow line */}
-        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-brand-accent/50 to-transparent"></div>
-      </div>
+    <section className="hero" aria-labelledby="h-hero">
+      <div className="shell">
+        <p className="label">
+          01 &nbsp;/&nbsp; VetBridge Consulting &nbsp;·&nbsp; Kansas City, Missouri
+        </p>
 
-      <div className="container mx-auto px-6 relative z-10 grid lg:grid-cols-12 gap-16 items-center">
-        <div className="lg:col-span-7">
-          <div className="rise-in inline-flex items-center gap-3 px-4 py-2 rounded-full glass text-brand-mint text-xs font-bold uppercase tracking-[0.25em] mb-10">
-            <span className="relative flex h-2 w-2">
-              <span className="pulse-dot relative inline-flex rounded-full h-2 w-2 bg-brand-accent"></span>
-            </span>
-            Veterinary Operations, Reimagined
+        <h1 id="h-hero">
+          Your systems don't talk to each other. <em>We make them.</em>
+        </h1>
+
+        <div className="hero-grid">
+          <div>
+            <p className="lead">
+              VetBridge connects the PIMS, lab equipment, inventory and billing your practice
+              already runs, so the numbers arrive on their own. We came out of hospital IT.
+              We take no vendor commissions and we don't sell software.
+            </p>
+            <div className="hero-actions">
+              <a className="btn" href="#contact">Book a free audit</a>
+              <a className="btn btn--ghost" href="#services">What we do</a>
+            </div>
+            <p className="meta">About an hour on a call. You get a written summary either way.</p>
           </div>
 
-          <h2 className="rise-in text-5xl sm:text-6xl lg:text-7xl xl:text-[5.5rem] font-semibold text-white leading-[1.02] tracking-tight mb-8 font-display" style={{ '--rise-delay': '150ms' } as React.CSSProperties}>
-            Smarter{' '}
-            <em className="text-gradient-violet font-light pr-1">operations</em>
-            <br />
-            for modern{' '}
-            <span className="relative inline-block">
-              vets.
-              {/* EKG flourish under the word */}
-              <svg className="absolute -bottom-3 left-0 w-full" viewBox="0 0 200 24" fill="none" preserveAspectRatio="none">
-                <path className="ekg-path" d="M0 14 H60 L72 14 L80 4 L90 22 L98 14 H200" stroke="#a78bfa" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </span>
-          </h2>
-
-          <p className="rise-in text-xl md:text-2xl text-slate-300/90 mb-12 max-w-xl font-light leading-relaxed" style={{ '--rise-delay': '300ms' } as React.CSSProperties}>
-            We bridge healthcare technology and veterinary excellence — turning your practice data into time saved, revenue found, and better medicine.
-          </p>
-
-          <div className="rise-in flex flex-col sm:flex-row gap-4 mb-16" style={{ '--rise-delay': '450ms' } as React.CSSProperties}>
-            <a href="#contact" className="shine-effect group bg-brand-accent text-brand-primary px-10 py-5 rounded-2xl font-black text-lg hover:bg-white transition-all shadow-2xl shadow-brand-secondary/30 flex items-center justify-center gap-2">
-              Book a Free Audit
-              <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-            </a>
-            <a href="#solutions" className="group glass text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-white/10 hover:border-brand-accent/40 transition-all flex items-center justify-center gap-2">
-              Explore Solutions
-              <svg className="w-4 h-4 text-brand-mint group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
-            </a>
-          </div>
-
-          {/* Stat strip */}
-          <div className="rise-in grid grid-cols-3 max-w-lg divide-x divide-white/10" style={{ '--rise-delay': '600ms' } as React.CSSProperties}>
-            {[
-              { value: '10+', label: 'PIMS systems supported' },
-              { value: '3', label: 'Integrated solution lines' },
-              { value: '100%', label: 'Vendor-agnostic advice' },
-            ].map((s) => (
-              <div key={s.label} className="px-5 first:pl-0">
-                <p className="text-3xl font-black text-white font-display">{s.value}</p>
-                <p className="text-[11px] text-slate-400 uppercase tracking-widest mt-1 leading-tight">{s.label}</p>
+          <div>
+            <div className="sheet">
+              <div className="sheet-head">
+                <span className="label">NAWS &nbsp;·&nbsp; Shepherd</span>
+                <span className="meta">2026 YTD &nbsp;·&nbsp; Jan–Jul</span>
               </div>
-            ))}
-          </div>
-        </div>
 
-        <div className="hidden lg:block lg:col-span-5 relative rise-in" style={{ '--rise-delay': '350ms' } as React.CSSProperties}>
-          <div className="relative z-10">
-            {/* Framed image */}
-            <div className="glass rounded-[2.5rem] p-3 shadow-2xl shadow-black/40">
-              <div className="rounded-[2rem] overflow-hidden aspect-[4/5] relative bg-brand-primary">
-                <img
-                  src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?auto=format&fit=crop&q=80&w=1200"
-                  alt="Veterinary care for a happy dog"
-                  className="w-full h-full object-cover animate-slow-zoom opacity-90"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent"></div>
-                <div className="absolute inset-0 bg-brand-secondary/15 mix-blend-overlay"></div>
+              <div>
+                {SEGMENTS.map((g, i) => {
+                  const scale = Math.max(g.now, g.prev) * 1.12;
+                  return (
+                    <div className="bullet" key={g.name}>
+                      <div className="bullet-head">
+                        <span className="bullet-name">{g.name}</span>
+                        <span className="bullet-val">
+                          {nf.format(g.now)}
+                          <em>{g.up ? '▲' : '▼'} {g.delta}</em>
+                        </span>
+                      </div>
+                      <div className="bullet-track">
+                        <i
+                          className="bullet-fill"
+                          style={{ width: i < landed ? `${(g.now / scale) * 100}%` : 0 }}
+                        />
+                        <b className="bullet-tick" style={{ left: `${(g.prev / scale) * 100}%` }} />
+                      </div>
+                      <div className="bullet-foot">
+                        <span>2025 · {nf.format(g.prev)}</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
 
-                {/* Floating growth card */}
-                <div className="absolute top-8 right-8 glass shadow-xl p-4 rounded-2xl float-bob">
-                  <div className="flex items-center gap-2.5 mb-1.5">
-                    <div className="w-2 h-2 rounded-full bg-emerald-400"></div>
-                    <p className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">Growth Index</p>
-                  </div>
-                  <p className="text-2xl font-black text-white font-display">+{count.toFixed(1)}%</p>
-                </div>
-
-                {/* Floating hours-saved card */}
-                <div className="absolute bottom-8 left-8 glass shadow-xl p-4 rounded-2xl float-bob" style={{ animationDelay: '-2.5s' }}>
-                  <div className="flex items-center gap-2.5 mb-1.5">
-                    <svg className="w-3 h-3 text-brand-mint" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                    <p className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">Hours Saved / Wk</p>
-                  </div>
-                  <p className="text-2xl font-black text-white font-display">{Math.round(hours)}+</p>
-                </div>
+              <div className={`sheet-foot${allLanded ? ' done' : ''}`}>
+                <span className="label state">Revenue tracked, year to date</span>
+                <span className="keys">$232,973</span>
               </div>
             </div>
 
-            {/* Rotated accent badge */}
-            <div className="absolute -bottom-8 -right-6 bg-brand-accent p-7 rounded-3xl shadow-2xl shadow-brand-secondary/40 text-brand-primary rotate-6 hover:rotate-0 transition-transform cursor-default float-bob" style={{ '--bob-rotate': '6deg', animationDelay: '-1s' } as React.CSSProperties}>
-              <p className="text-4xl font-black leading-none font-display">50+</p>
-              <p className="text-[10px] font-black uppercase tracking-widest mt-2 leading-tight">Combined Years<br />Expertise</p>
-            </div>
+            <p className="meta sheet-note">
+              Scroll — the comparison fills in. These are real figures from the dashboard we
+              built for NAWS; it reads from Shepherd and keeps itself current.
+            </p>
           </div>
         </div>
       </div>
-    </div>
+
+      <figure className="hero-figure">
+        <img
+          src={heroImg}
+          width={1600}
+          height={712}
+          decoding="async"
+          alt="A veterinarian in scrubs talking with a client and her dog in an exam room."
+        />
+      </figure>
+    </section>
   );
 };
 
