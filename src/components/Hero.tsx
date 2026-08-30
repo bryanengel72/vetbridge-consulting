@@ -62,7 +62,7 @@ const Hero: React.FC = () => {
     <section className="hero" aria-labelledby="h-hero">
       <div className="shell">
         <p className="label">
-          01 &nbsp;/&nbsp; VetBridge Consulting &nbsp;·&nbsp; Kansas City, Missouri
+          01 &nbsp;/&nbsp; VetBridge Consulting &nbsp;·&nbsp; Kansas City &nbsp;·&nbsp; San Diego
         </p>
 
         <h1 id="h-hero" className="h1-swap">

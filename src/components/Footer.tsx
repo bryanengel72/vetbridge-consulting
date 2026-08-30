@@ -40,7 +40,7 @@ const Footer: React.FC = () => {
             <ul className="mono">
               <li><a href="tel:+18163948980">(816) 394-8980</a></li>
               <li><a href="mailto:info@vetbridgeconsulting.com">info@vetbridgeconsulting.com</a></li>
-              <li style={{ color: 'var(--fg-2)', fontSize: '0.9375rem' }}>Kansas City, Missouri</li>
+              <li style={{ color: 'var(--fg-2)', fontSize: '0.9375rem' }}>Kansas City, MO · San Diego, CA</li>
             </ul>
           </div>
         </div>

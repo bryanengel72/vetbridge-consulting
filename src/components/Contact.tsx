@@ -98,7 +98,7 @@ const Contact: React.FC = () => {
                 </li>
                 <li>
                   <p className="label" style={{ marginBottom: 6 }}>Where we are</p>
-                  <span className="mono" style={{ fontSize: 'var(--t-1)' }}>Kansas City, Missouri</span>
+                  <span className="mono" style={{ fontSize: 'var(--t-1)' }}>Kansas City, MO · San Diego, CA</span>
                 </li>
               </ul>
             </div>
