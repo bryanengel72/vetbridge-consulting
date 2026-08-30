@@ -567,3 +567,54 @@ input[type=range]:focus-visible{outline-offset:-2px}
   html{scroll-behavior:auto}
 }
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+
+/* ── 07 · Fee schedule ─────────────────────────────────
+   A worksheet like the estimator: lettered lines, mono fees
+   on the right rail, care-plan tiers as ruled cards. */
+.fee-sheet{border-top:1px solid var(--fg);max-width:76ch}
+.fee-line{
+  display:grid;grid-template-columns:2.25rem minmax(0,1fr) auto;
+  gap:var(--s2);align-items:baseline;
+  padding-block:var(--s3);border-bottom:1px solid var(--rule);
+}
+.fee-letter{font-family:var(--mono);font-size:var(--t--1);color:var(--signal);font-weight:500}
+.fee-line h3{font-size:var(--t-1);margin-bottom:6px}
+.fee-sub{color:var(--fg-2);font-size:var(--t--1);max-width:48ch;line-height:1.55}
+.fee-amt{
+  font-family:var(--mono);font-variant-numeric:tabular-nums;
+  font-size:var(--t-1);white-space:nowrap;text-align:right;
+}
+.fee-amt small{
+  display:block;font-family:var(--mono);font-size:0.6875rem;color:var(--fg-3);
+  letter-spacing:.06em;text-transform:uppercase;margin-top:4px;
+}
+.fee-line[data-free] .fee-amt{color:var(--signal)}
+@media (max-width:559px){
+  .fee-line{grid-template-columns:2.25rem minmax(0,1fr)}
+  .fee-amt{grid-column:2;text-align:left;margin-top:var(--s1)}
+}
+.fee-inc{list-style:none;padding:0;margin-top:var(--s2);display:grid;gap:6px}
+.fee-inc li{display:flex;gap:10px;font-size:var(--t--1);color:var(--fg-2)}
+.fee-inc li i{font-style:normal;font-family:var(--mono);font-size:0.6875rem;color:var(--fg-3);padding-top:3px}
+
+.fee-tiers{display:grid;gap:var(--s3);margin-top:var(--s4)}
+@media (min-width:820px){.fee-tiers{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.fee-tier{
+  border:1px solid var(--rule-2);background:var(--bg);
+  padding:var(--s3);display:flex;flex-direction:column;gap:var(--s2);
+}
+.fee-tier[data-mark]{border-color:var(--signal)}
+.fee-tname{font-size:var(--t-1);font-weight:600;font-stretch:92%}
+.fee-tfee{font-family:var(--mono);font-variant-numeric:tabular-nums;font-size:var(--t-2);letter-spacing:-0.02em}
+.fee-tfee span{font-size:var(--t--1);color:var(--fg-3)}
+.fee-tier ul{
+  list-style:none;padding:0;margin:2px 0 0;display:grid;gap:8px;
+  border-top:1px solid var(--rule);padding-top:var(--s2);
+}
+.fee-tier li{font-size:var(--t--1);color:var(--fg-2);display:flex;justify-content:space-between;gap:var(--s2)}
+.fee-tier li b{font-family:var(--mono);font-weight:400;color:var(--fg);white-space:nowrap;font-variant-numeric:tabular-nums}
+
+.fee-notes{display:grid;gap:var(--s3);max-width:76ch;margin-top:var(--s5)}
+@media (min-width:820px){.fee-notes{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.fee-note h4{font-size:var(--t-0);margin-bottom:6px}
+.fee-note p{font-size:var(--t--1);color:var(--fg-2);line-height:1.6}

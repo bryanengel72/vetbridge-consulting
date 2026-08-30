@@ -7,6 +7,7 @@ import Solutions from './components/Solutions';
 import Referrals from './components/Referrals';
 import About from './components/About';
 import WhyChooseUs from './components/WhyChooseUs';
+import Pricing from './components/Pricing';
 import ROICalculator from './components/ROICalculator';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
@@ -50,6 +51,7 @@ const App: React.FC<{ city?: CityConfig }> = ({ city = HOME }) => {
         <Referrals />
         <About />
         <WhyChooseUs />
+        <Pricing />
         <ROICalculator />
         <Contact phone={city.phone} phoneHref={city.phoneHref} />
       </main>

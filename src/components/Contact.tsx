@@ -70,7 +70,7 @@ const Contact: React.FC<{ phone: string; phoneHref: string }> = ({ phone, phoneH
         <hr className="hairline draw rv" style={{ marginBottom: 'var(--pad-section)' }} />
         <div className="row">
           <div className="stub">
-            <span className="idx">08</span>
+            <span className="idx">09</span>
             <span>Contact</span>
           </div>
 
