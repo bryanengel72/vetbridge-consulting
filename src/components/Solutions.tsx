@@ -1,159 +1,173 @@
-import React from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
+/* Order is the priority order: VetRev and VetInsight are delivered work,
+   VetHub is not built yet and the card has to say so. */
 const solutions = [
   {
-    id: 'rev',
-    num: '01',
+    idx: '01',
+    tag: 'Pricing & billing',
     title: 'VetRev',
-    shortDesc: 'Identify pricing optimization opportunities based on your actual patient population and service patterns.',
-    tag: 'Revenue Cycle Management',
-    challenge: 'Without granular cost data, you\'re pricing services based on industry averages—not your reality. This means missed revenue opportunities and potential underpricing of high-cost procedures.',
-    gain: [
-      'Cost-per-patient visibility – Know exactly what each visit costs',
-      'Competitive intelligence – Billing code frequency trends',
-      'Strategic pricing models – Data-backed wellness plans',
-      'Patient population insights – Optimize inventory and staffing'
+    status: null as string | null,
+    problem:
+      "Most practices set prices off published industry averages. Those averages don't know your rent, your drug costs, or that a third of your patients are seniors on chronic meds. So you find out you've been underwater on a procedure after a year of running it.",
+    listHead: 'What changes',
+    items: [
+      'What a visit actually costs you, broken out by service and by doctor',
+      'Which billing codes you run most, and what the market charges for them',
+      'Wellness plans priced off your own numbers instead of a template',
+      'Enough population data to stock and staff for the patients you see',
     ],
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-    ),
-    accent: 'from-violet-400 to-violet-600',
   },
   {
-    id: 'hub',
-    num: '02',
-    title: 'VetHub',
-    shortDesc: 'Real-time, automatic capture of vital signs from physiological monitors directly into your EHR.',
-    tag: 'Biomedical Integration',
-    challenge: 'Clinical teams waste 10-15+ hours daily transcribing monitor readings. Every manual entry risks documentation errors and critical vitals can be missed.',
-    gain: [
-      'Time savings – Eliminate 10-15+ hours/week of manual entry',
-      'Clinical accuracy – Zero transcription errors; automated capture',
-      'Seamless workflow – Data flows directly to your PIMS/EHR',
-      'Compliance confidence – Complete, timestamped records'
-    ],
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-      </svg>
-    ),
-    accent: 'from-indigo-500 to-purple-600',
-  },
-  {
-    id: 'insight',
-    num: '03',
+    idx: '02',
+    tag: 'One place for all of it',
     title: 'VetInsight',
-    shortDesc: 'Aggregate data from PIMS, lab equipment, imaging, inventory, and scheduling into a unified data lake.',
-    tag: 'Analytics & Data Lake',
-    challenge: 'Your data is siloed across multiple systems. You can\'t easily answer questions like "What\'s my actual capacity utilization?" or drive profitable outcomes.',
-    gain: [
-      '360-degree visibility – Access all systems from one dashboard',
-      'Custom reporting – Get answers to specific business questions',
-      'Holistic insights – Relate scheduling to clinical outcomes',
-      'Future-ready – Foundation for advanced AI applications'
+    status: null as string | null,
+    problem:
+      'Scheduling lives in the PIMS, labs in the analyzer software, inventory in a spreadsheet, imaging somewhere else. A question as simple as "are we actually at capacity on Tuesdays?" takes a week and three exports to answer, so mostly nobody asks it.',
+    listHead: 'What changes',
+    items: [
+      'Every system feeding one place you can actually query',
+      "Reports built around your questions, not a vendor's report template",
+      'Scheduling, clinical outcomes and inventory in the same view',
+      'A clean data foundation, if you want to do anything with AI later',
     ],
-    icon: (
-      <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-      </svg>
-    ),
-    accent: 'from-purple-600 to-brand-primary',
-  }
+  },
+  {
+    idx: '03',
+    tag: 'Monitors → record',
+    title: 'VetHub',
+    status: 'In development · not yet deployed',
+    problem:
+      'A tech reads a number off the monitor and types it into the record. Across a practice that is ten to fifteen hours a week of transcription, and every entry is a chance to drop a digit or skip a reading during the part of the procedure where it matters most.',
+    listHead: 'What it will do',
+    items: [
+      'Vitals write themselves into the record, timestamped, every minute',
+      'No transcription errors, because nobody is transcribing',
+      'Complete anesthesia and hospitalization records without chasing anyone',
+      'Your techs get the time back',
+    ],
+  },
 ];
 
 const Solutions: React.FC = () => {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [scrollable, setScrollable] = useState(false);
+  const [atStart, setAtStart] = useState(true);
+  const [atEnd, setAtEnd] = useState(false);
+  const [dot, setDot] = useState(0);
+
+  const sync = useCallback(() => {
+    const t = trackRef.current;
+    if (!t) return;
+    const max = t.scrollWidth - t.clientWidth;
+    setScrollable(max > 4);
+    setAtStart(t.scrollLeft <= 6);
+    setAtEnd(t.scrollLeft >= max - 6);
+    /* Map across the real scroll range, not by card step — when the overflow
+       is less than one card wide the last dot must still be reachable. */
+    setDot(max <= 0 ? 0 : Math.round((t.scrollLeft / max) * (solutions.length - 1)));
+  }, []);
+
+  useEffect(() => {
+    sync();
+    window.addEventListener('resize', sync, { passive: true });
+    return () => window.removeEventListener('resize', sync);
+  }, [sync]);
+
+  const nudge = (dir: number) => {
+    const t = trackRef.current;
+    if (!t) return;
+    const cards = t.querySelectorAll<HTMLElement>('.card');
+    const step =
+      cards.length > 1 ? cards[1].offsetLeft - cards[0].offsetLeft : t.clientWidth;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    t.scrollBy({ left: dir * step, behavior: reduce ? 'auto' : 'smooth' });
+  };
+
   return (
-    <div className="container mx-auto px-6 relative">
-      <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-20 gap-10 reveal">
-        <div className="max-w-2xl">
-          <h6 className="text-brand-secondary font-black tracking-[0.25em] uppercase text-xs mb-5 flex items-center gap-3">
-            <span className="w-8 h-px bg-brand-secondary"></span>
-            Core Ecosystem
-          </h6>
-          <h2 className="text-5xl md:text-6xl font-semibold text-brand-primary leading-[1.05] font-display">
-            Architecture for <em className="text-brand-secondary font-light">peak</em> performance
-          </h2>
-        </div>
-        <div className="bg-white p-7 rounded-3xl shadow-xl shadow-brand-primary/5 border border-brand-secondary/10 flex items-center gap-5">
-          <div className="w-12 h-12 bg-brand-accent/20 rounded-2xl flex items-center justify-center text-brand-secondary shrink-0">
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" /></svg>
+    <section id="services" aria-labelledby="h-svc">
+      <div className="shell">
+        <div className="row">
+          <div className="stub">
+            <span className="idx">03</span>
+            <span>Services</span>
           </div>
+
           <div>
-            <h4 className="font-bold text-brand-primary">Interactive Deep Dive</h4>
-            <p className="text-sm text-slate-500">Hover or tap any card to see Challenges vs. Gains.</p>
-          </div>
-        </div>
-      </div>
+            <h2
+              id="h-svc"
+              className="rv"
+              style={{ fontSize: 'var(--t-4)', maxWidth: '18ch', marginBottom: 'var(--s6)' }}
+            >
+              Three things practices call us about.
+            </h2>
 
-      <div className="grid lg:grid-cols-3 gap-8">
-        {solutions.map((sol, i) => (
-          <div key={sol.id} className={`group h-[640px] perspective-1000 reveal stagger-${i + 1}`}>
-            <div className="relative w-full h-full card-flip preserve-3d cursor-default">
-
-              {/* Card Front */}
-              <div className="absolute inset-0 backface-hidden bg-white p-10 rounded-[2.5rem] shadow-xl shadow-brand-primary/5 border border-brand-secondary/10 flex flex-col overflow-hidden">
-                <div className={`absolute top-0 right-0 w-40 h-40 bg-gradient-to-br ${sol.accent} opacity-[0.06] rounded-bl-[6rem]`}></div>
-                <span className="absolute top-8 right-9 text-6xl font-black text-brand-primary/5 font-display select-none">{sol.num}</span>
-
-                <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${sol.accent} flex items-center justify-center mb-8 text-white shadow-xl shadow-brand-secondary/25`}>
-                  {sol.icon}
-                </div>
-
-                <span className="inline-block text-[10px] font-black uppercase tracking-[0.25em] text-brand-secondary/70 mb-4">{sol.tag}</span>
-                <h3 className="text-4xl font-semibold text-brand-primary mb-6 font-display">{sol.title}</h3>
-                <p className="text-slate-600 text-lg leading-relaxed">
-                  {sol.shortDesc}
-                </p>
-
-                <div className="mt-auto pt-8 border-t border-brand-secondary/10 flex items-center justify-between">
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Flip for Challenge &amp; Gain</span>
-                  <div className="w-9 h-9 rounded-full bg-lilac-mist flex items-center justify-center text-brand-secondary/40 group-hover:bg-brand-accent group-hover:text-brand-primary transition-colors duration-500">
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
-                  </div>
-                </div>
-              </div>
-
-              {/* Card Back */}
-              <div className="absolute inset-0 backface-hidden rotate-y-180 bg-brand-primary p-9 rounded-[2.5rem] shadow-2xl shadow-brand-primary/30 flex flex-col border border-white/10 overflow-hidden grain">
-                <div className="absolute top-0 right-0 w-64 h-64 bg-brand-secondary/30 rounded-full blur-[80px] pointer-events-none"></div>
-
-                <div className="mb-6 relative">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-2 h-2 rounded-full bg-rose-400 animate-pulse"></div>
-                    <h4 className="text-brand-accent font-black text-[10px] uppercase tracking-[0.25em]">The Challenge</h4>
-                  </div>
-                  <p className="text-slate-300 text-[13px] leading-relaxed pl-5 relative">
-                    <span className="absolute left-0 top-0 bottom-0 w-0.5 bg-rose-400/40 rounded-full"></span>
-                    {sol.challenge}
-                  </p>
-                </div>
-
-                <div className="mb-8 relative">
-                  <h4 className="text-white/50 font-black text-[10px] uppercase tracking-[0.25em] mb-4">What You'll Gain</h4>
-                  <ul className="space-y-3">
-                    {sol.gain.map((item, idx) => (
-                      <li key={idx} className="flex gap-3 text-white text-sm">
-                        <svg className="w-5 h-5 text-brand-mint shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" /></svg>
-                        <span className="leading-tight font-medium">{item}</span>
+            <div
+              className="svc-track"
+              id="svc-track"
+              ref={trackRef}
+              onScroll={sync}
+              tabIndex={0}
+              role="region"
+              aria-label="Services — scroll horizontally"
+            >
+              {solutions.map((s, i) => (
+                <article
+                  className="card rise"
+                  key={s.title}
+                  style={{ '--d': `${i * 110}ms` } as React.CSSProperties}
+                >
+                  <p className="card-idx">{s.idx}</p>
+                  <p className="label card-tag" style={{ color: 'var(--signal)' }}>{s.tag}</p>
+                  <h3>{s.title}</h3>
+                  {s.status && <p className="status">{s.status}</p>}
+                  <p className="card-problem">{s.problem}</p>
+                  <p className="label" style={{ marginBottom: 'var(--s3)' }}>{s.listHead}</p>
+                  <ul className="card-list">
+                    {s.items.map((item, k) => (
+                      <li key={item}>
+                        <i>{String(k + 1).padStart(2, '0')}</i>
+                        <span>{item}</span>
                       </li>
                     ))}
                   </ul>
-                </div>
+                  <a className="link" href="#contact">Talk to us about {s.title}</a>
+                </article>
+              ))}
+            </div>
 
-                <div className="mt-auto relative">
-                  <a href="#contact" className="shine-effect w-full bg-brand-accent text-brand-primary py-4 rounded-xl font-black text-center text-xs block hover:bg-white transition-all uppercase tracking-[0.2em]">
-                    Start with {sol.title}
-                  </a>
-                </div>
-              </div>
-
+            <div className="track-nav" data-scrollable={scrollable}>
+              <button
+                className="tbtn"
+                type="button"
+                onClick={() => nudge(-1)}
+                disabled={atStart}
+                aria-label="Previous service"
+                aria-controls="svc-track"
+              >
+                &#8592;
+              </button>
+              <button
+                className="tbtn"
+                type="button"
+                onClick={() => nudge(1)}
+                disabled={atEnd}
+                aria-label="Next service"
+                aria-controls="svc-track"
+              >
+                &#8594;
+              </button>
+              <ol className="rail" aria-hidden="true">
+                {solutions.map((s, i) => (
+                  <li key={s.title} data-on={i === dot ? 'true' : undefined} />
+                ))}
+              </ol>
             </div>
           </div>
-        ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 

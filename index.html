@@ -1,15 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VetBridge Consulting | Modern Veterinary Operations</title>
-    <meta name="description" content="VetBridge Consulting bridges healthcare technology and veterinary excellence — revenue analytics, biomedical integration, and unified practice data for modern clinics.">
+    <title>VetBridge Consulting — Veterinary systems, connected</title>
+    <meta name="description" content="VetBridge connects the PIMS, labs, inventory and billing your veterinary practice already runs, so the numbers arrive on their own. Kansas City, MO.">
+    <link rel="canonical" href="https://vetbridgeconsulting.com/">
+    <meta name="theme-color" content="#f8f7f4" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#130e25" media="(prefers-color-scheme: dark)">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="VetBridge Consulting">
+    <meta property="og:title" content="VetBridge Consulting — Veterinary systems, connected">
+    <meta property="og:description" content="We connect the systems veterinary practices already run, so the numbers arrive on their own. No vendor commissions. No software to sell you.">
+    <meta property="og:url" content="https://vetbridgeconsulting.com/">
+    <meta property="og:image" content="https://vetbridgeconsulting.com/og.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23140c2e'/%3E%3Cpath d='M5 22h22M5 15h22' stroke='%23f8f7f4' stroke-width='1' opacity='.35'/%3E%3Cpath d='M5 22l6-7 5 4 4-7 7 4' fill='none' stroke='%238144f0' stroke-width='2.4' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+    <script>
+      /* Flags JS so reveal states only hide content when they can be un-hidden,
+         and sets the theme before first paint so there is no flash. */
+      (function () {
+        document.documentElement.classList.add('js');
+        try {
+          var t = localStorage.getItem('vb-theme');
+          if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          document.documentElement.dataset.theme = t;
+        } catch (e) {}
+      })();
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context":"https://schema.org",
+      "@type":"ProfessionalService",
+      "name":"VetBridge Consulting",
+      "description":"Veterinary practice systems integration — PIMS, labs, inventory and billing connected so data flows without transcription.",
+      "url":"https://vetbridgeconsulting.com/",
+      "telephone":"+1-816-394-8980",
+      "email":"info@vetbridgeconsulting.com",
+      "areaServed":"United States",
+      "address":{"@type":"PostalAddress","addressLocality":"Kansas City","addressRegion":"MO","addressCountry":"US"},
+      "makesOffer":[
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"VetRev","description":"Pricing and billing analysis built on the practice's own cost data."}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"VetInsight","description":"Unified reporting across scheduling, clinical outcomes and inventory."}},
+        {"@type":"Offer","itemOffered":{"@type":"Service","name":"VetHub","description":"In development, not yet deployed: monitor-to-record integration so vitals write themselves into the patient record."}}
+      ]
+    }
+    </script>
 </head>
-<body class="bg-porcelain text-ink">
+<body>
     <div id="root"></div>
     <script type="module" src="/src/index.tsx"></script>
 </body>

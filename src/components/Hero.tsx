@@ -1,106 +1,128 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import heroImg from '../assets/hero-clinic.webp';
 
-/**
- * Full-bleed photograph, deep scrim, headline anchored low-left, and a
- * hairline metric bar across the base of the fold.
- *
- * The photograph is the hero — it carries the whole first screen, so it is
- * self-hosted rather than fetched from a third party. Swap HERO_IMAGE for
- * clinic photography of your own when it exists; nothing else needs to change.
- */
-const HERO_IMAGE = '/images/about-legacy.jpg';
-
-const METRICS = [
-  { value: '10+', label: 'PIMS platforms supported' },
-  { value: '15+', label: 'Hours saved per week' },
-  { value: '3', label: 'Integrated solution lines' },
-  { value: '100%', label: 'Vendor-agnostic advice' },
+/* Real NAWS figures, 2026 year to date against the same Jan–Jul window in
+   2025. The bar is this year, the tick is last year. Rows land one at a time
+   as the visitor scrolls — the comparison assembling itself. */
+const SEGMENTS = [
+  { name: 'All surgeries', now: 2318, prev: 2190, delta: '+5.8%', up: true },
+  { name: 'Feral cat TNR', now: 593, prev: 480, delta: '+23.5%', up: true },
+  { name: 'Canine surgeries', now: 401, prev: 530, delta: '−24.3%', up: false },
+  { name: 'Rescue partners', now: 463, prev: 486, delta: '−4.6%', up: false },
 ];
 
-const Hero: React.FC = () => {
-  return (
-    <div className="relative min-h-screen flex flex-col justify-end overflow-hidden bg-ink grain">
-      {/* ── Photograph ────────────────────────────────── */}
-      <div className="absolute inset-0 z-0">
-        <img
-          src={HERO_IMAGE}
-          alt="A veterinarian reviewing practice data on a tablet with a client and their dog"
-          className="w-full h-full object-cover animate-slow-zoom"
-          fetchPriority="high"
-        />
-        {/* scrims: bottom weight for the headline, left weight for legibility */}
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/25"></div>
-        <div className="absolute inset-0 bg-gradient-to-r from-ink/85 via-ink/35 to-transparent"></div>
-        <div className="absolute inset-0 bg-brand-primary/30 mix-blend-multiply"></div>
-      </div>
+const nf = new Intl.NumberFormat('en-US');
 
-      {/* ── Content ───────────────────────────────────── */}
-      <div className="relative z-10 container mx-auto px-6 pb-16 pt-40">
-        <div className="max-w-4xl">
-          <div className="rise-in flex items-center gap-4 mb-9">
-            <span className="relative flex h-2 w-2 shrink-0">
-              <span className="pulse-dot inline-flex rounded-full h-2 w-2 bg-brand-accent"></span>
-            </span>
-            <p className="text-[11px] font-bold uppercase tracking-[0.3em] text-brand-mint">
-              Veterinary Operations, Reimagined
+const Hero: React.FC = () => {
+  /* One row is filled at rest so the panel reads as a chart in progress
+     rather than an empty box; the rest fill across the first ~60vh. */
+  const [landed, setLanded] = useState(1);
+  const ticking = useRef(false);
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setLanded(SEGMENTS.length);
+      return;
+    }
+    const onScroll = () => {
+      if (ticking.current) return;
+      ticking.current = true;
+      requestAnimationFrame(() => {
+        const p = Math.min(1, Math.max(0, window.scrollY / (window.innerHeight * 0.62)));
+        setLanded(1 + Math.floor(p * (SEGMENTS.length - 0.001)));
+        ticking.current = false;
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const allLanded = landed >= SEGMENTS.length;
+
+  return (
+    <section className="hero" aria-labelledby="h-hero">
+      <div className="shell">
+        <p className="label">
+          01 &nbsp;/&nbsp; VetBridge Consulting &nbsp;·&nbsp; Kansas City, Missouri
+        </p>
+
+        <h1 id="h-hero">
+          Your systems don't talk to each other. <em>We make them.</em>
+        </h1>
+
+        <div className="hero-grid">
+          <div>
+            <p className="lead">
+              VetBridge connects the PIMS, lab equipment, inventory and billing your practice
+              already runs, so the numbers arrive on their own. We came out of hospital IT.
+              We take no vendor commissions and we don't sell software.
+            </p>
+            <div className="hero-actions">
+              <a className="btn" href="#contact">Book a free audit</a>
+              <a className="btn btn--ghost" href="#services">What we do</a>
+            </div>
+            <p className="meta">About an hour on a call. You get a written summary either way.</p>
+          </div>
+
+          <div>
+            <div className="sheet">
+              <div className="sheet-head">
+                <span className="label">NAWS &nbsp;·&nbsp; Shepherd</span>
+                <span className="meta">2026 YTD &nbsp;·&nbsp; Jan–Jul</span>
+              </div>
+
+              <div>
+                {SEGMENTS.map((g, i) => {
+                  const scale = Math.max(g.now, g.prev) * 1.12;
+                  return (
+                    <div className="bullet" key={g.name}>
+                      <div className="bullet-head">
+                        <span className="bullet-name">{g.name}</span>
+                        <span className="bullet-val">
+                          {nf.format(g.now)}
+                          <em>{g.up ? '▲' : '▼'} {g.delta}</em>
+                        </span>
+                      </div>
+                      <div className="bullet-track">
+                        <i
+                          className="bullet-fill"
+                          style={{ width: i < landed ? `${(g.now / scale) * 100}%` : 0 }}
+                        />
+                        <b className="bullet-tick" style={{ left: `${(g.prev / scale) * 100}%` }} />
+                      </div>
+                      <div className="bullet-foot">
+                        <span>2025 · {nf.format(g.prev)}</span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className={`sheet-foot${allLanded ? ' done' : ''}`}>
+                <span className="label state">Revenue tracked, year to date</span>
+                <span className="keys">$232,973</span>
+              </div>
+            </div>
+
+            <p className="meta sheet-note">
+              Scroll — the comparison fills in. These are real figures from the dashboard we
+              built for NAWS; it reads from Shepherd and keeps itself current.
             </p>
           </div>
-
-          <h2
-            className="rise-in font-display text-white text-[3.5rem] sm:text-7xl lg:text-[6rem] xl:text-[6.75rem] leading-[0.94] tracking-[-0.025em] mb-8"
-            style={{ '--rise-delay': '140ms' } as React.CSSProperties}
-          >
-            Smarter operations
-            <br />
-            for <em className="font-light text-brand-accent">modern</em> vets.
-          </h2>
-
-          <p
-            className="rise-in text-lg md:text-2xl text-slate-300 font-light leading-relaxed max-w-2xl mb-11"
-            style={{ '--rise-delay': '280ms' } as React.CSSProperties}
-          >
-            We bridge healthcare technology and veterinary excellence — turning your
-            practice data into time saved, revenue found, and better medicine.
-          </p>
-
-          <div
-            className="rise-in flex flex-col sm:flex-row gap-4"
-            style={{ '--rise-delay': '400ms' } as React.CSSProperties}
-          >
-            <a
-              href="#contact"
-              className="shine-effect group bg-white text-ink px-9 py-4 rounded-full font-bold flex items-center justify-center gap-2 hover:bg-brand-accent transition-colors duration-300"
-            >
-              Book a free audit
-              <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-            </a>
-            <a
-              href="#solutions"
-              className="border border-white/25 text-white px-9 py-4 rounded-full font-semibold flex items-center justify-center gap-2 hover:bg-white/10 transition-colors"
-            >
-              Explore solutions
-            </a>
-          </div>
         </div>
       </div>
 
-      {/* ── Base metric bar ───────────────────────────── */}
-      <div
-        className="rise-in relative z-10 border-t border-white/12 backdrop-blur-[2px]"
-        style={{ '--rise-delay': '520ms' } as React.CSSProperties}
-      >
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 divide-x divide-white/10">
-            {METRICS.map((s, i) => (
-              <div key={s.label} className={`py-7 px-6 ${i === 0 ? 'md:pl-0' : ''}`}>
-                <p className="font-display text-3xl lg:text-4xl text-white leading-none mb-2">{s.value}</p>
-                <p className="text-[10px] uppercase tracking-[0.18em] text-slate-400 leading-snug">{s.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
+      <figure className="hero-figure">
+        <img
+          src={heroImg}
+          width={1600}
+          height={712}
+          decoding="async"
+          alt="A veterinarian in scrubs talking with a client and her dog in an exam room."
+        />
+      </figure>
+    </section>
   );
 };
 
