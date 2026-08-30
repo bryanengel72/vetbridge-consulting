@@ -242,33 +242,9 @@ section{padding-block:var(--pad-section);scroll-margin-top:var(--header-h)}
 .hero h1{font-size:var(--t-5);max-width:15ch;margin-block:var(--s4) var(--s5)}
 .hero h1 em{font-style:normal;color:var(--signal)}
 .hero-grid{display:grid;gap:var(--s6)}
-@media (min-width:1080px){
-  /* Three children: copy, flowsheet, plate. The plate sits under the copy on
-     desktop, but stays third in the DOM so that on one column the proof panel
-     still comes before the photograph. */
-  .hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);
-    column-gap:var(--s7);row-gap:var(--s4);align-items:start}
-  .hero-copy{grid-column:1;grid-row:1}
-  .hero-sheet{grid-column:2;grid-row:1 / span 2}
-  .plate{grid-column:1;grid-row:2}
-}
+@media (min-width:1080px){.hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:var(--s7);align-items:start}}
 .hero-actions{display:flex;flex-wrap:wrap;gap:var(--s2);margin-block:var(--s4) var(--s3)}
 
-/* The photograph as a numbered plate inside the grid rather than a full-bleed
-   band. Same furniture as .sheet opposite it — head rule, ruled border, footed
-   caption — so it reads as an exhibit in the document, not a brochure header.
-   aspect-ratio reserves the box so nothing reflows on decode. */
-.plate{border:1px solid var(--rule-2);background:var(--bg)}
-.plate-head{display:flex;align-items:center;justify-content:space-between;gap:var(--s2);
-  padding:10px 14px;border-bottom:1px solid var(--rule-2)}
-.plate img{display:block;width:100%;height:auto;aspect-ratio:1600/712;
-  object-fit:cover;object-position:50% 40%}
-.plate figcaption{padding:11px 14px;border-top:1px solid var(--rule-2);
-  background:var(--bg-2);max-width:none}
-@media (max-width:639px){
-  /* taller, framed on the vet and the dog rather than cropping her out */
-  .plate img{aspect-ratio:3/2;object-position:42% 40%}
-}
 @media (max-width:479px){.hero-actions .btn{width:100%}}
 
 /* ── The flowsheet ──────────────────────────────────── */
