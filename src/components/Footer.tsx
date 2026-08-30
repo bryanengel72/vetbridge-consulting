@@ -20,8 +20,7 @@ const Footer: React.FC = () => {
               <span>Consulting</span>
             </a>
             <p style={{ color: 'var(--fg-2)', maxWidth: '34ch' }}>
-              We connect the systems veterinary practices already run, so the numbers arrive on
-              their own.
+              Systems integration for veterinary practices.
             </p>
           </div>
 
@@ -48,7 +47,6 @@ const Footer: React.FC = () => {
 
         <div className="colophon">
           <p className="meta">© {new Date().getFullYear()} VetBridge Consulting</p>
-          <p className="meta">No reseller agreements. No vendor commissions.</p>
         </div>
       </div>
     </footer>

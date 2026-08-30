@@ -37,9 +37,6 @@ const Integrations: React.FC = () => {
                 <li key={name}>{name}</li>
               ))}
             </ul>
-            <p className="meta" style={{ marginTop: 'var(--s3)' }}>
-              We work in what's on your machines. Replacing a PIMS is a last resort, not a first move.
-            </p>
           </div>
         </div>
       </div>

@@ -38,9 +38,8 @@ const ROICalculator: React.FC = () => {
                 Rough math on what this is worth.
               </h2>
               <p className="lead">
-                Fill in the four lines you already know. The formulas are shown so you can argue
-                with them. These are estimates on industry multiples, not a quote — the audit is
-                where the real numbers come from.
+                Fill in the four lines you already know. The formulas are printed so you can
+                argue with them.
               </p>
             </div>
 

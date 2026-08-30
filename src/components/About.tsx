@@ -25,19 +25,13 @@ const About: React.FC = () => {
               <div className="prose">
                 <p>
                   VetBridge came out of hospital IT: device integration, clinical interfaces,
-                  revenue cycle. The problems inside a veterinary practice are the same ones,
-                  minus the budget and minus the leverage to get a vendor to build you an
-                  interface because you asked nicely.
+                  revenue cycle. A veterinary practice has the same problems, minus the budget
+                  and the leverage to make a vendor listen.
                 </p>
                 <p>
-                  We started VetBridge to do that work at a scale a five-doctor clinic can
-                  actually pay for. Most of our time goes into systems that were never designed
-                  to be connected to anything. That work is unglamorous and it is where the hours
-                  and the money are hiding.
-                </p>
-                <p style={{ color: 'var(--fg)' }}>
-                  We have no reseller agreements. If the software you're running is fine, the
-                  audit will say so.
+                  We do that work at a scale a five-doctor clinic can pay for — mostly
+                  connecting systems that were never designed to talk. Unglamorous, and where
+                  the hours and the money are hiding.
                 </p>
               </div>
             </div>

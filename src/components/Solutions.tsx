@@ -9,13 +9,13 @@ const solutions = [
     title: 'VetRev',
     status: null as string | null,
     problem:
-      "Most practices set prices off published industry averages. Those averages don't know your rent, your drug costs, or that a third of your patients are seniors on chronic meds. So you find out you've been underwater on a procedure after a year of running it.",
+      "Most practices set prices off industry averages that don't know your rent, your drug costs, or your patient mix. So you learn you've been underwater on a procedure a year in.",
     listHead: 'What changes',
     items: [
-      'What a visit actually costs you, broken out by service and by doctor',
-      'Which billing codes you run most, and what the market charges for them',
-      'Wellness plans priced off your own numbers instead of a template',
-      'Enough population data to stock and staff for the patients you see',
+      'True cost per visit, by service and by doctor',
+      'Your top billing codes against market rates',
+      'Wellness plans priced off your numbers, not a template',
+      'Stocking and staffing for the patients you actually see',
     ],
   },
   {
@@ -24,13 +24,13 @@ const solutions = [
     title: 'VetInsight',
     status: null as string | null,
     problem:
-      'Scheduling lives in the PIMS, labs in the analyzer software, inventory in a spreadsheet, imaging somewhere else. A question as simple as "are we actually at capacity on Tuesdays?" takes a week and three exports to answer, so mostly nobody asks it.',
+      'Scheduling lives in the PIMS, labs in the analyzer software, inventory in a spreadsheet. "Are we actually at capacity on Tuesdays?" takes three exports to answer, so nobody asks.',
     listHead: 'What changes',
     items: [
       'Every system feeding one place you can actually query',
-      "Reports built around your questions, not a vendor's report template",
+      "Reports built around your questions, not a vendor's template",
       'Scheduling, clinical outcomes and inventory in the same view',
-      'A clean data foundation, if you want to do anything with AI later',
+      'A clean data foundation, if you want AI later',
     ],
   },
   {
@@ -39,7 +39,7 @@ const solutions = [
     title: 'VetHub',
     status: 'In development · not yet deployed',
     problem:
-      'A tech reads a number off the monitor and types it into the record. Across a practice that is ten to fifteen hours a week of transcription, and every entry is a chance to drop a digit or skip a reading during the part of the procedure where it matters most.',
+      'A tech reads a number off the monitor and types it into the record — ten to fifteen hours a week of transcription, and every entry a chance to drop a digit when it matters most.',
     listHead: 'What it will do',
     items: [
       'Vitals write themselves into the record, timestamped, every minute',

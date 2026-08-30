@@ -3,11 +3,11 @@ import React from 'react';
 const commitments = [
   {
     title: 'We take no commissions.',
-    desc: "No reseller agreements, no referral fees, nothing paid to us by a vendor. Our only incentive is that the thing works, because that's what gets us the next engagement.",
+    desc: "No reseller agreements, no referral fees, nothing paid to us by a vendor. If the software you're running is fine, the audit will say so.",
   },
   {
     title: 'We work inside what you already run.',
-    desc: 'Cornerstone, ezyVet, AVImark, whatever is on your machines. Replacing a PIMS costs a year and a lot of goodwill, and we will talk you out of it unless there is genuinely no other way.',
+    desc: "Cornerstone, ezyVet, AVImark, whatever is on your machines. Replacing a PIMS is a last resort — we'll talk you out of it unless there's genuinely no other way.",
   },
   {
     title: 'Every engagement has a number on it.',
@@ -48,11 +48,6 @@ const WhyChooseUs: React.FC = () => {
                 <h3 style={{ fontSize: 'var(--t-2)', marginBottom: 'var(--s2)' }}>
                   Start with the audit.
                 </h3>
-                <p style={{ color: 'var(--carbon-fg2)', maxWidth: '54ch' }}>
-                  A call, a look at your last twelve months of practice data, and a written summary
-                  of what we'd change and what it's worth. Free, and there's nothing to sign at the
-                  end of it.
-                </p>
               </div>
               <div>
                 <a className="btn" href="#contact">Book a free audit</a>

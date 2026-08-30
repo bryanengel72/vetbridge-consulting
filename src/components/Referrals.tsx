@@ -122,13 +122,9 @@ const Referrals: React.FC = () => {
               <div className="prose rv">
                 <p>
                   NAWS runs low-cost spay/neuter and wellness clinics across the Northland. They
-                  knew they were busy and they knew roughly where their clients came from, but not
-                  in a form anyone could put in front of a grant committee.
-                </p>
-                <p>
-                  We built them a dashboard that reads from Shepherd and keeps itself current —
-                  twelve views across surgeries, vaccines, clients, geography and funding. The
-                  figures below are the ones their board sees.
+                  knew they were busy, but not in a form anyone could put in front of a grant
+                  committee. We built them a dashboard that reads from Shepherd and keeps itself
+                  current. The figures below are the ones their board sees.
                 </p>
               </div>
             </div>
@@ -143,7 +139,7 @@ const Referrals: React.FC = () => {
               ))}
             </div>
             <p className="meta" style={{ marginTop: 'var(--s4)' }}>
-              2026 year to date, January–July. Dashboard built and maintained by VetBridge Consulting.
+              2026 year to date, January–July.
             </p>
 
             <div className="rv" style={{ marginTop: 'var(--s6)' }}>
@@ -155,20 +151,18 @@ const Referrals: React.FC = () => {
                   <p className="ins-tag">▲ &nbsp;Ahead</p>
                   <p className="ins-num">{nfInt.format(SOURCE.surgeries)} surgeries &nbsp;·&nbsp; +{surgeryDelta.toFixed(1)}%</p>
                   <p className="ins-body">
-                    Through July, surgeries are running ahead of 2025 (2,318 vs 2,190). July itself
-                    was the strongest month of the year — 383 surgeries, up 17.4% year over year. At
-                    this pace 2026 projects to roughly 3,974 surgeries and about $255K of revenue,
-                    +9.6% against 2025's 3,662.
+                    July was the strongest month of the year — 383 surgeries, up 17.4% year over
+                    year. At this pace 2026 projects to roughly 3,974 surgeries and about $255K of
+                    revenue, +9.6% over 2025.
                   </p>
                 </article>
                 <article className="insight">
                   <p className="ins-tag">▼ &nbsp;Needs attention</p>
                   <p className="ins-num">Canine &nbsp;·&nbsp; −129 surgeries</p>
                   <p className="ins-body">
-                    Canine surgeries fell 24.3% (530 → 401) against the same Jan–Jul period in 2025 —
-                    the steepest decline of any segment. July's overall surge was driven by feline
-                    and feral volume; canine stayed soft even then, 48 against 55 a year earlier.
-                    Worth investigating canine demand and rescue mix.
+                    The steepest decline of any segment. July's surge was feline and feral; canine
+                    stayed soft even then, 48 against 55 a year earlier. Worth investigating canine
+                    demand and rescue mix.
                   </p>
                 </article>
               </div>

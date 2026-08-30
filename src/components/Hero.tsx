@@ -53,9 +53,8 @@ const Hero: React.FC = () => {
         <div className="hero-grid">
           <div>
             <p className="lead">
-              VetBridge connects the PIMS, lab equipment, inventory and billing your practice
-              already runs, so the numbers arrive on their own. We came out of hospital IT.
-              We take no vendor commissions and we don't sell software.
+              We connect the PIMS, lab equipment, inventory and billing your practice
+              already runs, so the numbers arrive on their own.
             </p>
             <div className="hero-actions">
               <a className="btn" href="#contact">Book a free audit</a>
@@ -105,8 +104,8 @@ const Hero: React.FC = () => {
             </div>
 
             <p className="meta sheet-note">
-              Scroll — the comparison fills in. These are real figures from the dashboard we
-              built for NAWS; it reads from Shepherd and keeps itself current.
+              Real figures from the dashboard we built for NAWS. Scroll — the comparison
+              fills in.
             </p>
           </div>
 
