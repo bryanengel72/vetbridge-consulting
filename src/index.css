@@ -26,6 +26,7 @@
   --rule-ui:   oklch(0.635 0.020 292);     /*             3.2:1 — control borders */
   --signal:    oklch(0.491 0.241 292.6);   /* violet     #6d28d9   6.6:1 */
   --signal-mk: oklch(0.560 0.240 293);     /*             4.9:1 — marks */
+  --signal-bg: oklch(0.945 0.025 292);     /* violet-washed porcelain — hover ground */
   --grid:      color-mix(in oklch, var(--rule) 60%, transparent);
 
   /* ── Carbon: the inverted band, always opposite the page ── */
@@ -68,6 +69,7 @@
   --rule-ui:   oklch(0.535 0.035 291);
   --signal:    oklch(0.700 0.170 293);     /* violet lifted for a dark ground */
   --signal-mk: oklch(0.700 0.170 293);
+  --signal-bg: oklch(0.245 0.060 291);     /* violet-washed ink — hover ground */
   --grid:      color-mix(in oklch, var(--rule) 45%, transparent);
 
   --carbon-bg:  oklch(0.976 0.004 91);
@@ -289,6 +291,12 @@ section{padding-block:var(--pad-section);scroll-margin-top:var(--header-h)}
   color:var(--fg-2);display:flex;align-items:center;gap:10px;min-height:64px;
 }
 .systems li::before{content:'';width:6px;height:6px;background:var(--signal-mk);flex:none}
+@media (hover:hover){
+  .systems li{transition:background-color .18s ease-out,color .18s ease-out}
+  .systems li::before{transition:background-color .18s ease-out,transform .18s ease-out}
+  .systems li:hover{background:var(--signal-bg);color:var(--fg)}
+  .systems li:hover::before{background:var(--signal);transform:scale(1.4)}
+}
 @media (min-width:1024px){.systems--4{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media (min-width:640px){.systems--3{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (min-width:1024px){.systems--3{grid-template-columns:repeat(3,minmax(0,1fr))}}
