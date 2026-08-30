@@ -12,11 +12,30 @@ const SEGMENTS = [
 
 const nf = new Intl.NumberFormat('en-US');
 
+/* One sentence shape — the problem, then the counter in signal ink. Every
+   variant must hold at 15ch without outgrowing the tallest, and claim only
+   what read-only engagements deliver. */
+const HEADLINES = [
+  { a: "Your systems don't talk to each other.", b: 'We make them.' },
+  { a: 'Your numbers hide in five systems.', b: 'We put them in one place.' },
+  { a: 'Simple questions take three exports to answer.', b: 'Ask once.' },
+];
+
 const Hero: React.FC = () => {
   /* One row is filled at rest so the panel reads as a chart in progress
      rather than an empty box; the rest fill across the first ~60vh. */
   const [landed, setLanded] = useState(1);
+  const [head, setHead] = useState(0);
   const ticking = useRef(false);
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const id = window.setInterval(
+      () => setHead((h) => (h + 1) % HEADLINES.length),
+      7000
+    );
+    return () => window.clearInterval(id);
+  }, []);
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -46,8 +65,17 @@ const Hero: React.FC = () => {
           01 &nbsp;/&nbsp; VetBridge Consulting &nbsp;·&nbsp; Kansas City, Missouri
         </p>
 
-        <h1 id="h-hero">
-          Your systems don't talk to each other. <em>We make them.</em>
+        <h1 id="h-hero" className="h1-swap">
+          {HEADLINES.map((h, i) => (
+            <span
+              key={h.b}
+              className="h1-line"
+              data-on={i === head || undefined}
+              aria-hidden={i !== head || undefined}
+            >
+              {h.a} <em>{h.b}</em>
+            </span>
+          ))}
         </h1>
 
         <div className="hero-grid">

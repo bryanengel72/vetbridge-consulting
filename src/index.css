@@ -239,6 +239,18 @@ section{padding-block:var(--pad-section);scroll-margin-top:var(--header-h)}
 .hero{padding-top:calc(var(--header-h) + clamp(32px,1.5rem + 3vw,64px))}
 .hero h1{font-size:var(--t-5);max-width:15ch;margin-block:var(--s4) var(--s5)}
 .hero h1 em{font-style:normal;color:var(--signal)}
+/* Rotating headline: variants stack in one grid cell, so the hero keeps the
+   height of the tallest and nothing below it ever shifts. */
+.h1-swap{display:grid}
+.h1-swap .h1-line{
+  grid-area:1/1;opacity:0;transform:translateY(0.18em);visibility:hidden;
+  transition:opacity .7s ease-out,transform .7s ease-out,visibility 0s .7s;
+}
+.h1-swap .h1-line[data-on]{
+  opacity:1;transform:none;visibility:visible;
+  transition:opacity .7s ease-out,transform .7s ease-out,visibility 0s;
+}
+@media (prefers-reduced-motion:reduce){.h1-swap .h1-line{transition:none;transform:none}}
 .hero-grid{display:grid;gap:var(--s6)}
 @media (min-width:1080px){.hero-grid{grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:var(--s7);align-items:start}}
 .hero-actions{display:flex;flex-wrap:wrap;gap:var(--s2);margin-block:var(--s4) var(--s3)}
