@@ -21,7 +21,7 @@ const HEADLINES = [
   { a: 'Simple questions take three exports to answer.', b: 'Ask once.' },
 ];
 
-const Hero: React.FC = () => {
+const Hero: React.FC<{ place: string; meta: string }> = ({ place, meta }) => {
   /* One row is filled at rest so the panel reads as a chart in progress
      rather than an empty box; the rest fill across the first ~60vh. */
   const [landed, setLanded] = useState(1);
@@ -62,7 +62,7 @@ const Hero: React.FC = () => {
     <section className="hero" aria-labelledby="h-hero">
       <div className="shell">
         <p className="label">
-          01 &nbsp;/&nbsp; VetBridge Consulting &nbsp;·&nbsp; Kansas City &nbsp;·&nbsp; San Diego
+          01 &nbsp;/&nbsp; VetBridge Consulting &nbsp;·&nbsp; {place}
         </p>
 
         <h1 id="h-hero" className="h1-swap">
@@ -88,7 +88,7 @@ const Hero: React.FC = () => {
               <a className="btn" href="#contact">Book a free audit</a>
               <a className="btn btn--ghost" href="#services">What we do</a>
             </div>
-            <p className="meta">About an hour on a call. You get a written summary either way.</p>
+            <p className="meta">{meta}</p>
           </div>
 
           <div>

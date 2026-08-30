@@ -10,8 +10,9 @@ import WhyChooseUs from './components/WhyChooseUs';
 import ROICalculator from './components/ROICalculator';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import { CityConfig, HOME } from './city';
 
-const App: React.FC = () => {
+const App: React.FC<{ city?: CityConfig }> = ({ city = HOME }) => {
   /* Reveal-on-scroll. The hidden states are gated behind .js in CSS, so if
      this never runs the page still reads — it just doesn't animate. */
   useEffect(() => {
@@ -43,16 +44,16 @@ const App: React.FC = () => {
       <Header />
       <main id="main">
         <span id="top" />
-        <Hero />
+        <Hero place={city.place} meta={city.heroMeta} />
         <Solutions />
         <Integrations />
         <Referrals />
         <About />
         <WhyChooseUs />
         <ROICalculator />
-        <Contact />
+        <Contact phone={city.phone} phoneHref={city.phoneHref} />
       </main>
-      <Footer />
+      <Footer phone={city.phone} phoneHref={city.phoneHref} crossLink={city.crossLink} />
       <Analytics />
     </>
   );

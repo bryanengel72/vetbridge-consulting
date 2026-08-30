@@ -9,7 +9,11 @@ const links = [
   { name: 'Contact', id: 'contact' },
 ];
 
-const Footer: React.FC = () => {
+const Footer: React.FC<{
+  phone: string;
+  phoneHref: string;
+  crossLink: { name: string; href: string };
+}> = ({ phone, phoneHref, crossLink }) => {
   return (
     <footer className="site-footer">
       <div className="shell">
@@ -32,13 +36,16 @@ const Footer: React.FC = () => {
                   <a href={`#${l.id}`}>{l.name}</a>
                 </li>
               ))}
+              <li>
+                <a href={crossLink.href}>{crossLink.name} &#8594;</a>
+              </li>
             </ul>
           </div>
 
           <div>
             <p className="label" style={{ marginBottom: 'var(--s3)' }}>Get in touch</p>
             <ul className="mono">
-              <li><a href="tel:+18163948980">(816) 394-8980</a></li>
+              <li><a href={phoneHref}>{phone}</a></li>
               <li><a href="mailto:info@vetbridgeconsulting.com">info@vetbridgeconsulting.com</a></li>
               <li style={{ color: 'var(--fg-2)', fontSize: '0.9375rem' }}>Kansas City, MO · San Diego, CA</li>
             </ul>

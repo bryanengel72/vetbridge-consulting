@@ -7,7 +7,7 @@ const PUBLIC_KEY = 'gD_uQtcmPNPx4tyTy';
 
 type FieldName = 'practice_name' | 'pims_system' | 'user_email' | 'message';
 
-const Contact: React.FC = () => {
+const Contact: React.FC<{ phone: string; phoneHref: string }> = ({ phone, phoneHref }) => {
   const [submitted, setSubmitted] = useState(false);
   const [isSending, setIsSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -53,7 +53,7 @@ const Contact: React.FC = () => {
       (err) => {
         console.error('Contact form send failed:', err);
         setError(
-          "That didn't send. Email us at info@vetbridgeconsulting.com or call (816) 394-8980."
+          `That didn't send. Email us at info@vetbridgeconsulting.com or call ${phone}.`
         );
         setIsSending(false);
       }
@@ -90,7 +90,7 @@ const Contact: React.FC = () => {
               <ul className="contact-list">
                 <li>
                   <p className="label" style={{ marginBottom: 6 }}>Phone</p>
-                  <a href="tel:+18163948980">(816) 394-8980</a>
+                  <a href={phoneHref}>{phone}</a>
                 </li>
                 <li>
                   <p className="label" style={{ marginBottom: 6 }}>Email</p>
@@ -109,8 +109,8 @@ const Contact: React.FC = () => {
                   <p className="label">Sent</p>
                   <h3>Got it.</h3>
                   <p style={{ color: 'var(--fg-2)', maxWidth: '40ch' }}>
-                    We'll get back to you within one business day. If it's urgent, call
-                    (816) 394-8980.
+                    We'll get back to you within one business day. If it's urgent, call{' '}
+                    {phone}.
                   </p>
                 </div>
               ) : (
