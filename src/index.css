@@ -87,15 +87,11 @@ body{
   line-height:1.6;
   color:var(--fg);
   background-color:var(--bg);
-  background-image:
-    repeating-linear-gradient(to bottom,transparent 0 31px,var(--grid) 31px 32px),
-    repeating-linear-gradient(to right,transparent 0 95px,var(--grid) 95px 96px);
+  background-image:radial-gradient(circle,var(--grid) 1px,transparent 1.5px);
+  background-size:96px 32px;
   background-position:0 0;
   -webkit-font-smoothing:antialiased;
   overflow-x:hidden;
-}
-@media (max-width:767px){
-  body{background-image:repeating-linear-gradient(to bottom,transparent 0 31px,var(--grid) 31px 32px)}
 }
 @media (prefers-reduced-transparency:reduce){body{background-image:none}}
 
