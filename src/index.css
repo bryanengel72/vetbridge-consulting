@@ -357,20 +357,51 @@ section{padding-block:var(--pad-section);scroll-margin-top:var(--header-h)}
 .svc-track::-webkit-scrollbar-track{background:var(--rule)}
 .svc-track::-webkit-scrollbar-thumb{background:var(--rule-ui)}
 
-.card{
-  position:relative;scroll-snap-align:start;
-  display:flex;flex-direction:column;
+/* The card turns over: the problem is on the front, what changes is on the
+   back. Without JS the two faces stack down the card instead, so the full
+   text is still there for a reader or a crawler. */
+.card{position:relative;scroll-snap-align:start;cursor:pointer;
+  transition:transform .25s ease-out}
+.card-inner{display:flex;flex-direction:column;height:100%}
+.js .card-inner{
+  display:grid;transform-style:preserve-3d;
+  transition:transform .6s cubic-bezier(.22,1,.36,1);
+}
+.js .card[data-flipped] .card-inner{transform:rotateY(180deg)}
+.card-face{
+  position:relative;display:flex;flex-direction:column;
   border:1px solid var(--rule-2);background:var(--bg);
   padding:clamp(22px,1rem + 1.7vw,34px);
-  transition:transform .25s ease-out,border-color .25s ease-out;
+  transition:border-color .25s ease-out;
 }
-.card::before{
+.js .card-face{grid-area:1/1;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.js .card-face--back{transform:rotateY(180deg)}
+.card-face::before{
   content:'';position:absolute;left:-1px;right:-1px;top:-1px;height:3px;
   background:var(--signal-mk);transform:scaleX(0);transform-origin:left;
   transition:transform .3s ease-out;
 }
-.card:hover,.card:focus-within{transform:translateY(-4px);border-color:var(--rule-ui)}
-.card:hover::before,.card:focus-within::before{transform:scaleX(1)}
+.card:hover,.card:focus-within{transform:translateY(-4px)}
+.card:hover .card-face,.card:focus-within .card-face{border-color:var(--rule-ui)}
+.card:hover .card-face::before,.card:focus-within .card-face::before{transform:scaleX(1)}
+
+/* The turn affordance, and its twin on the reverse. */
+.flip{
+  display:none;margin-top:auto;align-self:flex-start;align-items:center;gap:8px;
+  min-height:44px;padding:0;background:none;border:0;cursor:pointer;
+  font-family:var(--mono);font-size:var(--t--1);letter-spacing:.06em;
+  text-transform:uppercase;color:var(--signal);
+  border-bottom:1px solid currentColor;
+}
+.js .flip{display:inline-flex}
+.flip:hover{color:var(--fg)}
+.flip i{font-style:normal;transition:transform .2s ease-out}
+.flip:hover i{transform:translateX(3px)}
+.flip--back{margin-top:var(--s3);color:var(--fg-3);border-bottom-color:transparent}
+.flip--back:hover{color:var(--fg)}
+.flip--back:hover i{transform:translateX(-3px)}
+.back-head{margin-bottom:var(--s3)}
+.card-face--back .link{margin-top:auto}
 .card-idx{
   font-family:var(--mono);font-size:0.6875rem;letter-spacing:.14em;
   color:var(--signal);margin-bottom:var(--s3);
@@ -387,12 +418,26 @@ section{padding-block:var(--pad-section);scroll-margin-top:var(--header-h)}
 .js .rise{opacity:0;transform:translateY(18px);
   transition:opacity .55s ease-out var(--d,0ms),transform .65s cubic-bezier(.22,1,.36,1) var(--d,0ms)}
 .rise.in{opacity:1;transform:none}
-.card.in .card-list li{animation:bullet-in .5s cubic-bezier(.22,1,.36,1) backwards}
-.card.in .card-list li:nth-child(1){animation-delay:calc(var(--d,0ms) + 260ms)}
-.card.in .card-list li:nth-child(2){animation-delay:calc(var(--d,0ms) + 330ms)}
-.card.in .card-list li:nth-child(3){animation-delay:calc(var(--d,0ms) + 400ms)}
-.card.in .card-list li:nth-child(4){animation-delay:calc(var(--d,0ms) + 470ms)}
+/* The list draws itself as the card lands on its back. */
+.js .card[data-flipped] .card-list li{animation:bullet-in .45s cubic-bezier(.22,1,.36,1) backwards}
+.js .card[data-flipped] .card-list li:nth-child(1){animation-delay:300ms}
+.js .card[data-flipped] .card-list li:nth-child(2){animation-delay:360ms}
+.js .card[data-flipped] .card-list li:nth-child(3){animation-delay:420ms}
+.js .card[data-flipped] .card-list li:nth-child(4){animation-delay:480ms}
 @keyframes bullet-in{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:none}}
+
+/* No rotation for anyone who asked for less motion — the faces cross-fade in
+   place instead, and the card still turns over. */
+@media (prefers-reduced-motion:reduce){
+  /* Must out-specify .js .card[data-flipped] .card-inner, or the inner still
+     rotates and the back face reads mirrored. */
+  .js .card-inner,.js .card[data-flipped] .card-inner{transform:none;transform-style:flat;transition:none}
+  .js .card-face{backface-visibility:visible;transition:opacity .2s linear}
+  .js .card-face--back{transform:none;opacity:0;pointer-events:none}
+  .js .card[data-flipped] .card-face--front{opacity:0;pointer-events:none}
+  .js .card[data-flipped] .card-face--back{opacity:1;pointer-events:auto}
+  .js .card[data-flipped] .card-list li{animation:none}
+}
 
 /* Track controls — only shown when the track actually scrolls */
 .track-nav{display:none;align-items:center;gap:var(--s2);margin-top:var(--s3)}

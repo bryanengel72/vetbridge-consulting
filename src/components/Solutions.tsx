@@ -50,6 +50,84 @@ const solutions = [
   },
 ];
 
+/* The card front carries the problem; the list of what changes lives on the
+   back. Clicking anywhere on the card turns it over. Without JS the two faces
+   simply stack, so nothing is hidden from a reader or a crawler. */
+const ServiceCard: React.FC<{ s: (typeof solutions)[number]; i: number }> = ({ s, i }) => {
+  const [flipped, setFlipped] = useState(false);
+  const down = useRef<{ x: number; y: number } | null>(null);
+  const moved = useRef(false);
+  const frontBtn = useRef<HTMLButtonElement>(null);
+  const backBtn = useRef<HTMLButtonElement>(null);
+  const backId = `svc-back-${s.title.toLowerCase()}`;
+
+  /* The face being turned away goes inert, so focus has to follow the flip or
+     it would be dropped on the document. */
+  useEffect(() => {
+    if (!moved.current) return;
+    (flipped ? backBtn : frontBtn).current?.focus();
+  }, [flipped]);
+
+  /* A swipe across the track must not read as a click, and the contact link on
+     the back has to keep working. */
+  const onPointerDown = (e: React.PointerEvent) => {
+    down.current = { x: e.clientX, y: e.clientY };
+  };
+  const onClick = (e: React.MouseEvent) => {
+    if ((e.target as HTMLElement).closest('a')) return;
+    const d = down.current;
+    if (d && Math.hypot(e.clientX - d.x, e.clientY - d.y) > 8) return;
+    moved.current = true;
+    setFlipped((v) => !v);
+  };
+
+  return (
+    <article
+      className="card rise"
+      data-flipped={flipped || undefined}
+      style={{ '--d': `${i * 110}ms` } as React.CSSProperties}
+      onPointerDown={onPointerDown}
+      onClick={onClick}
+    >
+      <div className="card-inner">
+        <div className="card-face card-face--front" inert={flipped}>
+          <p className="card-idx">{s.idx}</p>
+          <p className="label card-tag" style={{ color: 'var(--signal)' }}>{s.tag}</p>
+          <h3>{s.title}</h3>
+          {s.status && <p className="status">{s.status}</p>}
+          <p className="card-problem">{s.problem}</p>
+          <button
+            type="button"
+            className="flip"
+            ref={frontBtn}
+            aria-expanded={flipped}
+            aria-controls={backId}
+          >
+            {s.listHead} <i aria-hidden="true">&#8594;</i>
+          </button>
+        </div>
+
+        <div className="card-face card-face--back" id={backId} inert={!flipped}>
+          <p className="label card-tag" style={{ color: 'var(--signal)' }}>{s.title}</p>
+          <p className="label back-head">{s.listHead}</p>
+          <ul className="card-list">
+            {s.items.map((item, k) => (
+              <li key={item}>
+                <i>{String(k + 1).padStart(2, '0')}</i>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <a className="link" href="#contact">Talk to us about {s.title}</a>
+          <button type="button" className="flip flip--back" ref={backBtn}>
+            <i aria-hidden="true">&#8592;</i> Back
+          </button>
+        </div>
+      </div>
+    </article>
+  );
+};
+
 const Solutions: React.FC = () => {
   const trackRef = useRef<HTMLDivElement>(null);
   const [scrollable, setScrollable] = useState(false);
@@ -113,27 +191,7 @@ const Solutions: React.FC = () => {
               aria-label="Services — scroll horizontally"
             >
               {solutions.map((s, i) => (
-                <article
-                  className="card rise"
-                  key={s.title}
-                  style={{ '--d': `${i * 110}ms` } as React.CSSProperties}
-                >
-                  <p className="card-idx">{s.idx}</p>
-                  <p className="label card-tag" style={{ color: 'var(--signal)' }}>{s.tag}</p>
-                  <h3>{s.title}</h3>
-                  {s.status && <p className="status">{s.status}</p>}
-                  <p className="card-problem">{s.problem}</p>
-                  <p className="label" style={{ marginBottom: 'var(--s3)' }}>{s.listHead}</p>
-                  <ul className="card-list">
-                    {s.items.map((item, k) => (
-                      <li key={item}>
-                        <i>{String(k + 1).padStart(2, '0')}</i>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <a className="link" href="#contact">Talk to us about {s.title}</a>
-                </article>
+                <ServiceCard s={s} i={i} key={s.title} />
               ))}
             </div>
 
