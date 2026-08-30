@@ -84,7 +84,8 @@ const Contact: React.FC = () => {
               </h2>
               <p style={{ color: 'var(--fg-2)', maxWidth: '46ch' }}>
                 The audit is about an hour on a call, plus a look at your last twelve months of
-                practice data. You get a written summary either way, and there's nothing to sign.
+                practice data. Read access is all we need — we can't touch your records or your
+                billing. You get a written summary either way, and there's nothing to sign.
               </p>
               <ul className="contact-list">
                 <li>
