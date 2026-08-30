@@ -420,9 +420,15 @@ section{padding-block:var(--pad-section);scroll-margin-top:var(--header-h)}
 /* ── 06 Client work ─────────────────────────────────── */
 .stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s5) var(--s4)}
 @media (min-width:900px){.stats{grid-template-columns:repeat(4,minmax(0,1fr))}}
-.stat{border-top:1px solid var(--rule-2);padding-top:var(--s3)}
-.stat .big{font-size:clamp(1.75rem,1.05rem + 2.4vw,2.5rem);margin-block:var(--s2) var(--s2);
-  overflow-wrap:anywhere}
+.stat{border-top:1px solid var(--rule-2);padding-top:var(--s3);container-type:inline-size}
+/* The figure is sized against its own column, never the viewport alone: eight
+   mono glyphs run ~4.64em, so 20cqi always leaves headroom and "$232,973" can
+   never break mid-number the way overflow-wrap:anywhere used to let it. */
+.stat .big{font-size:min(clamp(1.75rem,1.05rem + 2.4vw,2.5rem),20cqi);
+  margin-block:var(--s2) var(--s2)}
+/* On the narrowest phones "Revenue per surgery" runs to two lines while its
+   neighbours don't, which would step the figures out of line. Reserve both. */
+@media (max-width:420px){.stat .label{display:block;min-height:2lh}}
 
 /* ── 07 Worksheet (estimator) ───────────────────────── */
 .work{border:1px solid var(--rule-2);background:var(--bg)}
