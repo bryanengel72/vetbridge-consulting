@@ -52,7 +52,7 @@ const Hero: React.FC = () => {
         </h1>
 
         <div className="hero-grid">
-          <div>
+          <div className="hero-copy">
             <p className="lead">
               VetBridge connects the PIMS, lab equipment, inventory and billing your practice
               already runs, so the numbers arrive on their own. We came out of hospital IT.
@@ -65,7 +65,7 @@ const Hero: React.FC = () => {
             <p className="meta">About an hour on a call. You get a written summary either way.</p>
           </div>
 
-          <div>
+          <div className="hero-sheet">
             <div className="sheet">
               <div className="sheet-head">
                 <span className="label">NAWS &nbsp;·&nbsp; Shepherd</span>
@@ -110,18 +110,26 @@ const Hero: React.FC = () => {
               built for NAWS; it reads from Shepherd and keeps itself current.
             </p>
           </div>
+
+          <figure className="plate rv">
+            <div className="plate-head">
+              <span className="label">Fig. 01</span>
+              <span className="meta">Exam room</span>
+            </div>
+            <img
+              src={heroImg}
+              width={1600}
+              height={712}
+              decoding="async"
+              alt="A veterinarian in scrubs talking with a client and her dog in an exam room."
+            />
+            <figcaption className="meta">
+              Illustrative. Every figure on this page starts here — a consult, typed into
+              Shepherd, read by the dashboard.
+            </figcaption>
+          </figure>
         </div>
       </div>
-
-      <figure className="hero-figure">
-        <img
-          src={heroImg}
-          width={1600}
-          height={712}
-          decoding="async"
-          alt="A veterinarian in scrubs talking with a client and her dog in an exam room."
-        />
-      </figure>
     </section>
   );
 };
