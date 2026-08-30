@@ -16,7 +16,7 @@ const Integrations: React.FC = () => {
         <hr className="hairline draw rv" />
         <div className="row" style={{ paddingTop: 'var(--s5)' }}>
           <div className="stub">
-            <span className="idx">02</span>
+            <span className="idx">03</span>
             <span>Systems</span>
           </div>
 

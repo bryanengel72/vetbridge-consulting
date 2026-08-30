@@ -44,8 +44,8 @@ const App: React.FC = () => {
       <main id="main">
         <span id="top" />
         <Hero />
-        <Integrations />
         <Solutions />
+        <Integrations />
         <Referrals />
         <About />
         <WhyChooseUs />

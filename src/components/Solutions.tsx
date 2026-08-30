@@ -168,7 +168,7 @@ const Solutions: React.FC = () => {
       <div className="shell">
         <div className="row">
           <div className="stub">
-            <span className="idx">03</span>
+            <span className="idx">02</span>
             <span>Services</span>
           </div>
 
