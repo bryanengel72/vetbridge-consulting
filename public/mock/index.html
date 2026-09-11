@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VetBridge Consulting | Award-Winning Veterinary Systems</title>
+    <meta name="description" content="Award-winning veterinary practice management and systems integration">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6d28d9; --primary-light: #8b5cf6; --secondary: #10b981;
+            --bg-light: #f8f7f4; --bg-dark: #140c2e; --bg-white: #ffffff;
+            --text-dark: #140c2e; --text-light: #f8f7f4; --text-muted: #6b7280;
+            --gradient-primary: linear-gradient(135deg, #6d28d9 0%, #8b5cf6 100%);
+            --gradient-secondary: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            --shadow-primary: 0 10px 25px rgba(109, 40, 217, 0.3);
+            --container: 1200px; --card-radius: 16px; --btn-radius: 8px;
+            --font-sans: 'Inter', sans-serif; --font-serif: 'Playfair Display', serif;
+        }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-sans); color: var(--text-dark); background: var(--bg-light); overflow-x: hidden; }
+        body.dark-mode { background: var(--bg-dark); color: var(--text-light); }
+        .container { max-width: var(--container); margin: 0 auto; padding: 0 20px; }
+        .section { padding: 80px 0; }
+        h1, h2, h3 { font-family: var(--font-serif); font-weight: 700; line-height: 1.2; }
+        h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+        h2 { font-size: clamp(2rem, 4vw, 3rem); }
+        p { color: var(--text-muted); margin-bottom: 1rem; }
+        body.dark-mode p { color: #9ca3af; }
+        .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; font-weight: 600;
+              text-decoration: none; border: none; border-radius: var(--btn-radius); cursor: pointer;
+              transition: all 0.3s ease; }
+        .btn-primary { background: var(--gradient-primary); color: white; box-shadow: var(--shadow-primary); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 15px 30px rgba(109, 40, 217, 0.4); }
+        .btn-outline { background: transparent; color: var(--primary); border: 2px solid var(--primary); }
+        .btn-outline:hover { background: var(--primary); color: white; }
+        .card { background: white; border-radius: var(--card-radius); padding: 2rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: all 0.3s ease; }
+        body.dark-mode .card { background: #1f2937; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 20px 25px rgba(0,0,0,0.1); }
+        .header { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(248, 247, 244, 0.95);
+                  backdrop-filter: blur(10px); padding: 1rem 0; transition: all 0.3s ease; }
+        body.dark-mode .header { background: rgba(20, 12, 46, 0.95); }
+        .header.scrolled { padding: 0.75rem 0; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .header .container { display: flex; align-items: center; justify-content: space-between; }
+        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo-icon { width: 40px; height: 40px; background: var(--gradient-primary); border-radius: 10px;
+                     display: flex; align-items: center; justify-content: center; color: white; font-size: 1.25rem; }
+        .logo-text { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; color: var(--text-dark); }
+        body.dark-mode .logo-text { color: var(--text-light); }
+        .nav { display: none; gap: 2rem; align-items: center; }
+        .nav a { text-decoration: none; color: var(--text-dark); font-weight: 500; transition: color 0.2s ease; }
+        body.dark-mode .nav a { color: var(--text-light); }
+        .nav a:hover { color: var(--primary); }
+        .mobile-menu-btn { display: flex; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 5px; }
+        .mobile-menu-btn span { width: 25px; height: 2px; background: var(--text-dark); transition: all 0.2s ease; }
+        body.dark-mode .mobile-menu-btn span { background: var(--text-light); }
+        .mobile-nav { display: none; position: fixed; top: 70px; left: 0; right: 0; background: rgba(248, 247, 244, 0.98);
+                     backdrop-filter: blur(10px); padding: 2rem; flex-direction: column; gap: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        body.dark-mode .mobile-nav { background: rgba(20, 12, 46, 0.98); }
+        .mobile-nav.active { display: flex; }
+        .mobile-nav a { text-decoration: none; color: var(--text-dark); font-size: 1.25rem; font-weight: 500; padding: 1rem; border-radius: var(--btn-radius); transition: all 0.2s ease; }
+        body.dark-mode .mobile-nav a { color: var(--text-light); }
+        .mobile-nav a:hover { background: var(--primary); color: white; }
+        .hero { padding-top: 120px; min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; }
+        .hero-bg { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(109, 40, 217, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%); z-index: -1; }
+        .hero .container { display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center; }
+        @media (min-width: 992px) { .hero .container { grid-template-columns: 1fr 1fr; } }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; background: rgba(109, 40, 217, 0.1); border: 1px solid var(--primary); border-radius: 20px; font-size: 0.875rem; font-weight: 500; color: var(--primary); margin-bottom: 1.5rem; }
+        body.dark-mode .hero-badge { background: rgba(109, 40, 217, 0.2); color: var(--primary-light); }
+        .hero-title-gradient { background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero-description { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 2rem; max-width: 500px; }
+        body.dark-mode .hero-description { color: #9ca3af; }
+        .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .hero-image-placeholder { width: 100%; max-width: 500px; height: 500px; background: linear-gradient(135deg, var(--primary-light) 0%, var(--secondary) 100%); border-radius: 20px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+        .hero-image-content { width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; padding: 2rem; color: white; text-align: center; z-index: 1; }
+        .hero-image-content i { font-size: 4rem; margin-bottom: 1rem; }
+        .hero-image-content h3 { font-size: 1.5rem; color: white; }
+        .hero-image-content p { color: rgba(255,255,255,0.9); }
+        .award-section { background: var(--bg-dark); position: relative; overflow: hidden; text-align: center; }
+        .award-badge { width: 120px; height: 120px; background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; box-shadow: var(--shadow-primary); animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+        .award-badge i { font-size: 3rem; color: white; }
+        .award-title { color: white; margin-bottom: 1rem; }
+        .award-subtitle { font-size: 1.25rem; color: rgba(255,255,255,0.8); max-width: 600px; margin: 0 auto 2rem; }
+        .award-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 3rem; }
+        .stat-item { text-align: center; }
+        .stat-number { font-size: 3rem; font-weight: 800; color: var(--primary-light); margin-bottom: 0.5rem; }
+        .stat-label { color: rgba(255,255,255,0.8); font-size: 0.875rem; text-transform: uppercase; letter-spacing: 1px; }
+        .services-header { text-align: center; margin-bottom: 3rem; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .service-card { overflow: hidden; border-radius: var(--card-radius); }
+        .service-icon { height: 150px; background: var(--gradient-primary); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem; }
+        .service-content { padding: 1.5rem; }
+        .service-category { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--primary); font-weight: 600; margin-bottom: 0.5rem; }
+        body.dark-mode .service-category { color: var(--primary-light); }
+        .service-title { font-size: 1.5rem; margin-bottom: 1rem; }
+        .service-description { color: var(--text-muted); margin-bottom: 1.5rem; }
+        body.dark-mode .service-description { color: #9ca3af; }
+        .service-link { display: inline-flex; align-items: center; gap: 8px; color: var(--primary); text-decoration: none; font-weight: 600; transition: gap 0.2s ease; }
+        body.dark-mode .service-link { color: var(--primary-light); }
+        .service-link:hover { gap: 12px; }
+        .features .container { display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: center; }
+        @media (min-width: 992px) { .features .container { grid-template-columns: 1fr 1fr; } }
+        .features-image-placeholder { width: 100%; height: 400px; background: var(--gradient-secondary); border-radius: 20px; display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem; }
+        .features-content h2 { margin-bottom: 1.5rem; }
+        .features-content p { margin-bottom: 2rem; }
+        .feature-list { display: grid; gap: 1.5rem; }
+        .feature-item { display: flex; gap: 1rem; align-items: flex-start; }
+        .feature-icon { width: 40px; height: 40px; background: rgba(16, 185, 129, 0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--secondary); font-size: 1.25rem; flex-shrink: 0; }
+        .feature-text h4 { font-size: 1.125rem; margin-bottom: 0.5rem; }
+        .feature-text p { margin-bottom: 0; font-size: 0.9375rem; }
+        .testimonials-header { text-align: center; margin-bottom: 3rem; }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .testimonial-card { background: white; padding: 2rem; border-radius: var(--card-radius); box-shadow: 0 4px 6px rgba(0,0,0,0.1); position: relative; }
+        body.dark-mode .testimonial-card { background: #1f2937; }
+        .testimonial-card::before { content: '"'; font-size: 6rem; color: rgba(109, 40, 217, 0.1); position: absolute; top: -20px; left: 20px; line-height: 1; }
+        .testimonial-content { position: relative; z-index: 1; }
+        .testimonial-text { font-style: italic; margin-bottom: 1.5rem; color: var(--text-muted); font-size: 1.125rem; line-height: 1.7; }
+        body.dark-mode .testimonial-text { color: #9ca3af; }
+        .testimonial-author { display: flex; align-items: center; gap: 1rem; }
+        .testimonial-avatar { width: 50px; height: 50px; background: var(--gradient-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 600; }
+        .testimonial-info h5 { margin-bottom: 0.25rem; }
+        .testimonial-info p { margin-bottom: 0; font-size: 0.875rem; }
+        .testimonial-rating { color: #f59e0b; margin-top: 1rem; }
+        .cta { background: var(--gradient-primary); position: relative; overflow: hidden; }
+        .cta::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 50m-40 0a40,40 0 1,0 80,0a40,40 0 1,0 -80,0' fill='none' stroke='%23ffffff' stroke-width='0.5' stroke-opacity='0.1'/%3E%3C/svg%3E"); opacity: 0.3; }
+        .cta-content { position: relative; z-index: 1; text-align: center; color: white; }
+        .cta-title { color: white; margin-bottom: 1.5rem; }
+        .cta-description { font-size: 1.25rem; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto; opacity: 0.9; }
+        .footer { background: var(--bg-dark); color: var(--text-light); }
+        .footer .container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; padding: 3rem 0; }
+        .footer-brand { grid-column: 1 / -1; }
+        @media (min-width: 768px) { .footer-brand { grid-column: 1; } }
+        .footer-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; }
+        .footer-logo i { color: var(--primary); }
+        .footer-description { color: #9ca3af; margin-bottom: 1rem; }
+        .footer-section h4 { color: var(--text-light); margin-bottom: 1.5rem; font-family: var(--font-sans); }
+        .footer-links { display: flex; flex-direction: column; gap: 1rem; }
+        .footer-links a { text-decoration: none; color: #9ca3af; transition: color 0.2s ease; }
+        .footer-links a:hover { color: var(--primary-light); }
+        .footer-bottom { border-top: 1px solid #374151; padding-top: 2rem; margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; text-align: center; }
+        @media (min-width: 768px) { .footer-bottom { flex-direction: row; justify-content: space-between; align-items: center; } }
+        .social-links { display: flex; gap: 1rem; justify-content: center; }
+        .social-links a { width: 40px; height: 40px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--text-light); text-decoration: none; transition: all 0.2s ease; }
+        .social-links a:hover { background: var(--primary); transform: translateY(-3px); }
+        .copyright { color: #9ca3af; font-size: 0.875rem; }
+        .animate-on-scroll { opacity: 0; transform: translateY(30px); transition: all 0.5s ease; }
+        .animate-on-scroll.animated { opacity: 1; transform: translateY(0); }
+        .loading { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--bg-light); display: flex; align-items: center; justify-content: center; z-index: 9999; transition: opacity 0.5s ease, visibility 0.5s ease; }
+        body.dark-mode .loading { background: var(--bg-dark); }
+        .loading.hidden { opacity: 0; visibility: hidden; }
+        .loader { width: 60px; height: 60px; border: 4px solid #e5e7eb; border-top-color: var(--primary); border-radius: 50%; animation: spin 1s linear infinite; }
+        body.dark-mode .loader { border-color: #374151; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .theme-toggle { background: none; border: none; cursor: pointer; font-size: 1.25rem; color: var(--text-dark); transition: color 0.2s ease; }
+        body.dark-mode .theme-toggle { color: var(--text-light); }
+        .theme-toggle:hover { color: var(--primary); }
+        body.dark-mode .theme-toggle:hover { color: var(--primary-light); }
+        .btn-white { background: white; color: var(--primary); }
+        .btn-white:hover { background: #f0f0f0; transform: translateY(-2px); }
+        @media (min-width: 768px) { .hero { padding-top: 140px; } .nav { display: flex; } .mobile-menu-btn { display: none; } .hero-title { font-size: clamp(2.5rem, 6vw, 4rem); } }
+        @media (max-width: 767px) { .section { padding: 40px 0; } .hero { padding-top: 100px; min-height: auto; } .hero .container { gap: 2rem; } .hero-image-placeholder { height: 300px; } .award-stats { grid-template-columns: 1fr; gap: 1rem; } .stat-number { font-size: 2rem; } .footer-brand { grid-column: 1 / -1; } }
+    </style>
+</head>
+<body>
+    <div class="loading" id="loading"><div class="loader"></div></div>
+    <header class="header" id="header">
+        <div class="container">
+            <a href="#" class="logo"><div class="logo-icon"><i class="fas fa-heartbeat"></i></div><div><div class="logo-text">VetBridge</div><div style="font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;">Consulting</div></div></a>
+            <nav class="nav"><a href="#home">Home</a><a href="#services">Services</a><a href="#features">Features</a><a href="#testimonials">Testimonials</a><a href="#contact">Contact</a></nav>
+            <button class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></button>
+            <button class="mobile-menu-btn" id="mobileMenuBtn"><span></span><span></span><span></span></button>
+        </div>
+        <div class="mobile-nav" id="mobileNav"><a href="#home">Home</a><a href="#services">Services</a><a href="#features">Features</a><a href="#testimonials">Testimonials</a><a href="#contact">Contact</a></div>
+    </header>
+    <section class="hero" id="home">
+        <div class="hero-bg"></div>
+        <div class="container">
+            <div class="hero-content animate-on-scroll">
+                <div class="hero-badge"><i class="fas fa-award"></i><span>Award Winning Solutions</span></div>
+                <h1 class="hero-title">Transform Your <span class="hero-title-gradient">Veterinary Practice</span></h1>
+                <p class="hero-description">Connecting PIMS, labs, inventory and billing systems to streamline your operations and boost efficiency.</p>
+                <div class="hero-buttons"><a href="#contact" class="btn btn-primary">Get Started<i class="fas fa-arrow-right"></i></a><a href="#services" class="btn btn-outline">Our Services<i class="fas fa-arrow-down"></i></a></div>
+            </div>
+            <div class="hero-image animate-on-scroll" style="transition-delay:0.2s;"><div class="hero-image-placeholder"><div class="hero-image-content"><i class="fas fa-laptop-medical"></i><h3>Seamless Integration</h3><p>All your systems, connected</p></div></div></div>
+        </div>
+    </section>
+    <section class="section award-section"><div class="container"><div class="award-content animate-on-scroll">
+        <div class="award-badge"><i class="fas fa-trophy"></i></div>
+        <h2 class="award-title">Industry Recognized Excellence</h2>
+        <p class="award-subtitle">VetBridge Consulting has been recognized for innovative solutions that transform veterinary practices.</p>
+        <div class="award-stats">
+            <div class="stat-item animate-on-scroll"><div class="stat-number">2024</div><div class="stat-label">Innovation Award</div></div>
+            <div class="stat-item animate-on-scroll" style="transition-delay:0.1s;"><div class="stat-number">500+</div><div class="stat-label">Happy Clients</div></div>
+            <div class="stat-item animate-on-scroll" style="transition-delay:0.2s;"><div class="stat-number">99%</div><div class="stat-label">Satisfaction Rate</div></div>
+            <div class="stat-item animate-on-scroll" style="transition-delay:0.3s;"><div class="stat-number">24/7</div><div class="stat-label">Support</div></div>
+        </div>
+    </div></div></section>
+    <section class="section services" id="services"><div class="container">
+        <div class="services-header animate-on-scroll"><h2>Our <span style="background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Services</span></h2><p style="font-size:1.25rem;margin-top:0.5rem;color:var(--text-muted);">Comprehensive solutions for your veterinary practice</p></div>
+        <div class="services-grid">
+            <div class="service-card animate-on-scroll"><div class="service-icon"><i class="fas fa-network-wired"></i></div><div class="service-content"><div class="service-category">Integration</div><h3 class="service-title">PIMS Integration</h3><p class="service-description">Seamlessly connect your Practice Information Management System with labs, inventory, and billing.</p><a href="#" class="service-link">Learn more<i class="fas fa-arrow-right"></i></a></div></div>
+            <div class="service-card animate-on-scroll" style="transition-delay:0.1s;"><div class="service-icon" style="background:var(--gradient-secondary);"><i class="fas fa-flask"></i></div><div class="service-content"><div class="service-category">Laboratory</div><h3 class="service-title">Lab Integration</h3><p class="service-description">Automatic test result transfer from external labs directly into patient records.</p><a href="#" class="service-link">Learn more<i class="fas fa-arrow-right"></i></a></div></div>
+            <div class="service-card animate-on-scroll" style="transition-delay:0.2s;"><div class="service-icon" style="background:linear-gradient(135deg,#f59e0b 0%,#d97706 100%);"><i class="fas fa-boxes"></i></div><div class="service-content"><div class="service-category">Inventory</div><h3 class="service-title">Inventory Management</h3><p class="service-description">Real-time inventory tracking with automatic reordering and usage analytics.</p><a href="#" class="service-link">Learn more<i class="fas fa-arrow-right"></i></a></div></div>
+            <div class="service-card animate-on-scroll" style="transition-delay:0.3s;"><div class="service-icon" style="background:linear-gradient(135deg,#ef4444 0%,#dc2626 100%);"><i class="fas fa-file-invoice-dollar"></i></div><div class="service-content"><div class="service-category">Billing</div><h3 class="service-title">Billing Automation</h3><p class="service-description">Streamline billing processes with automated invoice generation and payment tracking.</p><a href="#" class="service-link">Learn more<i class="fas fa-arrow-right"></i></a></div></div>
+            <div class="service-card animate-on-scroll" style="transition-delay:0.4s;"><div class="service-icon" style="background:linear-gradient(135deg,#3b82f6 0%,#1d4ed8 100%);"><i class="fas fa-chart-line"></i></div><div class="service-content"><div class="service-category">Analytics</div><h3 class="service-title">Advanced Analytics</h3><p class="service-description">Gain insights with comprehensive reporting and data visualization tools.</p><a href="#" class="service-link">Learn more<i class="fas fa-arrow-right"></i></a></div></div>
+            <div class="service-card animate-on-scroll" style="transition-delay:0.5s;"><div class="service-icon" style="background:linear-gradient(135deg,#8b5cf6 0%,#7c3aed 100%);"><i class="fas fa-cogs"></i></div><div class="service-content"><div class="service-category">Custom</div><h3 class="service-title">Custom Solutions</h3><p class="service-description">Tailored integration solutions to meet your unique practice needs.</p><a href="#" class="service-link">Learn more<i class="fas fa-arrow-right"></i></a></div></div>
+        </div>
+    </div></section>
+    <section class="section features" id="features"><div class="container">
+        <div class="features-content animate-on-scroll">
+            <h2>Why Choose <span class="hero-title-gradient">VetBridge</span></h2>
+            <p style="font-size:1.25rem;margin:0.5rem 0 2rem;color:var(--text-muted);">Our award-winning platform delivers exceptional value through innovative features designed for veterinary professionals.</p>
+            <div class="feature-list">
+                <div class="feature-item animate-on-scroll"><div class="feature-icon"><i class="fas fa-bolt"></i></div><div class="feature-text"><h4>Real-Time Sync</h4><p>Instant data synchronization across all connected systems</p></div></div>
+                <div class="feature-item animate-on-scroll" style="transition-delay:0.1s;"><div class="feature-icon"><i class="fas fa-shield-alt"></i></div><div class="feature-text"><h4>HIPAA Compliant</h4><p>Full compliance with veterinary data security standards</p></div></div>
+                <div class="feature-item animate-on-scroll" style="transition-delay:0.2s;"><div class="feature-icon"><i class="fas fa-cloud"></i></div><div class="feature-text"><h4>Cloud Based</h4><p>Access your data from anywhere, on any device</p></div></div>
+                <div class="feature-item animate-on-scroll" style="transition-delay:0.3s;"><div class="feature-icon"><i class="fas fa-tachometer-alt"></i></div><div class="feature-text"><h4>Performance</h4><p>Lightning-fast performance with 99.9% uptime</p></div></div>
+                <div class="feature-item animate-on-scroll" style="transition-delay:0.4s;"><div class="feature-icon"><i class="fas fa-headset"></i></div><div class="feature-text"><h4>24/7 Support</h4><p>Dedicated support team available around the clock</p></div></div>
+                <div class="feature-item animate-on-scroll" style="transition-delay:0.5s;"><div class="feature-icon"><i class="fas fa-lock"></i></div><div class="feature-text"><h4>Secure</h4><p>Enterprise-grade security with regular audits</p></div></div>
+            </div>
+            <div style="margin-top:2rem;"><a href="#contact" class="btn btn-secondary">Request Demo<i class="fas fa-calendar-alt"></i></a></div>
+        </div>
+        <div class="features-image animate-on-scroll"><div class="features-image-placeholder"><i class="fas fa-sync-alt"></i></div></div>
+    </div></section>
+    <section class="section testimonials" id="testimonials"><div class="container">
+        <div class="testimonials-header animate-on-scroll"><h2>What Our <span style="background:var(--gradient-primary);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Clients Say</span></h2><p style="font-size:1.25rem;margin-top:0.5rem;color:var(--text-muted);">Hear from veterinary professionals who trust VetBridge</p></div>
+        <div class="testimonials-grid">
+            <div class="testimonial-card animate-on-scroll"><div class="testimonial-content"><p class="testimonial-text">VetBridge transformed our practice overnight. The seamless integration between our PIMS and lab systems has saved us countless hours every week.</p><div class="testimonial-author"><div class="testimonial-avatar">DR</div><div class="testimonial-info"><h5>Dr. Sarah Johnson</h5><p>Veterinary Clinic Owner</p></div></div><div class="testimonial-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div></div>
+            <div class="testimonial-card animate-on-scroll" style="transition-delay:0.1s;"><div class="testimonial-content"><p class="testimonial-text">The inventory management system alone has paid for the entire VetBridge solution. We've reduced waste by 40% and always have what we need on hand.</p><div class="testimonial-author"><div class="testimonial-avatar">MP</div><div class="testimonial-info"><h5>Mike Peterson</h5><p>Practice Manager</p></div></div><div class="testimonial-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div></div>
+            <div class="testimonial-card animate-on-scroll" style="transition-delay:0.2s;"><div class="testimonial-content"><p class="testimonial-text">The billing automation has been a game-changer. We've reduced billing errors to zero and our clients love the transparent invoicing.</p><div class="testimonial-author"><div class="testimonial-avatar">LK</div><div class="testimonial-info"><h5>Lisa Kim</h5><p>Hospital Administrator</p></div></div><div class="testimonial-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div></div></div>
+        </div>
+    </div></section>
+    <section class="section cta" id="contact"><div class="container"><div class="cta-content animate-on-scroll">
+        <h2 class="cta-title">Ready to Transform Your Practice?</h2>
+        <p class="cta-description">Join hundreds of veterinary practices already benefiting from VetBridge's award-winning integration solutions.</p>
+        <div class="hero-buttons">
+            <a href="#" class="btn btn-white"><i class="fas fa-calendar-alt"></i>Schedule Demo</a>
+            <a href="tel:+18001234567" class="btn btn-outline" style="color:white;border-color:white;"><i class="fas fa-phone"></i>Call Now</a>
+        </div>
+    </div></div></section>
+    <footer class="footer"><div class="container">
+        <div class="footer-brand animate-on-scroll">
+            <a href="#" class="footer-logo"><i class="fas fa-heartbeat"></i><span style="font-family:var(--font-serif);font-size:1.5rem;font-weight:700;color:white;">VetBridge</span></a>
+            <p class="footer-description">Award-winning veterinary systems integration, connecting PIMS, labs, inventory and billing for seamless operations.</p>
+            <div class="social-links animate-on-scroll"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-instagram"></i></a><a href="#"><i class="fab fa-youtube"></i></a></div>
+        </div>
+        <div class="footer-section animate-on-scroll" style="transition-delay:0.1s;"><h4>Services</h4><div class="footer-links"><a href="#">PIMS Integration</a><a href="#">Lab Integration</a><a href="#">Inventory Management</a><a href="#">Billing Automation</a><a href="#">Analytics</a></div></div>
+        <div class="footer-section animate-on-scroll" style="transition-delay:0.2s;"><h4>Resources</h4><div class="footer-links"><a href="#">Documentation</a><a href="#">Case Studies</a><a href="#">Blog</a><a href="#">Webinars</a><a href="#">Support</a></div></div>
+        <div class="footer-section animate-on-scroll" style="transition-delay:0.3s;"><h4>Company</h4><div class="footer-links"><a href="#">About Us</a><a href="#">Careers</a><a href="#">Press</a><a href="#">Partners</a><a href="#">Contact</a></div></div>
+        <div class="footer-section animate-on-scroll" style="transition-delay:0.4s;"><h4>Legal</h4><div class="footer-links"><a href="#">Privacy Policy</a><a href="#">Terms of Service</a><a href="#">Security</a><a href="#">Compliance</a></div></div>
+    </div><div class="container"><div class="footer-bottom">
+        <p class="copyright animate-on-scroll">&copy; 2024 VetBridge Consulting. All rights reserved.</p>
+        <p class="copyright animate-on-scroll" style="transition-delay:0.1s;"><i class="fas fa-award"></i> Award-Winning Veterinary Solutions</p>
+    </div></div></footer>
+    <button class="btn btn-primary" id="backToTop" style="position:fixed;bottom:20px;right:20px;display:none;z-index:1000;box-shadow:var(--shadow-primary);"><i class="fas fa-arrow-up"></i><span>Top</span></button>
+    <script>
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') { body.classList.add('dark-mode'); themeToggle.innerHTML = '<i class="fas fa-sun"></i>'; }
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) { themeToggle.innerHTML = '<i class="fas fa-sun"></i>'; localStorage.setItem('theme', 'dark'); }
+            else { themeToggle.innerHTML = '<i class="fas fa-moon"></i>'; localStorage.setItem('theme', 'light'); }
+        });
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileNav = document.getElementById('mobileNav');
+        mobileMenuBtn.addEventListener('click', () => { mobileMenuBtn.classList.toggle('active'); mobileNav.classList.toggle('active'); });
+        mobileNav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { mobileMenuBtn.classList.remove('active'); mobileNav.classList.remove('active'); }));
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) header.classList.add('scrolled'); else header.classList.remove('scrolled');
+            if (window.scrollY > 300) document.getElementById('backToTop').style.display = 'flex'; else document.getElementById('backToTop').style.display = 'none';
+        });
+        document.getElementById('backToTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        window.addEventListener('load', () => setTimeout(() => document.getElementById('loading').classList.add('hidden'), 1000));
+        const observer = new IntersectionObserver((entries) => entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('animated'); }), { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => anchor.addEventListener('click', function(e) { e.preventDefault(); const target = document.querySelector(this.getAttribute('href')); if (target) { const offset = target.getBoundingClientRect().top + window.pageYOffset - 80; window.scrollTo({ top: offset, behavior: 'smooth' }); } }));
+        console.log('%c VetBridge Consulting ', 'background:linear-gradient(135deg,#6d28d9,#8b5cf6);color:white;font-size:20px;font-weight:bold;padding:10px 20px;border-radius:5px;');
+    </script>
+</body>
+</html>
