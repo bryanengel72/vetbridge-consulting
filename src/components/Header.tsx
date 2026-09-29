@@ -11,24 +11,6 @@ const navLinks = [
 
 const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [dark, setDark] = useState(false);
-
-  /* The pre-paint script in index.html has already set data-theme;
-     read it back so the button label matches on first render. */
-  useEffect(() => {
-    setDark(document.documentElement.dataset.theme === 'dark');
-  }, []);
-
-  const toggleTheme = () => {
-    const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
-    document.documentElement.dataset.theme = next;
-    try {
-      localStorage.setItem('vb-theme', next);
-    } catch {
-      /* private mode — the toggle still works for this page view */
-    }
-    setDark(next === 'dark');
-  };
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -56,15 +38,6 @@ const Header: React.FC = () => {
         </nav>
 
         <div className="tools">
-          <button
-            className="toggle"
-            type="button"
-            onClick={toggleTheme}
-            aria-pressed={dark}
-            aria-label={dark ? 'Switch to light theme' : 'Switch to dark theme'}
-          >
-            {dark ? 'Light' : 'Dark'}
-          </button>
           <a className="btn header-cta" href="#contact">
             Book a free audit
           </a>

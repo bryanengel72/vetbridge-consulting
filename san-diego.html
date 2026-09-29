@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VetBridge Consulting — Veterinary dashboards &amp; data, San Diego</title>
     <meta name="description" content="VetBridge reads from the PIMS, labs, inventory and billing your San Diego veterinary practice already runs and turns it into one live dashboard. Free audit, read-only access.">
     <link rel="canonical" href="https://vetbridgeconsulting.com/san-diego">
-    <meta name="theme-color" content="#f8f7f4" media="(prefers-color-scheme: light)">
-    <meta name="theme-color" content="#130e25" media="(prefers-color-scheme: dark)">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#130e25">
 
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="VetBridge Consulting">
@@ -23,20 +23,12 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Nunito+Sans:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Nunito+Sans:wght@400;600;700&display=swap">
 
     <script>
-      /* Flags JS so reveal states only hide content when they can be un-hidden,
-         and sets the theme before first paint so there is no flash. */
-      (function () {
-        document.documentElement.classList.add('js');
-        try {
-          var t = localStorage.getItem('vb-theme');
-          if (!t) t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-          document.documentElement.dataset.theme = t;
-        } catch (e) {}
-      })();
+      /* Flags JS so reveal states only hide content when they can be un-hidden. */
+      document.documentElement.classList.add('js');
     </script>
 
     <script type="application/ld+json">

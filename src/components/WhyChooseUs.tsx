@@ -15,8 +15,8 @@ const commitments = [
   },
 ];
 
-/* The carbon copy — the one inverted band. Its tokens always sit opposite
-   the page, so it flips to paper in dark theme. */
+/* The carbon copy — the one violet band, set deeper and more saturated
+   than the ink page around it. */
 const WhyChooseUs: React.FC = () => {
   return (
     <section id="how" className="carbon" aria-labelledby="h-how">
