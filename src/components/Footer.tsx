@@ -57,7 +57,7 @@ const Footer: React.FC<{
         </div>
 
         <div className="colophon">
-          <p className="meta">© {new Date().getFullYear()} VetBridge Consulting</p>
+          <p className="meta">© {new Date().getFullYear()} VetBridge Consulting LLC</p>
           <a className="meta" href="/privacy">Privacy policy</a>
         </div>
       </div>

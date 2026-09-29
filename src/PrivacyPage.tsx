@@ -31,7 +31,7 @@ const PrivacyPage: React.FC = () => (
 
               <h2>Who we are</h2>
               <p>
-                VetBridge Consulting (“VetBridge,” “we”) helps veterinary practices connect the
+                VetBridge Consulting LLC (“VetBridge,” “we”) helps veterinary practices connect the
                 systems they already run. We’re based in Kansas City, Missouri, and also serve
                 San Diego, California. This policy covers vetbridgeconsulting.com, including the
                 San Diego page.
