@@ -1,20 +1,36 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# VetBridge Consulting
 
-# Run and deploy your AI Studio app
+Marketing site for [vetbridgeconsulting.com](https://vetbridgeconsulting.com): veterinary practice systems integration, Kansas City and San Diego.
 
-This contains everything you need to run your app locally.
+## Stack
 
-View your app in AI Studio: https://ai.studio/apps/drive/1KbcpaUzrFloXFTBkkriEoZvvxDPUdz0p
+- Vite + React 19 + TypeScript
+- Hand-written CSS in `src/index.css` (Tailwind is imported for layout utilities only)
+- Fonts: Montserrat (display) and Nunito Sans (body) from Google Fonts
+- Contact form sends through [EmailJS](https://www.emailjs.com/) from the browser
+- Vercel Analytics (cookieless)
 
-## Run Locally
+## Pages
 
-**Prerequisites:**  Node.js
+| URL | Entry |
+|---|---|
+| `/` | `index.html` → `src/index.tsx` |
+| `/san-diego` | `san-diego.html` → `src/sandiego.tsx` (rewrite in `vercel.json`) |
 
+Both render `src/App.tsx`; city-specific copy and phone numbers live in `src/city.ts`.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+## Run locally
+
+Requires Node.js.
+
+```bash
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # outputs to dist/
+```
+
+The dev server listens on localhost only.
+
+## Deploy
+
+Pushing to `main` deploys to production on Vercel. Security headers (CSP and friends) are set in `vercel.json`. If you add a new third-party script, font or API, add its origin to the `Content-Security-Policy` there. If you change the inline script in the `<head>` of either HTML file, update its `sha256-` hash in the policy as well.
