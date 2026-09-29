@@ -529,7 +529,23 @@ input[type=range]:focus-visible{outline-offset:-2px}
   display:inline-flex;align-items:center;min-height:44px;overflow-wrap:anywhere}
 .foot-grid a:hover{color:var(--signal)}
 .colophon{border-top:1px solid var(--rule);padding-top:var(--s3);
-  display:flex;flex-wrap:wrap;gap:var(--s2) var(--s4);justify-content:space-between}
+  display:flex;flex-wrap:wrap;align-items:center;gap:var(--s2) var(--s4);justify-content:space-between}
+.colophon a{text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
+.colophon a:hover{color:var(--signal)}
+
+/* ── Privacy policy ─────────────────────────────────── */
+.policy-page{padding-top:calc(var(--header-h) + var(--pad-section) * .6)}
+.policy{max-width:68ch}
+.policy h1{font-size:var(--t-4);margin-bottom:var(--s3)}
+.policy .lead{margin-bottom:var(--s2)}
+.policy h2{font-size:var(--t-2);margin-block:var(--s6) var(--s2)}
+.policy p,.policy li{color:var(--fg-2)}
+.policy p + p{margin-top:var(--s2)}
+.policy b{color:var(--fg);font-weight:700}
+.policy ul{padding-left:1.25em;display:grid;gap:10px;margin-block:var(--s2)}
+.policy li::marker{color:var(--signal)}
+.policy a{color:var(--fg);text-decoration-color:var(--signal);text-underline-offset:3px}
+.policy a:hover{color:var(--signal)}
 
 /* ── Motion: rules draw, content fades. Nothing travels far. ── */
 .js .rv{opacity:0;transition:opacity .7s ease-out var(--d,0ms)}

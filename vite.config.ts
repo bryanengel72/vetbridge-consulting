@@ -16,6 +16,7 @@ export default defineConfig({
       input: {
         main: path.resolve(__dirname, 'index.html'),
         'san-diego': path.resolve(__dirname, 'san-diego.html'),
+        privacy: path.resolve(__dirname, 'privacy.html'),
       },
     },
   },

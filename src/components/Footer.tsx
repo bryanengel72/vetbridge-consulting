@@ -13,13 +13,15 @@ const Footer: React.FC<{
   phone: string;
   phoneHref: string;
   crossLink: { name: string; href: string };
-}> = ({ phone, phoneHref, crossLink }) => {
+  /* Prefix for the section links when the footer sits on another page. */
+  base?: string;
+}> = ({ phone, phoneHref, crossLink, base = '' }) => {
   return (
     <footer className="site-footer">
       <div className="shell">
         <div className="foot-grid">
           <div>
-            <a className="wordmark" href="#top" style={{ marginBottom: 'var(--s3)' }}>
+            <a className="wordmark" href={`${base}#top`} style={{ marginBottom: 'var(--s3)' }}>
               <b>Vetbridge</b>
               <span>Consulting</span>
             </a>
@@ -29,11 +31,13 @@ const Footer: React.FC<{
           </div>
 
           <div>
-            <p className="label" style={{ marginBottom: 'var(--s3)' }}>On this page</p>
+            <p className="label" style={{ marginBottom: 'var(--s3)' }}>
+              {base ? 'On the site' : 'On this page'}
+            </p>
             <ul>
               {links.map((l) => (
                 <li key={l.id}>
-                  <a href={`#${l.id}`}>{l.name}</a>
+                  <a href={`${base}#${l.id}`}>{l.name}</a>
                 </li>
               ))}
               <li>
@@ -54,6 +58,7 @@ const Footer: React.FC<{
 
         <div className="colophon">
           <p className="meta">© {new Date().getFullYear()} VetBridge Consulting</p>
+          <a className="meta" href="/privacy">Privacy policy</a>
         </div>
       </div>
     </footer>

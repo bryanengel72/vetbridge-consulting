@@ -9,7 +9,9 @@ const navLinks = [
   { name: 'Estimator', id: 'estimator', n: '08' },
 ];
 
-const Header: React.FC = () => {
+/* `base` prefixes the section links so they still land on the homepage
+   when the header is used on another page (e.g. base="/" on /privacy). */
+const Header: React.FC<{ base?: string }> = ({ base = '' }) => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -24,21 +26,21 @@ const Header: React.FC = () => {
   return (
     <header className="site-header">
       <div className="header-in">
-        <a className="wordmark" href="#top">
+        <a className="wordmark" href={`${base}#top`}>
           <b>Vetbridge</b>
           <span>Consulting</span>
         </a>
 
         <nav className="nav" aria-label="Sections">
           {navLinks.map((l) => (
-            <a key={l.id} href={`#${l.id}`}>
+            <a key={l.id} href={`${base}#${l.id}`}>
               {l.name}
             </a>
           ))}
         </nav>
 
         <div className="tools">
-          <a className="btn header-cta" href="#contact">
+          <a className="btn header-cta" href={`${base}#contact`}>
             Book a free audit
           </a>
           <button
@@ -60,12 +62,12 @@ const Header: React.FC = () => {
         aria-label="Sections"
       >
         {navLinks.map((l) => (
-          <a key={l.id} href={`#${l.id}`} onClick={() => setMenuOpen(false)}>
+          <a key={l.id} href={`${base}#${l.id}`} onClick={() => setMenuOpen(false)}>
             <span className="n">{l.n}</span>
             {l.name}
           </a>
         ))}
-        <a className="btn" href="#contact" onClick={() => setMenuOpen(false)}>
+        <a className="btn" href={`${base}#contact`} onClick={() => setMenuOpen(false)}>
           Book a free audit
         </a>
       </nav>

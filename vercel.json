@@ -1,6 +1,7 @@
 {
   "rewrites": [
-    { "source": "/san-diego", "destination": "/san-diego.html" }
+    { "source": "/san-diego", "destination": "/san-diego.html" },
+    { "source": "/privacy", "destination": "/privacy.html" }
   ],
   "headers": [
     {
