@@ -4,6 +4,7 @@ import React, { useRef, useState } from 'react';
 const SERVICE_ID = 'service_ekg9k3n';
 const TEMPLATE_ID = 'template_kwdi3g9';
 const PUBLIC_KEY = 'gD_uQtcmPNPx4tyTy';
+const HONEYPOT = 'company_website';
 
 type FieldName = 'practice_name' | 'pims_system' | 'user_email' | 'message';
 
@@ -32,8 +33,16 @@ const Contact: React.FC<{ phone: string; phoneHref: string }> = ({ phone, phoneH
     e.preventDefault();
     if (!form.current) return;
 
+    /* Honeypot: people never see this field, bots fill it in. Show them the
+       success state so they move on, and don't send anything. */
+    const trap = form.current.elements.namedItem(HONEYPOT) as HTMLInputElement | null;
+    if (trap?.value) {
+      setSubmitted(true);
+      return;
+    }
+
     const fields: Array<HTMLInputElement | HTMLTextAreaElement> = Array.from(
-      form.current.querySelectorAll('input, textarea')
+      form.current.querySelectorAll(`input:not([name=${HONEYPOT}]), textarea`)
     );
     const bad = fields.filter((el) => !check(el));
     if (bad.length) {
@@ -116,6 +125,11 @@ const Contact: React.FC<{ phone: string; phoneHref: string }> = ({ phone, phoneH
               ) : (
                 <form ref={form} onSubmit={handleSubmit} noValidate>
                   <p className="label" style={{ marginBottom: 'var(--s4)' }}>Audit request</p>
+
+                  <div className="hp" aria-hidden="true">
+                    <label htmlFor="f-hp">Leave this empty</label>
+                    <input id="f-hp" name={HONEYPOT} type="text" tabIndex={-1} autoComplete="off" />
+                  </div>
 
                   <div className="pair">
                     <div className="field" {...field('practice_name')}>

@@ -506,6 +506,8 @@ input[type=range]:focus-visible{outline-offset:-2px}
 .err{font-family:var(--display);font-size:var(--t--1);color:var(--signal);display:none}
 .err::before{content:'! ';font-weight:500}
 .field[data-invalid="true"] .err{display:block}
+/* Honeypot: off-screen rather than display:none, which some bots skip. */
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .pair{display:grid;gap:0}
 @media (min-width:640px){.pair{grid-template-columns:1fr 1fr;gap:var(--s4)}}
 .contact-list{list-style:none;padding:0;border-top:1px solid var(--rule-2);margin-top:var(--s4)}
