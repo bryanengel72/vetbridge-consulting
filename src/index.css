@@ -176,24 +176,25 @@ section{padding-block:var(--pad-section);scroll-margin-top:var(--header-h)}
 .wordmark span{font-family:var(--display);font-weight:600;font-size:0.625rem;letter-spacing:.08em;
   text-transform:uppercase;color:var(--fg-3);line-height:1}
 .nav{display:none;gap:var(--s4);align-items:center}
-@media (min-width:1024px){.nav{display:flex}}
+/* The full nav needs ~1115px in Montserrat; below that the Menu button takes over. */
+@media (min-width:1180px){.nav{display:flex}}
 .nav a{
   font-family:var(--display);font-size:var(--t--1);font-weight:500;letter-spacing:.01em;
-  text-decoration:none;color:var(--fg-2);
+  text-decoration:none;color:var(--fg-2);white-space:nowrap;
   display:inline-flex;align-items:center;min-height:44px;
   border-bottom:1px solid transparent;
 }
 .nav a:hover{color:var(--fg);border-bottom-color:var(--signal)}
 .tools{display:flex;align-items:center;gap:var(--s2)}
 .header-cta{display:none}
-@media (min-width:1024px){.header-cta{display:inline-flex;min-height:44px;padding:8px 20px;font-size:var(--t--1)}}
+@media (min-width:1180px){.header-cta{display:inline-flex;min-height:44px;padding:8px 20px;font-size:var(--t--1)}}
 .burger{
   display:inline-flex;align-items:center;justify-content:center;
   min-width:44px;min-height:44px;background:transparent;border:1px solid var(--rule-ui);
   color:var(--fg);cursor:pointer;font-family:var(--display);font-size:0.625rem;
   letter-spacing:.08em;text-transform:uppercase;padding:0 12px;
 }
-@media (min-width:1024px){.burger{display:none}}
+@media (min-width:1180px){.burger{display:none}}
 .mobile-nav{
   display:none;border-top:1px solid var(--rule);background:var(--bg);
   padding:var(--s3) var(--gutter) var(--s5);
