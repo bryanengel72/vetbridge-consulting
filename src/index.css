@@ -581,6 +581,8 @@ input[type=range]:focus-visible{outline-offset:-2px}
   letter-spacing:.06em;text-transform:uppercase;margin-top:4px;
 }
 .fee-line[data-free] .fee-amt{color:var(--signal)}
+.fee-amt a,.fee-tfee a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.fee-tfee a{font-size:var(--t-1)}
 @media (max-width:559px){
   .fee-line{grid-template-columns:2.25rem minmax(0,1fr)}
   .fee-amt{grid-column:2;text-align:left;margin-top:var(--s1)}

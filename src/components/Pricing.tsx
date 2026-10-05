@@ -20,7 +20,7 @@ const lines = [
   {
     letter: 'B',
     title: 'Operational roadmap',
-    fee: '$1,500',
+    fee: 'Contact us',
     feeNote: 'One-time · credited',
     free: false,
     sub: "The full prioritized 90-day plan behind the audit's findings — what to fix, in what order, and what each fix is worth. Standalone, or credited in full toward your first engagement.",
@@ -29,8 +29,8 @@ const lines = [
   {
     letter: 'C',
     title: 'VetRev — pricing & billing analysis',
-    fee: 'from $5,000',
-    feeNote: 'Typical $5,000–8,500',
+    fee: 'Contact us',
+    feeNote: 'Fixed fee · quoted',
     free: false,
     sub: 'True cost per visit by service and by doctor, your top billing codes against market rates, wellness plans priced off your numbers. Delivered in 3–4 weeks.',
     items: [],
@@ -38,8 +38,8 @@ const lines = [
   {
     letter: 'D',
     title: 'VetInsight — data unification build',
-    fee: 'from $12,000',
-    feeNote: 'Typical $12,000–25,000',
+    fee: 'Contact us',
+    feeNote: 'Fixed fee · quoted',
     free: false,
     sub: 'Scheduling, labs, inventory and billing feeding one place you can actually query. Reports built around your questions. Delivered in 6–10 weeks.',
     items: [],
@@ -49,7 +49,6 @@ const lines = [
 const tiers = [
   {
     name: 'Essentials',
-    fee: '$750',
     mark: false,
     rows: [
       ['Response', '2 business days'],
@@ -60,7 +59,6 @@ const tiers = [
   },
   {
     name: 'Standard',
-    fee: '$1,250',
     mark: true,
     rows: [
       ['Response', 'Next business day'],
@@ -71,7 +69,6 @@ const tiers = [
   },
   {
     name: 'Priority',
-    fee: '$2,500',
     mark: false,
     rows: [
       ['Response', 'Same day'],
@@ -84,7 +81,7 @@ const tiers = [
 
 const notes = [
   {
-    title: 'Nonprofits and shelters: 40% off this schedule.',
+    title: 'Nonprofits and shelters get a reduced rate.',
     body: 'Policy, not a negotiation. Our first client is a nonprofit and shaped how we work.',
   },
   {
@@ -92,8 +89,8 @@ const notes = [
     body: 'Care plans scale with locations, not with renegotiation. Engagement quotes cover the group.',
   },
   {
-    title: 'VetHub is in development — it has no price yet.',
-    body: "Monitor-to-record integration isn't deployed, so it isn't on this schedule. Pricing publishes when it ships; care-plan clients hear first.",
+    title: 'VetHub is in development.',
+    body: "Monitor-to-record integration isn't deployed, so it isn't on this schedule yet. Care-plan clients hear first when it ships.",
   },
   {
     title: 'No commissions, ever.',
@@ -117,12 +114,12 @@ const Pricing: React.FC = () => {
               className="rv"
               style={{ fontSize: 'var(--t-4)', maxWidth: '16ch', marginBottom: 'var(--s3)' }}
             >
-              The audit is free. The fixes have a number on them.
+              The audit is free. Everything after it is quoted to your practice.
             </h2>
             <p className="lead rv" style={{ marginBottom: 'var(--s5)' }}>
               Every engagement is a fixed fee, agreed before we start, priced against a number
               we name in advance — hours saved, revenue found, or errors eliminated. No hourly
-              billing, and the quote doesn't move.
+              billing, and the quote doesn't move. Get in touch and we'll scope it with you.
             </p>
 
             <div className="fee-sheet rv">
@@ -144,7 +141,7 @@ const Pricing: React.FC = () => {
                     )}
                   </div>
                   <p className="fee-amt">
-                    {l.fee}
+                    {l.free ? l.fee : <a href="#contact">{l.fee}</a>}
                     <small>{l.feeNote}</small>
                   </p>
                 </div>
@@ -169,8 +166,8 @@ const Pricing: React.FC = () => {
                 >
                   <p className="fee-tname">{t.name}</p>
                   <p className="fee-tfee">
-                    {t.fee}
-                    <span> /location/mo</span>
+                    <a href="#contact">Contact us</a>
+                    <span> · per location</span>
                   </p>
                   <ul>
                     {t.rows.map(([k, v]) => (
