@@ -107,7 +107,7 @@ const Contact: React.FC<{ phone: string; phoneHref: string }> = ({ phone, phoneH
                 </li>
                 <li>
                   <p className="label" style={{ marginBottom: 6 }}>Where we are</p>
-                  <span className="mono" style={{ fontSize: 'var(--t-1)' }}>Kansas City, MO · San Diego, CA</span>
+                  <span className="mono where">Kansas City, MO · San Diego, CA</span>
                 </li>
               </ul>
             </div>

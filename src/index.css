@@ -523,9 +523,12 @@ input[type=range]:focus-visible{outline-offset:-2px}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .pair{display:grid;gap:0}
 @media (min-width:640px){.pair{grid-template-columns:1fr 1fr;gap:var(--s4)}}
-.contact-list{list-style:none;padding:0;border-top:1px solid var(--rule-2);margin-top:var(--s4)}
+/* Sized off the column, not the viewport: the email address is the longest
+   unbreakable thing on the page and has to fit the column it is actually in. */
+.contact-list{list-style:none;padding:0;border-top:1px solid var(--rule-2);margin-top:var(--s4);
+  container-type:inline-size}
 .contact-list li{border-bottom:1px solid var(--rule);padding-block:var(--s3)}
-.contact-list a{font-family:var(--display);font-size:clamp(1rem,0.92rem + 0.45vw,1.375rem);
+.contact-list a,.contact-list .where{font-family:var(--display);font-size:clamp(0.8125rem,5.2cqi,1.375rem);
   text-decoration:none;display:inline-flex;align-items:center;min-height:44px;
   border-bottom:1px solid transparent;overflow-wrap:anywhere}
 .contact-list a:hover{border-bottom-color:var(--signal);color:var(--signal)}
