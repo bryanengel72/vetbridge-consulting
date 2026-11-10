@@ -135,7 +135,7 @@ const Contact: React.FC<{ phone: string; phoneHref: string }> = ({ phone, phoneH
                     <div className="field" {...field('practice_name')}>
                       <label htmlFor="f-practice">Practice name</label>
                       <input
-                        id="f-practice" name="practice_name" type="text" required
+                        id="f-practice" name="practice_name" type="text" required maxLength={120}
                         autoComplete="organization" placeholder="Northland Animal Hospital"
                         aria-invalid={invalid.practice_name || false}
                         aria-describedby="e-practice"
@@ -146,7 +146,7 @@ const Contact: React.FC<{ phone: string; phoneHref: string }> = ({ phone, phoneH
                     <div className="field" {...field('pims_system')}>
                       <label htmlFor="f-pims">What PIMS do you run?</label>
                       <input
-                        id="f-pims" name="pims_system" type="text" required
+                        id="f-pims" name="pims_system" type="text" required maxLength={80}
                         autoComplete="off" placeholder="Shepherd, Cornerstone, not sure…"
                         aria-invalid={invalid.pims_system || false}
                         aria-describedby="e-pims"
@@ -159,7 +159,7 @@ const Contact: React.FC<{ phone: string; phoneHref: string }> = ({ phone, phoneH
                   <div className="field" {...field('user_email')}>
                     <label htmlFor="f-email">Your email</label>
                     <input
-                      id="f-email" name="user_email" type="email" required
+                      id="f-email" name="user_email" type="email" required maxLength={254}
                       autoComplete="email" placeholder="you@yourclinic.com"
                       aria-invalid={invalid.user_email || false}
                       aria-describedby="e-email"
@@ -171,7 +171,7 @@ const Contact: React.FC<{ phone: string; phoneHref: string }> = ({ phone, phoneH
                   <div className="field" {...field('message')}>
                     <label htmlFor="f-msg">What's the problem?</label>
                     <textarea
-                      id="f-msg" name="message" required
+                      id="f-msg" name="message" required maxLength={4000}
                       placeholder="Where the time goes, what you can't get a straight answer on, what you've already tried."
                       aria-invalid={invalid.message || false}
                       aria-describedby="e-msg"

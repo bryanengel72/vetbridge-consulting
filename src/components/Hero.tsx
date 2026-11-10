@@ -27,13 +27,17 @@ const Hero: React.FC<{ place: string; meta: string }> = ({ place, meta }) => {
   const [landed, setLanded] = useState(1);
   const [head, setHead] = useState(0);
   const ticking = useRef(false);
+  /* The headline holds still while someone is pointing at it, tabbing through
+     the hero, or looking at another tab. */
+  const hovering = useRef(false);
+  const focused = useRef(false);
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const id = window.setInterval(
-      () => setHead((h) => (h + 1) % HEADLINES.length),
-      7000
-    );
+    const id = window.setInterval(() => {
+      if (hovering.current || focused.current || document.hidden) return;
+      setHead((h) => (h + 1) % HEADLINES.length);
+    }, 7000);
     return () => window.clearInterval(id);
   }, []);
 
@@ -59,13 +63,23 @@ const Hero: React.FC<{ place: string; meta: string }> = ({ place, meta }) => {
   const allLanded = landed >= SEGMENTS.length;
 
   return (
-    <section className="hero" aria-labelledby="h-hero">
+    <section
+      className="hero"
+      aria-labelledby="h-hero"
+      onFocus={() => { focused.current = true; }}
+      onBlur={() => { focused.current = false; }}
+    >
       <div className="shell">
         <p className="label">
           01 &nbsp;/&nbsp; VetBridge Consulting &nbsp;·&nbsp; {place}
         </p>
 
-        <h1 id="h-hero" className="h1-swap">
+        <h1
+          id="h-hero"
+          className="h1-swap"
+          onPointerEnter={() => { hovering.current = true; }}
+          onPointerLeave={() => { hovering.current = false; }}
+        >
           {HEADLINES.map((h, i) => (
             <span
               key={h.b}
